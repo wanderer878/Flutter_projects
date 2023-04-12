@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -137,28 +138,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text('oops an error'),
                     );
                   } else if (snapshot.hasData) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          color: Theme.of(context).colorScheme.onBackground,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(18, 5, 0, 5),
-                            child: Text(
-                              'All Time Best',
-                              style: Theme.of(context).textTheme.headlineLarge,
-                              textAlign: TextAlign.left,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 5),
-                        games_list(list: snapshot.data![0]),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        games_list(list: snapshot.data![1])
-                      ],
+                    return SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CategoryName(heading :"All Time Best"),
+                          SizedBox(height: 5),
+                          games_list(list: snapshot.data![0]),
+                          SizedBox(height: 50),
+                          CategoryName(heading :"Genres"),
+                          games_list(list: snapshot.data![1])
+                        ],
+                      ),
                     );
                     ;
                   } else {
@@ -167,6 +158,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 })),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class CategoryName extends StatelessWidget {
+  const CategoryName({
+    required this.heading,
+    super.key,
+  });
+
+  final String heading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Theme.of(context).colorScheme.onBackground,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(18, 5, 0, 5),
+        child: Text(
+          heading,
+          style: Theme.of(context).textTheme.headlineLarge,
+          textAlign: TextAlign.left,
+        ),
+      ),
     );
   }
 }
