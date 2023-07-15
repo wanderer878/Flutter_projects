@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\build\windows\CMakeFiles\d3203bf0d22dd00c8485b9ef0ce72cdc\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\build\windows\CMakeFiles\117d931acd0ada85f9ad72a9d85e5d90\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\build\windows\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EF052B18-55D2-35F4-A8DD-A8C25BD1D8F2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

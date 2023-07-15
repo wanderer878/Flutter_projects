@@ -1,0 +1,9 @@
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/icudtl.dat
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/flutter_windows.dll
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

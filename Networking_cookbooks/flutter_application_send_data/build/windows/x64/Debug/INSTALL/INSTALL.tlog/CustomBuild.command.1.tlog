@@ -1,0 +1,10 @@
+^E:\CODING\FLUTTER_PROJECTS\FLUTTER_PROJECTS\NETWORKING_COOKBOOKS\FLUTTER_APPLICATION_SEND_DATA\BUILD\WINDOWS\CMAKEFILES\5371657FBA8EB5685FF11B6C445EC1DC\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

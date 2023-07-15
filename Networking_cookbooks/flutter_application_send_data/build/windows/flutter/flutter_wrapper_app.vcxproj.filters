@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\ephemeral\cpp_client_wrapper\core_implementations.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\ephemeral\cpp_client_wrapper\standard_codec.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\ephemeral\cpp_client_wrapper\flutter_engine.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\ephemeral\cpp_client_wrapper\flutter_view_controller.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EF052B18-55D2-35F4-A8DD-A8C25BD1D8F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7941544B-B07F-3C11-9201-C7F97452BC46}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

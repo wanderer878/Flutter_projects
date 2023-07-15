@@ -1,0 +1,28 @@
+^E:\CODING\FLUTTER_PROJECTS\FLUTTER_PROJECTS\NETWORKING_COOKBOOKS\FLUTTER_APPLICATION_SEND_DATA\BUILD\WINDOWS\CMAKEFILES\D3203BF0D22DD00C8485B9EF0CE72CDC\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=E:\Coding\flutter_windows_3.7.6-stable\flutter PROJECT_DIR=E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data FLUTTER_ROOT=E:\Coding\flutter_windows_3.7.6-stable\flutter FLUTTER_EPHEMERAL_DIR=E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\windows\flutter\ephemeral PROJECT_DIR=E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data FLUTTER_TARGET=E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=E:\Coding\flutter_projects\Flutter_projects\Networking_cookbooks\flutter_application_send_data\.dart_tool\package_config.json E:/Coding/flutter_windows_3.7.6-stable/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\CODING\FLUTTER_PROJECTS\FLUTTER_PROJECTS\NETWORKING_COOKBOOKS\FLUTTER_APPLICATION_SEND_DATA\BUILD\WINDOWS\CMAKEFILES\117D931ACD0ADA85F9AD72A9D85E5D90\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\CODING\FLUTTER_PROJECTS\FLUTTER_PROJECTS\NETWORKING_COOKBOOKS\FLUTTER_APPLICATION_SEND_DATA\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/windows -BE:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows --check-stamp-file E:/Coding/flutter_projects/Flutter_projects/Networking_cookbooks/flutter_application_send_data/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
