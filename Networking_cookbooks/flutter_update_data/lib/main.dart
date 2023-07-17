@@ -1,9 +1,25 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<Album> fetch_data() async {
+Future<Album> post_data(String title) async {
+  final response =
+      await http.post(Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode({'title': title}));
+
+  if (response.statusCode == 201) {
+    print("done");
+    return Album.fromjson(jsonDecode(response.body));
+  } else
+    return throw Exception('error while fetching');
+}
+
+/*Future<Album> fetch_data() async {
   final response = await http
       .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
@@ -11,7 +27,7 @@ Future<Album> fetch_data() async {
     return Album.fromjson(jsonDecode(response.body));
   else
     return throw Exception('error while fetching');
-}
+}*/
 
 Future<Album> update_data(String title) async {
   final response = await http.put(
@@ -19,9 +35,9 @@ Future<Album> update_data(String title) async {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'title': title}));
 
-  if (response.statusCode == 200)
+  if (response.statusCode == 200) {
     return Album.fromjson(jsonDecode(response.body));
-  else
+  } else
     throw Exception('error while fetching');
 }
 
@@ -89,63 +105,87 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late Future<Album> future_Album;
+  Future<Album>? future_Album;
   final TextEditingController controller = TextEditingController();
 
-  @override
+  /*@override
   void initState() {
     future_Album = fetch_data();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FutureBuilder(
-                future: future_Album,
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        Text(snapshot.data!.title),
-                        TextField(
-                          controller: controller,
-                          decoration: InputDecoration(hintText: 'enter title'),
-                        ),
-                        ElevatedButton(
-                            onPressed: (() {
-                              setState(() {
-                                future_Album = update_data(controller.text);
-                              });
-                            }),
-                            child: Text('update label'))
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
+    return future_Album == null
+        ? Scaffold(
+            appBar: AppBar(
+              // Here we take the value from the MyHomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
+              title: Text(widget.title),
+            ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Title',
+                      )),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          post_data("text");
+                        });
+                      },
+                      child: Text("create"))
+                ],
+              ),
+            ),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              // Here we take the value from the MyHomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
+              title: Text(widget.title),
+            ),
+            body: Center(
+              // Center is a layout widget. It takes a single child and positions it
+              // in the middle of the parent.
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FutureBuilder(
+                      future: future_Album,
+                      builder: ((context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Column(
+                            children: [
+                              Text(snapshot.data!.title),
+                              TextField(
+                                controller: controller,
+                                decoration:
+                                    InputDecoration(hintText: 'enter title'),
+                              ),
+                              ElevatedButton(
+                                  onPressed: (() {
+                                    setState(() {
+                                      future_Album =
+                                          update_data(controller.text);
+                                    });
+                                  }),
+                                  child: Text('update label'))
+                            ],
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
 
-                  return const CircularProgressIndicator();
-                }))
-          ],
-        ),
-      ),
-    );
+                        return const CircularProgressIndicator();
+                      }))
+                ],
+              ),
+            ),
+          );
   }
 }
