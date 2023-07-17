@@ -135,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          post_data("text");
+                          future_Album = post_data(controller.text);
                         });
                       },
                       child: Text("create"))
