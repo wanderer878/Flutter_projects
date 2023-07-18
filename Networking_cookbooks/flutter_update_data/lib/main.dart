@@ -108,11 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<Album>? future_Album;
   final TextEditingController controller = TextEditingController();
 
-  /*@override
-  void initState() {
-    future_Album = fetch_data();
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return future_Album == null
