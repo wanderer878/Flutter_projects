@@ -17,7 +17,7 @@ Future<Album> Fetch_Album() async {
     throw Exception("error occured");
 }
 
-Future<Album> delete_data(int id) async {
+Future<Album> delete_data(String id) async {
   final response = await http.delete(
       Uri.parse("https://jsonplaceholder.typicode.com/albums/$id"),
       headers: <String, String>{
@@ -31,8 +31,8 @@ Future<Album> delete_data(int id) async {
 }
 
 class Album {
-  final int id;
-  final String title;
+  final int? id;
+  final String? title;
 
   Album({required this.id, required this.title});
 
@@ -50,6 +50,7 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   late Future<Album> future_album;
+  bool is_disable = false;
 
   @override
   void initState() {
@@ -62,20 +63,35 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Column(
-            children: [
-              FutureBuilder(
-                future: future_album,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData)
-                    return Text(snapshot.data!.title);
-                  else if (snapshot.hasError)
-                    return Text(snapshot.error.toString());
+          child: FutureBuilder(
+            future: future_album,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(snapshot.data?.title ?? 'data has been deleted'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                        onPressed: is_disable
+                            ? null
+                            : () {
+                                setState(() {
+                                  future_album =
+                                      delete_data(snapshot.data!.id.toString());
+                                  is_disable = true;
+                                });
+                              },
+                        child: Text('delete data'))
+                  ],
+                );
+              } else if (snapshot.hasError)
+                return Text(snapshot.error.toString());
 
-                  return CircularProgressIndicator();
-                },
-              ),
-            ],
+              return CircularProgressIndicator();
+            },
           ),
         ),
       ),
