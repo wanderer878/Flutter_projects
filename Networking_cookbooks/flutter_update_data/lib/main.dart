@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,8 +14,9 @@ Future<Album> post_data(String title) async {
   if (response.statusCode == 201) {
     print("done");
     return Album.fromjson(jsonDecode(response.body));
-  } else
+  } else {
     return throw Exception('error while fetching');
+  }
 }
 
 /*Future<Album> fetch_data() async {
@@ -37,8 +37,9 @@ Future<Album> update_data(String title) async {
 
   if (response.statusCode == 200) {
     return Album.fromjson(jsonDecode(response.body));
-  } else
+  } else {
     throw Exception('error while fetching');
+  }
 }
 
 class Album {
@@ -123,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   TextField(
                       controller: controller,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter Title',
                       )),
@@ -133,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           future_Album = post_data(controller.text);
                         });
                       },
-                      child: Text("create"))
+                      child: const Text("create"))
                 ],
               ),
             ),
@@ -160,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               TextField(
                                 controller: controller,
                                 decoration:
-                                    InputDecoration(hintText: 'enter title'),
+                                    const InputDecoration(hintText: 'enter title'),
                               ),
                               ElevatedButton(
                                   onPressed: (() {
@@ -169,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           update_data(controller.text);
                                     });
                                   }),
-                                  child: Text('update label'))
+                                  child: const Text('update label'))
                             ],
                           );
                         } else if (snapshot.hasError) {
