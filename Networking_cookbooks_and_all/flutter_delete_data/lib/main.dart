@@ -70,7 +70,7 @@ class _MainAppState extends State<MainApp> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(snapshot.data?.title ?? 'data has been deleted'),
+                    Text(snapshot.data?.title ?? 'Data has been deleted'),
                     SizedBox(
                       height: 10,
                     ),
