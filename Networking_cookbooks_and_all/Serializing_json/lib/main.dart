@@ -2,29 +2,36 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:json_annotation/json_annotation.dart';
 
-Future<Album> fetch_album() async {
+import 'album.dart';
+
+var album;
+
+Future<Album> fetch_Album() async {
   final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/photos/1'));
 
   if (response.statusCode == 200) {
-    return Album.fromJson(jsonDecode(response.body));
+    album = Album.fromJson(jsonDecode(response.body));
+    return album;
   } else {
     throw Exception('Error occured');
   }
 }
 
-class Album {
-  String title;
-  int id;
+Future<Album> update_Album() async {
+  final response = await http.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/photos/1'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(Album));
 
-  Album({required this.id, required this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      title: json['title'],
-      id: json['id'],
-    );
+  if (response.statusCode == 200) {
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Error occured');
   }
 }
 
@@ -41,10 +48,11 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   late Future<Album> future_Album;
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
-    future_Album = fetch_album();
+    future_Album = fetch_Album();
     super.initState();
   }
 
@@ -56,6 +64,18 @@ class _MainAppState extends State<MainApp> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: "enter title"),
+              controller: _controller,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    future_Album = update_Album();
+                  });
+                },
+                child: Text("update")),
             FutureBuilder(
                 future: future_Album,
                 builder: (context, snapshot) {
