@@ -10,7 +10,7 @@ var album;
 
 Future<Album> fetch_Album() async {
   final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/photos/1'));
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
 
   if (response.statusCode == 200) {
     album = Album.fromJson(jsonDecode(response.body));
@@ -20,18 +20,18 @@ Future<Album> fetch_Album() async {
   }
 }
 
-Future<Album> update_Album() async {
-  final response = await http.post(
-      Uri.parse('https://jsonplaceholder.typicode.com/photos/1'),
+Future<Album> update_Album(String title) async {
+  final response = await http.put(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums/1'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
-      body: jsonEncode(Album));
+      body: jsonEncode(Album(id: album.id, title: title)));
 
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('Error occured');
+    throw Exception('Error occured in update album');
   }
 }
 
@@ -61,35 +61,50 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: "enter title"),
-              controller: _controller,
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    future_Album = update_Album();
-                  });
-                },
-                child: Text("update")),
-            FutureBuilder(
-                future: future_Album,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(snapshot.data!.title);
-                  } else if (snapshot.hasError) {
-                    return Text('Error occured');
-                  }
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), hintText: "enter title"),
+                controller: _controller,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      updating_future();
+                    });
+                  },
+                  child: Text("update")),
+              const SizedBox(
+                height: 10,
+              ),
+              FutureBuilder(
+                  future: future_Album,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(snapshot.data!.title);
+                    } else if (snapshot.hasError) {
+                      return Text('Error occured');
+                    }
 
-                  return CircularProgressIndicator();
-                })
-          ],
+                    return CircularProgressIndicator();
+                  })
+            ],
+          ),
         )),
       ),
     );
+  }
+
+  updating_future() {
+    if (_controller.text != '') {
+      future_Album = update_Album(_controller.text);
+    }
   }
 }

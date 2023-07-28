@@ -7,9 +7,8 @@ part "album.g.dart";
 class Album {
   String title;
   int id;
-  String url;
 
-  Album({required this.id, required this.title, required this.url});
+  Album({required this.id, required this.title});
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return _$AlbumFromJson(json);
