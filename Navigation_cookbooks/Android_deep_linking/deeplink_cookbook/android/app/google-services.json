@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "650574532503",
+    "project_id": "flutter-deep-linking-cf0b7",
+    "storage_bucket": "flutter-deep-linking-cf0b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650574532503:android:ad34ff3ba4052a97b2fed2",
+        "android_client_info": {
+          "package_name": "com.example.deeplink_cookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650574532503-a586ccomqm6lhm39ol89fa69hitfesr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.deeplink_cookbook",
+            "certificate_hash": "4f5a1f77e0bf96e3c59f189dde0446f2c6b809c8"
+          }
+        },
+        {
+          "client_id": "650574532503-lb8va84s774q7i6b39biau8qh4312ie6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcdEudMke2-X0YhXtT6cbZTg32O1YX2Bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650574532503-lb8va84s774q7i6b39biau8qh4312ie6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
