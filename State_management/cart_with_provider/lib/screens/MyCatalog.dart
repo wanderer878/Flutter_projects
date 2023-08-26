@@ -1,7 +1,11 @@
+import 'package:cart_with_provider/Notifying_classes/Items.dart';
+import 'package:cart_with_provider/screens/MyCart.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math' as math;
+
+import 'package:provider/provider.dart';
 
 class List_obj {
   WordPair word;
@@ -29,7 +33,12 @@ class MyCatalog extends StatelessWidget {
       appBar: AppBar(
         title: Text("catalog"),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => MyCart()));
+              },
+              icon: const Icon(Icons.shopping_cart))
         ],
       ),
       body: ListView.builder(
@@ -46,9 +55,18 @@ class MyCatalog extends StatelessWidget {
                   width: 50,
                 ),
                 title: Text(items_list[index].word.toString()),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Text("ADD"),
+                trailing: Consumer<Items>(
+                  builder: (context, item, child) {
+                    return TextButton(
+                        onPressed:
+                            item.selectedItems.contains(items_list[index].word)
+                                ? null
+                                : () {
+                                    Provider.of<Items>(context, listen: false)
+                                        .addItem(items_list[index].word);
+                                  },
+                        child: Text('ADD'));
+                  },
                 ),
               ),
             );

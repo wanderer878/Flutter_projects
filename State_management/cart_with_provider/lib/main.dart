@@ -1,8 +1,11 @@
+import 'package:cart_with_provider/Notifying_classes/Items.dart';
 import 'package:cart_with_provider/screens/MyCatalog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => Items(), child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
