@@ -10,11 +10,12 @@ import 'package:provider/provider.dart';
 class List_obj {
   WordPair word;
   Color color;
+  int price;
 
-  List_obj({required this.word, required this.color});
+  List_obj({required this.word, required this.color, required this.price});
 
-  factory List_obj.fac(word, color) {
-    return List_obj(word: word, color: color);
+  factory List_obj.fac(word, color, price) {
+    return List_obj(word: word, color: color, price: price);
   }
 }
 
@@ -28,7 +29,8 @@ class MyCatalog extends StatelessWidget {
         (index) => List_obj.fac(
             WordPair.random(),
             Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
-                .withOpacity(1.0)));
+                .withOpacity(1.0),
+            math.Random().nextInt(200 - 10 + 1) + 10));
     return Scaffold(
       appBar: AppBar(
         title: Text("catalog"),
@@ -59,11 +61,13 @@ class MyCatalog extends StatelessWidget {
                   builder: (context, item, child) {
                     return TextButton(
                         onPressed:
-                            item.selectedItems.contains(items_list[index].word)
+                            item.selectedItems.contains(items_list[index])
                                 ? null
                                 : () {
                                     Provider.of<Items>(context, listen: false)
-                                        .addItem(items_list[index].word);
+                                        .addItem_price(
+                                      items_list[index],
+                                    );
                                   },
                         child: Text('ADD'));
                   },
