@@ -4,21 +4,28 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => Todos(),
-    child: const MainApp(),
+    child: MaterialApp(home: MainApp()),
   ));
 }
 
 class Todos extends ChangeNotifier {
-  List<String> todosList = List.generate(10, (index) => (index + 1).toString());
+  List<String> todosList = [];
 
   void todos_add(String todo) {
     todosList.add(todo);
     notifyListeners();
   }
+
+  void todos_remove(String todo) {
+    todosList.remove(todo);
+    notifyListeners();
+  }
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  TextEditingController _controller = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,37 +35,61 @@ class MainApp extends StatelessWidget {
           title: Text('Todo Manager'),
         ),
         body: Center(child: Consumer<Todos>(builder: (context, todos, child) {
-          return ListView.builder(
-              itemCount: todos.todosList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: Checkbox(
-                    value: false,
-                    onChanged: (value) {},
-                    checkColor: Colors.red,
-                  ),
-                  title: Text(todos.todosList[index]),
-                  trailing: GestureDetector(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                  ),
-                );
-              });
+          return todos.todosList.isNotEmpty
+              ? ListView.builder(
+                  itemCount: todos.todosList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Checkbox(
+                        value: false,
+                        onChanged: (value) {},
+                        checkColor: Colors.red,
+                      ),
+                      title: Text(todos.todosList[index]),
+                      trailing: GestureDetector(
+                        onTap: () {
+                          todos.todos_remove(todos.todosList[index]);
+                        },
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    );
+                  })
+              : Text('Nothing to show here');
         })),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (context) {
                   return AlertDialog(
                     title: Text('Add a todo'),
-                    content: Text('custom dialog'),
+                    content: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(hintText: 'Add a todo'),
+                    ),
                     actions: [
-                      TextButton(onPressed: () {}, child: Text('add')),
-                      TextButton(onPressed: () {}, child: Text('cancel'))
+                      Consumer<Todos>(builder: (context, todo, child) {
+                        return ElevatedButton(
+                            onPressed: () {
+                              if (_controller.text.isNotEmpty &&
+                                  !todo.todosList.contains(_controller.text)) {
+                                Provider.of<Todos>(context, listen: false)
+                                    .todos_add(_controller.text);
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: Text('Add'));
+                      }),
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Cancel'),
+                      )
                     ],
                   );
                 });
