@@ -20,7 +20,7 @@ class Todos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void strike(int index, bool value) {
+  void complete(int index, bool value) {
     todosList[index] = <String, dynamic>{
       "todo": todosList[index]["todo"],
       "isChecked": value
@@ -53,20 +53,18 @@ class _MainAppState extends State<MainApp> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: Checkbox(
-                        value: false,
+                        value: todos.todosList[index]['isChecked'],
                         onChanged: (value) {
                           setState(() {
-                            value = true;
+                            todos.complete(index, value!);
                           });
-                          todos.strike(index, value!);
                         },
-                        checkColor: Colors.red,
                       ),
-                      title: todos.todosList[index]['isChecked']
-                          ? Text(todos.todosList[index]['todo'],
-                              style: TextStyle(
-                                  decoration: TextDecoration.lineThrough))
-                          : Text(todos.todosList[index]['todo']),
+                      title: Text(todos.todosList[index]['todo'],
+                          style: TextStyle(
+                              decoration: !todos.todosList[index]['isChecked']
+                                  ? TextDecoration.none
+                                  : TextDecoration.lineThrough)),
                       trailing: GestureDetector(
                         onTap: () {
                           todos.todos_remove(index);
@@ -100,7 +98,9 @@ class _MainAppState extends State<MainApp> {
                                   !checklist(
                                       todo.todosList, _controller.text)) {
                                 Provider.of<Todos>(context, listen: false)
-                                    .todos_add(_controller.text);
+                                    .todos_add(
+                                  _controller.text,
+                                );
                                 _controller.clear();
                                 Navigator.pop(context);
                               }
