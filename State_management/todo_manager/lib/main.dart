@@ -9,22 +9,34 @@ void main() {
 }
 
 class Todos extends ChangeNotifier {
-  List<String> todosList = [];
-
-  void todos_add(String todo) {
-    todosList.add(todo);
+  List<Map<String, dynamic>> todosList = [];
+  void todos_add(String todo, {bool isChecked = false}) {
+    todosList.add({"todo": todo, "isChecked": isChecked});
     notifyListeners();
   }
 
-  void todos_remove(String todo) {
-    todosList.remove(todo);
+  void todos_remove(int index) {
+    todosList.removeAt(index);
+    notifyListeners();
+  }
+
+  void strike(int index, bool value) {
+    todosList[index] = <String, dynamic>{
+      "todo": todosList[index]["todo"],
+      "isChecked": value
+    };
     notifyListeners();
   }
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   MainApp({super.key});
 
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
   TextEditingController _controller = new TextEditingController();
 
   @override
@@ -42,13 +54,22 @@ class MainApp extends StatelessWidget {
                     return ListTile(
                       leading: Checkbox(
                         value: false,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          setState(() {
+                            value = true;
+                          });
+                          todos.strike(index, value!);
+                        },
                         checkColor: Colors.red,
                       ),
-                      title: Text(todos.todosList[index]),
+                      title: todos.todosList[index]['isChecked']
+                          ? Text(todos.todosList[index]['todo'],
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough))
+                          : Text(todos.todosList[index]['todo']),
                       trailing: GestureDetector(
                         onTap: () {
-                          todos.todos_remove(todos.todosList[index]);
+                          todos.todos_remove(index);
                         },
                         child: const Icon(
                           Icons.delete,
@@ -76,9 +97,11 @@ class MainApp extends StatelessWidget {
                         return ElevatedButton(
                             onPressed: () {
                               if (_controller.text.isNotEmpty &&
-                                  !todo.todosList.contains(_controller.text)) {
+                                  !checklist(
+                                      todo.todosList, _controller.text)) {
                                 Provider.of<Todos>(context, listen: false)
                                     .todos_add(_controller.text);
+                                _controller.clear();
                                 Navigator.pop(context);
                               }
                             },
@@ -86,6 +109,7 @@ class MainApp extends StatelessWidget {
                       }),
                       OutlinedButton(
                         onPressed: () {
+                          _controller.clear();
                           Navigator.pop(context);
                         },
                         child: Text('Cancel'),
@@ -98,5 +122,15 @@ class MainApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool checklist(List<Map<String, dynamic>> maps_list, String value) {
+    bool check = false;
+
+    maps_list.forEach((element) {
+      check = element["todo"] == value ? true : check;
+    });
+
+    return check;
   }
 }
