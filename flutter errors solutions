@@ -1,0 +1,4 @@
+
+MissingPluginException while using plugin for flutter (after adding google fonts) :
+
+If you are using hot restart or hot reload, it won't do the trick.Close the app and execute flutter run command.

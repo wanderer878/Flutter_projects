@@ -1,0 +1,65 @@
+CrossAxisAlignment:
+The crossAxisAlignment property determines how Row and Column can position their children on their cross axes.
+A Row 's cross axis is vertical, and a Column 's cross axis is horizontal. The crossAxisAlignment property has five 
+possible values: CrossAxisAlignment.
+
+Material App:
+An application that uses Material Design. A convenience widget that wraps a number of widgets that are commonly required
+for Material Design applications.
+
+Container layout widget :
+If a container widget has fixed size or child it will take the fixed size or child size, but if it does not then it will 
+take as much size as possible.
+
+IMPORTANT NOTE:
+If a child widget does not have it's own size , it will take the size of it's parent widget.
+
+Tight constraint
+A tight constraint offers a single possibility, an exact size. In other words, a tight constraint has its maximum width
+equal to its minimum width; and has its maximum height equal to its minimum height.
+
+Loose constraint:
+loose constraint, on the other hand, sets the maximum width and height, but lets the widget be as small as it wants. 
+In other words, a loose constraint has a minimum width and height both equal to zero:
+
+Currying:
+Deconstruct a function that takes multiple arguments into a sequence of functions that each take a single argument 
+(also called currying).
+
+Transpiler : 
+While compiler translates from high level to low level language, transpiler translates from high level to another high level language.
+
+AOT : 
+In computer science, ahead-of-time compilation (AOT compilation) is the act of compiling an (often) higher-level programming language into an (often)   lower-level language before execution of a program, usually at build-time, to reduce the amount of work needed to be performed at run time.
+
+Transpiler : 
+While compiler translates from high level to low level language, transpiler translates from high level to another high level language.
+
+AOT : 
+In computer science, ahead-of-time compilation (AOT compilation) is the act of compiling an (often) higher-level programming language into an (often)   lower-level language before execution of a program, usually at build-time, to reduce the amount of work needed to be performed at run time. 
+
+Builder widget : 
+Builder widget apne nearest context ko touch krta hai . Eg : agr main widget ke andar scafold hai or scafold ke andr text widget hai yani
+(main -> scaffold -> Text). jb ap text ke andr theme.of(context) ko apply kriengay to wo main widget ke context ko reference krega. mgr hum to scafold widget chate thay to islye hum text ko builder widget ke andr use kriengay. Builder me jo context hga wo scaffold ko reference krega. 
+
+Designs in flutter : 
+https://docs.flutter.dev/cookbook/design
+
+
+Factory Constructor : 
+Factory constructor is used when we don't want to return new instance of class everytime. by using normal constructor, it always return new instance of class so we
+will use factory constructor instead.
+
+Compute :
+Compute is a function in flutter which runs the given data in background. Compute(Methodtorun, argumentstobegiventomethod)
+
+State Management:
+=> change notifier: aik class jo change notifier ko extend kregi, sb changes yahan di jayengi eg: add method , remove
+   method etc. aur methods me notify listener dedya jayega jo is data ko use krnay walay tamam widgets ko notify krdega.
+   taake sb ko pta chal jaye kuch add ya remove hwa hai.
+=> change notifier provider: is ke zarye jis jis class tk provider ko use krna hai unhe access dya jayega. Jese react
+   native me use context wagera.
+=> Consumer : Aik widget jo us widget ko wrap krega jis me change ana hai , advantage yeh hai ke srf wo widget update
+   hga baqi tree same rhega. optimization.
+=> Provider.of : jb kisi widget me khud change na arha ho but wo doosre widget ko change kre , jese buton press krne
+   pr text widget update ho to button ko provider.of me wrap krtay hain. han listen property false hygi mgr.
