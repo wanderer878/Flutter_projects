@@ -63,3 +63,7 @@ State Management:
    hga baqi tree same rhega. optimization.
 => Provider.of : jb kisi widget me khud change na arha ho but wo doosre widget ko change kre , jese buton press krne
    pr text widget update ho to button ko provider.of me wrap krtay hain. han listen property false hygi mgr.
+
+Package: Jo flutter me koi functionality deta hai.
+
+Plugin: Platform specific package , jese android kylye jo package java code de wo plugin khlayega.
