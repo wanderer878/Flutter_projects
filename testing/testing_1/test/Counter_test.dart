@@ -18,5 +18,8 @@ void main() {
 
       expect(counter.value, -1);
     });
+    test("initial value", () {
+      expect(Counter().value, 0);
+    });
   });
 }
