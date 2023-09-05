@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testing_1/Fetch_album.dart';
 
 void main() {
   runApp(const MainApp());
@@ -28,16 +27,7 @@ class Main_w extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Fetch_album()));
-              },
-              child: Text("Mockito Testing"))
-        ],
+        children: [Text('hello world')],
       ),
     );
   }
