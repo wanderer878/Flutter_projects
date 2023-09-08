@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:mockito_testing/album.dart';
 
 Future<Album> fetchAlbum(http.Client client) async {
   final response = await client
@@ -19,20 +21,28 @@ Future<Album> fetchAlbum(http.Client client) async {
   }
 }
 
-class Album {
-  final int userId;
-  final int id;
-  final String title;
+Future<Album> createAlbum(http.Client client, String title) async {
+  final response = await client.post(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+      headers: {'Content-type': 'application/json; charset=UTF-8'},
+      body: jsonEncode(<String, String>{'title': title}));
 
-  const Album({required this.userId, required this.id, required this.title});
+  if (response.statusCode == 201)
+    return Album.fromJson(jsonDecode(response.body));
+  else
+    throw Exception("failed to create");
+}
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
-  }
+Future<Album> updateAlbum(String title, int id, http.Client client) async {
+  final response = await client.put(
+      Uri.parse('https://jsonplaceholder.typicode.com/albums/${id}'),
+      headers: {'Content-type': 'application/json; charset=UTF-8'},
+      body: jsonEncode(<String, String>{'title': title}));
+
+  if (response.statusCode == 200)
+    return Album.fromJson(jsonDecode(response.body));
+  else
+    throw Exception('failed to update');
 }
 
 void main() => runApp(const MyApp());
