@@ -39,4 +39,20 @@ void main() {
       expect(text_finder, findsOneWidget);
     });
   });
+
+  testWidgets("key widgets", (widgetTester) async {
+    await widgetTester.pumpWidget(MaterialApp(
+      home: ListView.builder(
+          key: Key("12"),
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            ListTile(
+              key: Key(index.toString()),
+              title: Text((index).toString()),
+            );
+          }),
+    ));
+
+    expect(find.byKey(Key("12")), findsOneWidget);
+  });
 }
