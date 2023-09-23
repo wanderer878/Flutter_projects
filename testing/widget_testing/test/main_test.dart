@@ -33,10 +33,11 @@ void main() {
         home: Test_widget2(),
       ));
 
-      //final image_w = find.image(FileImage(File("images/Starfield.webp")));
+      final image_w = find.byType(Image);
       final text_finder = find.text("Widget 2");
 
       expect(text_finder, findsOneWidget);
+      expect(image_w, findsOneWidget);
     });
   });
 
@@ -54,5 +55,41 @@ void main() {
     ));
 
     expect(find.byKey(Key("12")), findsOneWidget);
+  });
+
+  testWidgets("finds a specific instance", (widgetTester) async {
+    const txt_widget = Text("Halo 3");
+
+    await widgetTester.pumpWidget(MaterialApp(
+      home: Container(
+        child: txt_widget,
+      ),
+    ));
+
+    expect(find.byWidget(txt_widget), findsOneWidget);
+  });
+
+  testWidgets("Handle Scrolling", (widgetTester) async {
+    final items = List<String>.generate(100, (index) => "Item $index");
+
+    await widgetTester.pumpWidget(MaterialApp(
+      home: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return Text(
+              items[index],
+              key: Key('item_${index}_text'),
+            );
+          }),
+    ));
+
+    final List_Finder = find.byType(Scrollable);
+    //final List_Finder = find.byKey(const ValueKey("long_list"));
+    final item_to_find = find.byKey(const ValueKey("item_50_text"));
+
+    await widgetTester.scrollUntilVisible(item_to_find, 500.0,
+        scrollable: List_Finder);
+
+    expect(item_to_find, findsOneWidget);
   });
 }
