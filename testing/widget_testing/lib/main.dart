@@ -99,8 +99,10 @@ class drag_drop extends StatefulWidget {
 }
 
 class _drag_dropState extends State<drag_drop> {
-  final todos = <String>["hello", "world"];
+  final todos = <String>[];
   final _controller = TextEditingController();
+  show_bar(txt, context) =>
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(txt)));
 
   @override
   Widget build(BuildContext context) {
@@ -110,23 +112,32 @@ class _drag_dropState extends State<drag_drop> {
             title: Text("Drag drop testing"),
           ),
           body: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                children: [
-                  TextField(
-                    controller: _controller,
-                  ),
-                  ListView.builder(
-                      shrinkWrap: true,
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _controller,
+                ),
+                Expanded(
+                  child: ListView.builder(
                       itemCount: todos.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(todos[index]),
+                        return Dismissible(
+                          key: UniqueKey(),
+                          onDismissed: (direction) => {
+                            todos.removeAt(index),
+                            show_bar("removed", context)
+                          },
+                          background: Container(
+                            color: Colors.red,
+                          ),
+                          child: ListTile(
+                            title: Text(todos[index]),
+                          ),
                         );
-                      })
-                ],
-              ),
+                      }),
+                )
+              ],
             ),
           ),
           floatingActionButton: Builder(builder: (context) {
@@ -139,12 +150,67 @@ class _drag_dropState extends State<drag_drop> {
                           _controller.clear();
                         },
                       )
-                    : ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Nothing to add")));
+                    : show_bar("Nothing to add", context);
               },
               child: Icon(Icons.add),
             );
           })),
+    );
+  }
+}
+
+class TodoList extends StatefulWidget {
+  const TodoList({super.key});
+
+  @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
+  static const _appTitle = 'Todo List';
+  final todos = <String>[];
+  final controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _appTitle,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(_appTitle),
+        ),
+        body: Column(
+          children: [
+            TextField(
+              controller: controller,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: todos.length,
+                itemBuilder: (context, index) {
+                  final todo = todos[index];
+
+                  return Dismissible(
+                    key: Key('$todo$index'),
+                    onDismissed: (direction) => todos.removeAt(index),
+                    background: Container(color: Colors.red),
+                    child: ListTile(title: Text(todo)),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              todos.add(controller.text);
+              controller.clear();
+            });
+          },
+          child: const Icon(Icons.add),
+        ),
+      ),
     );
   }
 }
