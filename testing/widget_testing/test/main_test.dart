@@ -39,57 +39,75 @@ void main() {
       expect(text_finder, findsOneWidget);
       expect(image_w, findsOneWidget);
     });
-  });
 
-  testWidgets("key widgets", (widgetTester) async {
-    await widgetTester.pumpWidget(MaterialApp(
-      home: ListView.builder(
-          key: Key("12"),
-          itemCount: 20,
-          itemBuilder: (context, index) {
-            ListTile(
-              key: Key(index.toString()),
-              title: Text((index).toString()),
-            );
-          }),
-    ));
+    testWidgets("key widgets", (widgetTester) async {
+      await widgetTester.pumpWidget(MaterialApp(
+        home: ListView.builder(
+            key: Key("12"),
+            itemCount: 20,
+            itemBuilder: (context, index) {
+              ListTile(
+                key: Key(index.toString()),
+                title: Text((index).toString()),
+              );
+            }),
+      ));
 
-    expect(find.byKey(Key("12")), findsOneWidget);
-  });
+      expect(find.byKey(Key("12")), findsOneWidget);
+    });
 
-  testWidgets("finds a specific instance", (widgetTester) async {
-    const txt_widget = Text("Halo 3");
+    testWidgets("finds a specific instance", (widgetTester) async {
+      const txt_widget = Text("Halo 3");
 
-    await widgetTester.pumpWidget(MaterialApp(
-      home: Container(
-        child: txt_widget,
-      ),
-    ));
+      await widgetTester.pumpWidget(MaterialApp(
+        home: Container(
+          child: txt_widget,
+        ),
+      ));
 
-    expect(find.byWidget(txt_widget), findsOneWidget);
-  });
+      expect(find.byWidget(txt_widget), findsOneWidget);
+    });
 
-  testWidgets("Handle Scrolling", (widgetTester) async {
-    final items = List<String>.generate(100, (index) => "Item $index");
+    testWidgets("Handle Scrolling", (widgetTester) async {
+      final items = List<String>.generate(100, (index) => "Item $index");
 
-    await widgetTester.pumpWidget(MaterialApp(
-      home: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return Text(
-              items[index],
-              key: Key('item_${index}_text'),
-            );
-          }),
-    ));
+      await widgetTester.pumpWidget(MaterialApp(
+        home: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Text(
+                items[index],
+                key: Key('item_${index}_text'),
+              );
+            }),
+      ));
 
-    final List_Finder = find.byType(Scrollable);
-    //final List_Finder = find.byKey(const ValueKey("long_list"));
-    final item_to_find = find.byKey(const ValueKey("item_50_text"));
+      final List_Finder = find.byType(Scrollable);
+      //final List_Finder = find.byKey(const ValueKey("long_list"));
+      final item_to_find = find.byKey(const ValueKey("item_50_text"));
 
-    await widgetTester.scrollUntilVisible(item_to_find, 500.0,
-        scrollable: List_Finder);
+      await widgetTester.scrollUntilVisible(item_to_find, 500.0,
+          scrollable: List_Finder);
 
-    expect(item_to_find, findsOneWidget);
+      expect(item_to_find, findsOneWidget);
+    });
+
+    testWidgets("Tap, drag, and enter text", (widgetTester) async {
+      await widgetTester.pumpWidget(drag_drop());
+
+      await widgetTester.enterText(find.byType(TextField), "Hello world");
+
+      await widgetTester.tap(find.byType(FloatingActionButton));
+
+      await widgetTester.pump();
+
+      expect(find.text("Hello world"), findsOneWidget);
+
+      await widgetTester.drag(find.byType(Dismissible), const Offset(-500, 0));
+
+      await widgetTester.pumpAndSettle();
+
+      expect(find.text("Hello world"), findsNothing);
+    });
   });
 }
