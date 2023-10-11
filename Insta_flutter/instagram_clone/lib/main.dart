@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/responsive/mobile_screen_layout.dart';
+import 'package:instagram_clone/responsive/responsive_layout.dart';
+import 'package:instagram_clone/responsive/web_screen_layout.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
 void main() {
@@ -11,14 +14,12 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "INSEED",
-      theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        title: "INSEED",
+        theme: ThemeData.dark()
+            .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
+        home: responsive_layout(
+            MobileScreenLayout: MobileScreenLayout(),
+            WebScreenLayout: WebScreenLayout()));
   }
 }
