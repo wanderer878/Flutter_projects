@@ -17,6 +17,50 @@ void main() {
 
     expect(find.byType(ListView), findsOneWidget);
 
-    //await
+    expect(find.text("item 1"), findsOneWidget);
+
+    await widgetTester.fling(find.byType(ListView), Offset(0, -200), 200);
+
+    await widgetTester.pumpAndSettle();
+
+    expect(find.text('item 1'), findsNothing);
   });
+
+  testWidgets("Testing IconButtons", (widgetTester) async {
+    await widgetTester.pumpWidget(createHomeScreen());
+
+    expect(find.byIcon(Icons.favorite), findsNothing);
+
+    await widgetTester.tap(find.byIcon(Icons.favorite_border).first);
+
+    await widgetTester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.favorite), findsOneWidget);
+  });
+
+  testWidgets("with unit testing", (widgetTester) async {
+    await widgetTester.pumpWidget(createHomeScreen());
+
+    expect(find.byIcon(Icons.favorite), findsNothing);
+
+    myFunction() {
+      test("adding item", () {
+        final favourites = Favourites();
+
+        int i = 10;
+        expect(favourites.items.length, 0);
+
+        favourites.add(i);
+
+        expect(favourites.items.length, 1);
+      });
+    }
+
+    expect(myFunction(), equals(Favourites().items.length == 1));
+  });
+
+  /*await widgetTester.pumpAndSettle();
+
+    xpect(find.byIcon(Icons.favorite), findsOneWidget);
+  });*/
 }
