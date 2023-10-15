@@ -4,12 +4,21 @@ import 'package:provider/provider.dart';
 import 'package:testing_codelab/models/favorites.dart';
 import 'package:testing_codelab/screens/home.dart';
 
+late final Favourites favourites;
+
 Widget createHomeScreen() => ChangeNotifierProvider<Favourites>(
-      create: (context) => Favourites(),
+      create: (context) {
+        favourites = Favourites();
+        return favourites;
+      },
       child: const MaterialApp(
         home: HomePage(),
       ),
     );
+
+void addItems(int i) {
+  favourites.add(i);
+}
 
 void main() {
   testWidgets("Home Page Widget Tests", (widgetTester) async {
@@ -35,6 +44,8 @@ void main() {
 
     await widgetTester.pumpAndSettle();
 
+    expect(find.text('Item Added Sucessfully'), findsOneWidget);
+
     expect(find.byIcon(Icons.favorite), findsOneWidget);
   });
 
@@ -43,24 +54,14 @@ void main() {
 
     expect(find.byIcon(Icons.favorite), findsNothing);
 
-    myFunction() {
-      test("adding item", () {
-        final favourites = Favourites();
+    expect(favourites.items.length, 0);
 
-        int i = 10;
-        expect(favourites.items.length, 0);
+    addItems(1);
 
-        favourites.add(i);
+    expect(favourites.items.length, 1);
 
-        expect(favourites.items.length, 1);
-      });
-    }
+    await widgetTester.pumpAndSettle();
 
-    expect(myFunction(), equals(Favourites().items.length == 1));
+    expect(find.byIcon(Icons.favorite), findsOneWidget);
   });
-
-  /*await widgetTester.pumpAndSettle();
-
-    xpect(find.byIcon(Icons.favorite), findsOneWidget);
-  });*/
 }
