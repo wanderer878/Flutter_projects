@@ -51,6 +51,7 @@ class ItemTile extends StatelessWidget {
         ),
         title: Text('item $itemNo'),
         trailing: IconButton(
+            key: Key("icon_$itemNo"),
             onPressed: () {
               !favouritesList.items.contains(itemNo)
                   ? favouritesList.add(itemNo)
