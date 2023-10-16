@@ -22,8 +22,8 @@ void main() {
 
     final remove_icon_Keys = [
       "remove_icon_0",
-      "remove_icon_1"
-          "remove_icon_2"
+      "remove_icon_1",
+      "remove_icon_2"
     ];
 
     for (var remove_icon in remove_icon_Keys) {
