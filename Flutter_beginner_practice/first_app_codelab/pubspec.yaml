@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.0.5
+  word_generator: ^0.4.3
 
 dev_dependencies:
   flutter_test:

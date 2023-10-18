@@ -1,8 +1,13 @@
+import 'package:first_app_codelab/Favorites.dart';
 import 'package:first_app_codelab/screens/Home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => Favourites(),
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
