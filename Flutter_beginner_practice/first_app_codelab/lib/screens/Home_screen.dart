@@ -65,15 +65,16 @@ class Home_Widget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextButton.icon(
-                  onPressed: () {
-                    Provider.of<Favourites>(context, listen: false).toggle_Favs(
-                        Provider.of<Favourites>(context, listen: false)
-                            .current_pair);
-                    print(Favourites().fav.length);
-                  },
-                  icon: Icon(Icons.favorite_border),
-                  label: Text("Like")),
+              Consumer<Favourites>(builder: (context, value, child) {
+                return TextButton.icon(
+                    onPressed: () {
+                      Provider.of<Favourites>(context, listen: false)
+                          .toggle_Favs(value.current_pair);
+                      print(value.fav.length);
+                    },
+                    icon: Icon(Icons.favorite_border),
+                    label: Text("Like"));
+              }),
               SizedBox(
                 width: 20,
               ),
