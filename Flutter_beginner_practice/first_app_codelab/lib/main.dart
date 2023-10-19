@@ -19,8 +19,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: base.copyWith(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown)
-                .copyWith(background: Colors.brown.shade100)),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown).copyWith(
+              background: Colors.brown.shade100,
+              onPrimaryContainer: Colors.white),
+          cardTheme: CardTheme(color: Colors.brown[600]),
+          textTheme: TextTheme(
+              displayMedium: TextStyle(color: Colors.white),
+              bodyLarge: TextStyle(color: Colors.brown)),
+        ),
         home: HomePage());
   }
 }

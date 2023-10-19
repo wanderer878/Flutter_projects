@@ -11,7 +11,7 @@ class Favourites extends ChangeNotifier {
 
   List<String> fav = [];
 
-  get items => fav;
+  List<String> get items => fav;
 
   toggle_Favs(word) {
     fav.contains(word) ? fav.remove(word) : fav.add(word);
