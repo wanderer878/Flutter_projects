@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(2), // Modify this line
+                        padding: const EdgeInsets.all(12), // Modify this line
                         child: Text(
                           'Recently played',
                           style: context.headlineSmall,
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 AdaptiveContainer(
                   columnSpan: 12,
                   child: Padding(
-                    padding: const EdgeInsets.all(2), // Modify this line
+                    padding: const EdgeInsets.all(12), // Modify this line
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
