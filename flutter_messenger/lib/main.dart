@@ -18,7 +18,9 @@ class MainApp extends StatelessWidget {
                 titleTextStyle: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 24))),
+                    fontSize: 24)),
+            inputDecorationTheme:
+                InputDecorationTheme(prefixIconColor: Colors.grey)),
         debugShowCheckedModeBanner: false,
         home: Conversations());
   }
