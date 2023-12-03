@@ -9,5 +9,6 @@ _______________________________________________________________
 
 setting up firebase: 
 
+=> flutterfire configure --project=flutter-insta-8d8cc
 Mene flutterfire cli use kri hai, aur DefaultFirebaseOptions.android use kre hain , kynke windows app pr issues
 arahy thay.
