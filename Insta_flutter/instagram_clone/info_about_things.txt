@@ -5,4 +5,9 @@ LAYOUT BUILDER : Layout builder apne size ko apne
 parent widget ke according change krta hai. Isko 
 responsive layout banane me use krtay hain.
 
+_______________________________________________________________
 
+setting up firebase: 
+
+Mene flutterfire cli use kri hai, aur DefaultFirebaseOptions.android use kre hain , kynke windows app pr issues
+arahy thay.
