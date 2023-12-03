@@ -1,0 +1,8 @@
+
+Building Responsive Layout Widget: 
+
+LAYOUT BUILDER : Layout builder apne size ko apne
+parent widget ke according change krta hai. Isko 
+responsive layout banane me use krtay hain.
+
+
