@@ -13,14 +13,19 @@ class _Login_PageState extends State<Login_Page> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Flexible(child: Container(),flex: 2,),
                 SvgPicture.asset("assets/ic_instagram.svg",
-                    height: 61, color: primaryColor)
+                    height: 61, color: primaryColor),
+
+                SizedBox(height: 64,)
+
               ],
             )));
   }
