@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/utils/colors.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({super.key});
@@ -13,10 +15,13 @@ class _Login_PageState extends State<Login_Page> {
     return SafeArea(
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            width: double.maxFinite,
+            width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Text('Login')],
+              children: [
+                SvgPicture.asset("assets/ic_instagram.svg",
+                    height: 61, color: primaryColor)
+              ],
             )));
   }
 }
