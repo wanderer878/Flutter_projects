@@ -31,7 +31,10 @@ class _Login_PageState extends State<Login_Page> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 10),
+                  Flexible(
+                    child: Container(),
+                    flex: 2,
+                  ),
                   SvgPicture.asset(
                     "assets/ic_instagram.svg",
                     height: 61,
@@ -58,9 +61,32 @@ class _Login_PageState extends State<Login_Page> {
                   ),
                   FilledButton(
                       style: FilledButton.styleFrom(
-                          minimumSize: Size.fromHeight(40)),
+                          minimumSize: Size.fromHeight(40),
+                          backgroundColor: blueColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
                       onPressed: () {},
-                      child: Text('Login'))
+                      child: Text('Login')),
+                  Flexible(
+                    child: Container(),
+                    flex: 2,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("already have an account ? "),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ))),
     );
