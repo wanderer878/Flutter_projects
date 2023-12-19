@@ -12,3 +12,10 @@ setting up firebase:
 => flutterfire configure --project=flutter-insta-8d8cc
 Mene flutterfire cli use kri hai, aur DefaultFirebaseOptions.android use kre hain , kynke windows app pr issues
 arahy thay.
+
+Note : LINUX PR NHI CHAL RHA YEH
+
+_______________________________________________________________
+
+NetworkImage is a class that creates an object that provides an image from the URL passed to it. It is not a widget and does not output an image to the screen. It is an ImageProvider, which means it can be used by widgets that require an image source, such as CircleAvatar or FadeInImage.
+Image.network is a named constructor of the Image class, which is a stateful widget that displays an image on the screen. It sets the image property using the NetworkImage, and then uses the RawImage widget to render the image. It is a convenient way to show an image from a URL without needing an ImageProvider.
