@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
@@ -100,7 +101,15 @@ class _Signup_scState extends State<Signup_sc> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(3.0)),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        String res = await Auth_methods().signup(
+                            username: username_controller.text,
+                            password: password_controller.text,
+                            email: email_controller.text,
+                            bio: bio_controller.text);
+
+                        print(res);
+                      },
                       child: Text('Sign up')),
                   Flexible(
                     child: Container(),
