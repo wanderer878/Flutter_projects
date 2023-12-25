@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
 class Signup_sc extends StatefulWidget {
@@ -16,12 +20,20 @@ class _Signup_scState extends State<Signup_sc> {
   final TextEditingController password_controller = new TextEditingController();
   final TextEditingController username_controller = new TextEditingController();
   final TextEditingController bio_controller = new TextEditingController();
+  Uint8List? _image;
 
   @override
   void dispose() {
     email_controller.dispose();
     password_controller.dispose();
     super.dispose();
+  }
+
+  void select_image() async {
+    Uint8List i_list = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = i_list;
+    });
   }
 
   @override
@@ -48,14 +60,21 @@ class _Signup_scState extends State<Signup_sc> {
                   ),
                   Stack(
                     children: [
-                      CircleAvatar(
-                        radius: 64,
-                        backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1701601831490-534481ed0703?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D"),
-                      ),
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 64,
+                              backgroundImage: MemoryImage(_image!),
+                            )
+                          : CircleAvatar(
+                              radius: 64,
+                              backgroundImage: NetworkImage(
+                                  'https://images.unsplash.com/photo-1702966051138-009c0c965295?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8')),
                       Positioned(
                         child: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.add_a_photo)),
+                            onPressed: () {
+                              select_image();
+                            },
+                            icon: Icon(Icons.add_a_photo)),
                         bottom: -10,
                         left: 80,
                       )
