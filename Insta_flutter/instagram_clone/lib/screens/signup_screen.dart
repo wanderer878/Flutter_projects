@@ -30,7 +30,7 @@ class _Signup_scState extends State<Signup_sc> {
   }
 
   void select_image() async {
-    Uint8List i_list = await pickImage(ImageSource.gallery);
+    Uint8List? i_list = await pickImage(ImageSource.gallery);
     setState(() {
       _image = i_list;
     });
@@ -71,9 +71,7 @@ class _Signup_scState extends State<Signup_sc> {
                                   'https://images.unsplash.com/photo-1702966051138-009c0c965295?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8')),
                       Positioned(
                         child: IconButton(
-                            onPressed: () {
-                              select_image();
-                            },
+                            onPressed: select_image,
                             icon: Icon(Icons.add_a_photo)),
                         bottom: -10,
                         left: 80,
@@ -125,7 +123,8 @@ class _Signup_scState extends State<Signup_sc> {
                             username: username_controller.text,
                             password: password_controller.text,
                             email: email_controller.text,
-                            bio: bio_controller.text);
+                            bio: bio_controller.text,
+                            file: _image);
 
                         print(res);
                       },
