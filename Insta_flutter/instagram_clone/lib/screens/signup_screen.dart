@@ -21,6 +21,7 @@ class _Signup_scState extends State<Signup_sc> {
   final TextEditingController username_controller = new TextEditingController();
   final TextEditingController bio_controller = new TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -118,17 +119,15 @@ class _Signup_scState extends State<Signup_sc> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(3.0)),
                       ),
-                      onPressed: () async {
-                        String res = await Auth_methods().signup(
-                            username: username_controller.text,
-                            password: password_controller.text,
-                            email: email_controller.text,
-                            bio: bio_controller.text,
-                            file: _image);
-
-                        print(res);
-                      },
-                      child: Text('Sign up')),
+                      onPressed: Signup_press,
+                      child: _isLoading == true
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircularProgressIndicator(
+                                color: primaryColor,
+                              ),
+                            )
+                          : Text('Sign up')),
                   Flexible(
                     child: Container(),
                     flex: 2,
@@ -152,5 +151,27 @@ class _Signup_scState extends State<Signup_sc> {
                 ],
               ))),
     );
+  }
+
+  void Signup_press() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    String res = await Auth_methods().signup(
+        username: username_controller.text,
+        password: password_controller.text,
+        email: email_controller.text,
+        bio: bio_controller.text,
+        file: _image);
+
+    setState(() {
+      _isLoading = false;
+    });
+    if (res != "success") {
+      showSnackbar(res, context);
+    }
+
+    print(res);
   }
 }
