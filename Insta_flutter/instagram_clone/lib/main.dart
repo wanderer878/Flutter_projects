@@ -26,7 +26,7 @@ class MainApp extends StatelessWidget {
         title: "INSEED",
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
-        home: Signup_sc()
+        home: Login_Page()
         /*responsive_layout(
                 MobileScreenLayout: MobileScreenLayout(),
                 WebScreenLayout: WebScreenLayout())*/
