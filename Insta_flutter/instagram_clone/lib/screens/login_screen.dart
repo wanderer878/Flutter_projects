@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:instagram_clone/screens/signup_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
@@ -86,7 +87,12 @@ class _Login_PageState extends State<Login_Page> {
                     children: [
                       Text("Don't have an account ? "),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Signup_sc()));
+                        },
                         child: Text(
                           "Sign up",
                           style: TextStyle(fontWeight: FontWeight.bold),
