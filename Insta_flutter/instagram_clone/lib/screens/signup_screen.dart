@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
+import 'package:instagram_clone/responsive/responsive_layout.dart';
+import 'package:instagram_clone/responsive/web_screen_layout.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
+
+import '../responsive/mobile_screen_layout.dart';
 
 class Signup_sc extends StatefulWidget {
   const Signup_sc({super.key});
@@ -176,6 +180,13 @@ class _Signup_scState extends State<Signup_sc> {
     });
     if (res != "success") {
       showSnackbar(res, context);
+    } else if (res == 'success') {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const responsive_layout(
+                  MobileScreenLayout: MobileScreenLayout(),
+                  WebScreenLayout: WebScreenLayout())));
     }
 
     print(res);

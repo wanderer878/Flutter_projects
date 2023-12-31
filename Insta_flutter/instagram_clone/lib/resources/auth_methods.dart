@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/resources/storage_methods.dart';
+import 'package:instagram_clone/models/user.dart' as model;
 
 class Auth_methods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,17 +32,11 @@ class Auth_methods {
         photo_url = await StorageMethods()
             .UploadImgToStorage('profilePics', file, false);
 
+        //model.User user = model.User();
+
         print(user_cred.user!.uid);
         //adding collection
-        await _firestore.collection("users").doc(user_cred.user!.uid).set({
-          'username': username,
-          "uid": user_cred.user!.uid,
-          "email": email,
-          "bio": bio,
-          "followers": [],
-          "following": [],
-          "photo_url": photo_url,
-        });
+        //await _firestore.collection("users").doc(user_cred.user!.uid).set();
 
         res = "success";
       } else {

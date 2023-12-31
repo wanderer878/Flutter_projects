@@ -6,6 +6,10 @@ import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 import 'package:instagram_clone/resources/auth_methods.dart';
 
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout.dart';
+import '../responsive/web_screen_layout.dart';
+
 class Login_Page extends StatefulWidget {
   Login_Page({super.key});
 
@@ -122,6 +126,13 @@ class _Login_PageState extends State<Login_Page> {
 
     if (res != "success") {
       showSnackbar(res, context);
+    } else if (res == "success") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const responsive_layout(
+                  MobileScreenLayout: MobileScreenLayout(),
+                  WebScreenLayout: WebScreenLayout())));
     }
   }
 }
