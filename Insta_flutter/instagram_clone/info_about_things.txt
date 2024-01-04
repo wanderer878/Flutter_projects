@@ -26,3 +26,7 @@ Image hm ne as unint8list rkhi hai kynke hm image file bhi use krskte thay mgr p
 _______________________________________________________________
 
 you can access static methods from a required parameters class without giving required parameters in Dart.
+_______________________________________________________________
+
+Private variable in dart _ ke sath hta hai example _user
+_______________________________________________________________
