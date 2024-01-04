@@ -6,6 +6,9 @@ class responsive_layout extends StatelessWidget {
   final Widget MobileScreenLayout;
   final Widget WebScreenLayout;
 
+  @override
+  void initState() {}
+
   const responsive_layout(
       {super.key,
       required this.MobileScreenLayout,

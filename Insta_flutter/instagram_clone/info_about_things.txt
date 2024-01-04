@@ -23,3 +23,6 @@ Image.network is a named constructor of the Image class, which is a stateful wid
 _______________________________________________________________
 
 Image hm ne as unint8list rkhi hai kynke hm image file bhi use krskte thay mgr phr web pr run krna problem hta. 
+_______________________________________________________________
+
+you can access static methods from a required parameters class without giving required parameters in Dart.
