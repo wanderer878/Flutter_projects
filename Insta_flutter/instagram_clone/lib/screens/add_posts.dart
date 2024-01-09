@@ -28,7 +28,38 @@ class _AddPostsState extends State<AddPosts> {
               ))
         ],
       ),
-      body: Center(child: Text("Posts Screen")),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://images.unsplash.com/photo-1704774801340-7d23d2d3868b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzM3x8fGVufDB8fHx8fA%3D%3D'),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: TextField(
+                  maxLines: 8,
+                  decoration: InputDecoration(
+                    hintText: 'Write a caption...',
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 45,
+                width: 45,
+                child: AspectRatio(
+                  aspectRatio: 487 / 451,
+                  child: Container(),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
