@@ -30,3 +30,6 @@ _______________________________________________________________
 
 Private variable in dart _ ke sath hta hai example _user
 _______________________________________________________________
+
+flutter run -d edge --web-renderer html  This will run code on edge using html, zroori hai take firebase se image show hske
+_______________________________________________________________

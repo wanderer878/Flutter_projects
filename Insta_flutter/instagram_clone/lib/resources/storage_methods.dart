@@ -25,6 +25,8 @@ class StorageMethods {
 
     String download_url = await snapshot.ref.getDownloadURL();
 
+    print(snapshot.ref);
+
     return download_url;
   }
 }
