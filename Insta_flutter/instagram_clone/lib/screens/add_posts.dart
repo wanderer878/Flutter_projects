@@ -32,7 +32,7 @@ class _AddPostsState extends State<AddPosts> {
                 padding: EdgeInsets.all(20),
                 onPressed: () async {
                   Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.camera);
+                  Uint8List? file = await pickImage(ImageSource.camera);
                   setState(() {
                     _file = file;
                   });
@@ -43,7 +43,7 @@ class _AddPostsState extends State<AddPosts> {
                 padding: EdgeInsets.all(20),
                 onPressed: () async {
                   Navigator.of(context).pop();
-                  Uint8List file = await pickImage(ImageSource.gallery);
+                  Uint8List? file = await pickImage(ImageSource.gallery);
                   setState(() {
                     _file = file;
                   });
@@ -60,7 +60,7 @@ class _AddPostsState extends State<AddPosts> {
           );
         });
   }
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -105,7 +105,7 @@ class _AddPostsState extends State<AddPosts> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: TextField(
-                        controller:  _descriptionController,
+                        controller: _descriptionController,
                         maxLines: 8,
                         decoration: InputDecoration(
                           hintText: 'Write a caption...',
