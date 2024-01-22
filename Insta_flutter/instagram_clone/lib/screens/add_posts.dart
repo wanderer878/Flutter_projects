@@ -18,6 +18,7 @@ class AddPosts extends StatefulWidget {
 
 class _AddPostsState extends State<AddPosts> {
   Uint8List? _file;
+  TextEditingController _descriptionController = TextEditingController();
 
   _selectImage(BuildContext context) {
     return showDialog(
@@ -47,10 +48,23 @@ class _AddPostsState extends State<AddPosts> {
                     _file = file;
                   });
                 },
+              ),
+              SimpleDialogOption(
+                child: Text("Cancel"),
+                padding: EdgeInsets.all(20),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               )
             ],
           );
         });
+  }
+  
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionController.dispose();
   }
 
   @override
@@ -91,6 +105,7 @@ class _AddPostsState extends State<AddPosts> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: TextField(
+                        controller:  _descriptionController,
                         maxLines: 8,
                         decoration: InputDecoration(
                           hintText: 'Write a caption...',
@@ -106,8 +121,7 @@ class _AddPostsState extends State<AddPosts> {
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://images.unsplash.com/photo-1704774801340-7d23d2d3868b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzM3x8fGVufDB8fHx8fA%3D%3D'),
+                                  image: MemoryImage(_file!),
                                   fit: BoxFit.fill,
                                   alignment: FractionalOffset.topCenter)),
                         ),
