@@ -20,6 +20,7 @@ class AddPosts extends StatefulWidget {
 class _AddPostsState extends State<AddPosts> {
   Uint8List? _file;
   TextEditingController _descriptionController = TextEditingController();
+  bool _loadingState = false;
 
   _selectImage(BuildContext context) {
     return showDialog(
@@ -62,25 +63,45 @@ class _AddPostsState extends State<AddPosts> {
         });
   }
 
-  void postImage(
-    String uid,
-    String profImage,
-    String username
-  )async{
+  void postImage(String uid, String profImage, String username) async {
     try {
-      String res = await Firestore_methods().uploadPost(uid, _descriptionController.text, _file!, username, profImage);
+      setState(() {
+        _loadingState = true;
+      });
 
-      res == "success" ? showSnackbar("Posted successfully", context):showSnackbar(res, context); 
+      String res = await Firestore_methods().uploadPost(
+          uid, _descriptionController.text, _file!, username, profImage);
+
+      if (res == "success") {
+        setState(() {
+          _loadingState = false;
+        });
+        showSnackbar("Posted successfully", context);
+        clearImage();
+      } else {
+        setState(() {
+          _loadingState = false;
+        });
+        showSnackbar(res, context);
+      }
     } catch (e) {
+      setState(() {
+        _loadingState = false;
+      });
       showSnackbar(e.toString(), context);
     }
+  }
+
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _descriptionController.dispose();
-    
   }
 
   @override
@@ -96,13 +117,14 @@ class _AddPostsState extends State<AddPosts> {
         : Scaffold(
             appBar: AppBar(
               backgroundColor: mobileBackgroundColor,
-              leading:
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+              leading: IconButton(
+                  onPressed: clearImage, icon: Icon(Icons.arrow_back)),
               title: Text("Post to"),
               centerTitle: false,
               actions: [
                 TextButton(
-                    onPressed: ()=> postImage(user.userId,user.photo_url,user.username),
+                    onPressed: () =>
+                        postImage(user.userId, user.photo_url, user.username),
                     child: Text(
                       "Post",
                       style: TextStyle(
@@ -113,6 +135,10 @@ class _AddPostsState extends State<AddPosts> {
             ),
             body: Column(
               children: [
+                _loadingState
+                    ? LinearProgressIndicator()
+                    : Padding(padding: EdgeInsets.only(top: 0)),
+                Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
