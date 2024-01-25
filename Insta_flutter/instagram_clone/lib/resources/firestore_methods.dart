@@ -15,7 +15,7 @@ class Firestore_methods {
 
     try {
       String photo_url =
-          await StorageMethods().UploadImgToStorage("Posts", file, true);
+          await StorageMethods().UploadImgToStorage("posts", file, true);
 
       String postId = const Uuid().v1();
 
