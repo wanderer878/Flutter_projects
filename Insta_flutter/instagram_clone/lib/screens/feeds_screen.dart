@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/widgets/Post_card.dart';
 
 class Feeds extends StatefulWidget {
   const Feeds({super.key});
@@ -25,6 +26,7 @@ class _FeedsState extends State<Feeds> {
               onPressed: () {}, icon: Icon(Icons.chat_bubble_outline_rounded))
         ],
       ),
+      body: PostCard(),
     );
   }
 }
