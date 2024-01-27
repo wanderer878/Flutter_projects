@@ -16,6 +16,7 @@ class _FeedsState extends State<Feeds> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: mobileBackgroundColor,
         title: SvgPicture.asset(
           'assets/ic_instagram.svg',
           height: 32,
@@ -23,10 +24,13 @@ class _FeedsState extends State<Feeds> {
         ),
         actions: [
           IconButton(
-              onPressed: () {}, icon: Icon(Icons.chat_bubble_outline_rounded))
+              onPressed: (){}, icon: Icon(Icons.chat_bubble_outline_rounded))
         ],
       ),
-      body: PostCard(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: PostCard(),
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class Firestore_methods {
 
       Post post = Post(
           description: description,
-          uid: uid,
+          uid: uid, 
           username: username,
           likes: [],
           postId: postId,
