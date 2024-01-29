@@ -145,7 +145,9 @@ class _PostCardState extends State<PostCard> {
                     ),
               ),
               IconButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Comments_sc()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> Comments_sc(
+                  snap: widget.snap,
+                )));
               }, icon: Icon(Icons.chat)),
               IconButton(
                 onPressed: (){},
