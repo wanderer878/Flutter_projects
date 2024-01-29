@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:intl/intl.dart';
 
-class PostCard extends StatefulWidget {
+class PostCard extends StatelessWidget {
   final snap;
-  const PostCard({super.key , required this.snap});
+  const PostCard({super.key, required this.snap});
 
-  @override
-  State<PostCard> createState() => _PostCardState();
-}
-
-class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,8 +21,7 @@ class _PostCardState extends State<PostCard> {
               children: [
                 CircleAvatar(
                   radius: 16,
-                  backgroundImage: NetworkImage(
-                      'https://cdn.cloudflare.steamstatic.com/steam/apps/377160/ss_f7861bd71e6c0c218d8ff69fb1c626aec0d187cf.1920x1080.jpg?t=1650909928'),
+                  backgroundImage: NetworkImage(snap['profImage']),
                 ),
                 Expanded(
                     child: Padding(
@@ -36,7 +31,7 @@ class _PostCardState extends State<PostCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Username',
+                        snap['username'],
                         style: TextStyle(fontWeight: FontWeight.bold),
                       )
                     ],
@@ -71,7 +66,7 @@ class _PostCardState extends State<PostCard> {
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
             child: Image.network(
-              "https://images.unsplash.com/photo-1705651460814-abf3af6eefee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHx8",
+              snap['post_url'],
               fit: BoxFit.cover,
             ),
           ),
@@ -106,7 +101,7 @@ class _PostCardState extends State<PostCard> {
                           fontWeight: FontWeight.bold,
                         ),
                     child: Text(
-                      '1,231 likes',
+                      "${snap['likes'].length} likes",
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
@@ -118,10 +113,10 @@ class _PostCardState extends State<PostCard> {
                               style: TextStyle(color: primaryColor),
                               children: [
                             TextSpan(
-                                text: 'username',
+                                text: snap['username'],
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(
-                              text: " posted a photo",
+                              text: "  ${snap['description']}",
                             ),
                           ]))),
                   GestureDetector(
@@ -137,7 +132,7 @@ class _PostCardState extends State<PostCard> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      "1/27/22024",
+                      DateFormat.yMMMd().format(snap['datePublished'].toDate()),
                       style: TextStyle(color: secondaryColor, fontSize: 16),
                     ),
                   ),
