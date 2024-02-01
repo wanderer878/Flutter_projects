@@ -33,3 +33,6 @@ _______________________________________________________________
 
 flutter run -d edge --web-renderer html  This will run code on edge using html, zroori hai take firebase se image show hske
 _______________________________________________________________
+
+widget.snap , yeh kisi stateful class ki state class ke parameter ko access krne kylye use kra jata hai
+_______________________________________________________________ 

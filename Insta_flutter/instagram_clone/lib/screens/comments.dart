@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user.dart';
@@ -34,7 +35,7 @@ class _Comments_scState extends State<Comments_sc> {
         centerTitle: false,
         title: Text("Comments"),
       ),
-      body: CommentCard(),
+      body: CommentCard(), //StreamBuilder(stream: FirebaseFirestore.instance.collection(collectionPath), builder: builder),
       bottomNavigationBar: SafeArea(
         child: Container(
           height: kToolbarHeight,
