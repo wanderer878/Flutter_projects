@@ -63,6 +63,9 @@ class _Comments_scState extends State<Comments_sc> {
               InkWell(
                 onTap: () {
                   Firestore_methods().postComment(widget.snap["postId"],_commentsController.text, user.userId, user.username, user.photo_url);
+                  setState(() {
+                    _commentsController.clear();
+                  });
                 },
                 child: Container(
                   padding:
