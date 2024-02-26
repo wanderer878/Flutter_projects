@@ -6,7 +6,6 @@ import 'package:instagram_clone/resources/storage_methods.dart';
 import 'package:uuid/uuid.dart';
 
 class Firestore_methods {
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<String> uploadPost(String uid, String description, Uint8List file,
@@ -21,7 +20,7 @@ class Firestore_methods {
 
       Post post = Post(
           description: description,
-          uid: uid, 
+          uid: uid,
           username: username,
           likes: [],
           postId: postId,
@@ -29,7 +28,7 @@ class Firestore_methods {
           post_url: photo_url,
           profImage: profImage);
 
-       _firestore.collection("posts").doc(postId).set(post.toJson());
+      _firestore.collection("posts").doc(postId).set(post.toJson());
 
       res = "success";
     } catch (e) {
@@ -65,7 +64,6 @@ class Firestore_methods {
     String res = "Some error occurred";
     try {
       if (text.isNotEmpty) {
-        // if the likes list contains the user uid, we need to remove it
         String commentId = const Uuid().v1();
         _firestore
             .collection('posts')
@@ -90,5 +88,3 @@ class Firestore_methods {
     return res;
   }
 }
-
-

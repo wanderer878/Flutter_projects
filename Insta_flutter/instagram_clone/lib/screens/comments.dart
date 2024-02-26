@@ -26,16 +26,34 @@ class _Comments_scState extends State<Comments_sc> {
 
   @override
   Widget build(BuildContext context) {
-
     final User user = Provider.of<User_provider>(context).get_user;
-
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         title: Text("Comments"),
       ),
-      body: CommentCard(), //StreamBuilder(stream: FirebaseFirestore.instance.collection(collectionPath), builder: builder),
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('posts')
+              .doc(widget.snap['postId'])
+              .collection('comments')
+              .snapshots(),
+          builder: (context,
+              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  return CommentCard(
+                    snap: snapshot.data!.docs[index].data(),
+                  );
+                });
+          }),
       bottomNavigationBar: SafeArea(
         child: Container(
           height: kToolbarHeight,
@@ -45,7 +63,8 @@ class _Comments_scState extends State<Comments_sc> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage("https://images.unsplash.com/photo-1682685796965-9814afcbff55?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1682685796965-9814afcbff55?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
                 radius: 18,
               ),
               Expanded(
@@ -62,7 +81,12 @@ class _Comments_scState extends State<Comments_sc> {
               ),
               InkWell(
                 onTap: () {
-                  Firestore_methods().postComment(widget.snap["postId"],_commentsController.text, user.userId, user.username, user.photo_url);
+                  Firestore_methods().postComment(
+                      widget.snap["postId"],
+                      _commentsController.text,
+                      user.userId,
+                      user.username,
+                      user.photo_url);
                   setState(() {
                     _commentsController.clear();
                   });
