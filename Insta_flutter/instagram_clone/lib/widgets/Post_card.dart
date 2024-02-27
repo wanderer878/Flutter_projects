@@ -189,9 +189,16 @@ class _PostCardState extends State<PostCard> {
                               text: "  ${widget.snap['description']}",
                             ),
                           ]))),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Comments_sc(
+                            snap: widget.snap,
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 4),

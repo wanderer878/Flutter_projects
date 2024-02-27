@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class CommentCard extends StatelessWidget {
   final snap;
   const CommentCard({Key? key, required this.snap}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +14,7 @@ class CommentCard extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(
-              snap.data()['profilePic'],
+              snap['profilePic'],
             ),
             radius: 18,
           ),
@@ -29,12 +29,12 @@ class CommentCard extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                            text: snap.data()['name'],
+                            text: snap['name'],
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor)),
                         TextSpan(
-                            text: ' ${snap.data()['text']}',
+                            text: ' ${snap['text']}',
                             style: const TextStyle(color: primaryColor)),
                       ],
                     ),
@@ -43,7 +43,7 @@ class CommentCard extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       DateFormat.yMMMd().format(
-                        snap.data()['datePublished'].toDate(),
+                        snap['datePublished'].toDate(),
                       ),
                       style: const TextStyle(
                         fontSize: 12,

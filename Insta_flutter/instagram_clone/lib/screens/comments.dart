@@ -27,7 +27,6 @@ class _Comments_scState extends State<Comments_sc> {
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<User_provider>(context).get_user;
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -64,7 +63,8 @@ class _Comments_scState extends State<Comments_sc> {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1682685796965-9814afcbff55?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                  user.photo_url
+                ),
                 radius: 18,
               ),
               Expanded(

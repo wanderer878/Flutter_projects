@@ -77,6 +77,7 @@ class Firestore_methods {
           'text': text,
           'commentId': commentId,
           'datePublished': DateTime.now(),
+          'Likedby': []
         });
         res = 'success';
       } else {
