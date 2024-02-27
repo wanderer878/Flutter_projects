@@ -1,11 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:intl/intl.dart';
 
 class CommentCard extends StatelessWidget {
   final snap;
   const CommentCard({Key? key, required this.snap}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,13 +57,15 @@ class CommentCard extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Icon(
-              Icons.favorite,
-              size: 16,
-            ),
-          )
+          IconButton(
+              onPressed: () {
+                Firestore_methods().likeComment(snap['postId'],
+                    snap['commentId'], snap['uid'], snap['likedby']);
+              },
+              icon: snap['likedby']
+                      .contains(FirebaseAuth.instance.currentUser!.uid)
+                  ? Icon(Icons.favorite, color: Colors.red)
+                  : Icon(Icons.favorite_border_outlined))
         ],
       ),
     );

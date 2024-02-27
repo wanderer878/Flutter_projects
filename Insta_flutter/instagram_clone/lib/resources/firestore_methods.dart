@@ -59,6 +59,36 @@ class Firestore_methods {
     return res;
   }
 
+  Future<String> likeComment(
+      String postId, String commentId, String uid, List likes) async {
+    String res = 'Some error occured';
+    try {
+      if (likes.contains(uid)) {
+        _firestore
+            .collection('posts')
+            .doc(postId)
+            .collection('comments')
+            .doc(commentId)
+            .update({
+          'likedby': FieldValue.arrayRemove([uid])
+        });
+      } else {
+        _firestore
+            .collection('posts')
+            .doc(postId)
+            .collection('comments')
+            .doc(commentId)
+            .update({
+          'likedby': FieldValue.arrayUnion([uid])
+        });
+      }
+      res = 'success';
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
+
   Future<String> postComment(String postId, String text, String uid,
       String name, String profilePic) async {
     String res = "Some error occurred";
@@ -77,7 +107,8 @@ class Firestore_methods {
           'text': text,
           'commentId': commentId,
           'datePublished': DateTime.now(),
-          'Likedby': []
+          'likedby': [],
+          'postId': postId
         });
         res = 'success';
       } else {
