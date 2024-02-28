@@ -37,6 +37,7 @@ class _Comments_scState extends State<Comments_sc> {
               .collection('posts')
               .doc(widget.snap['postId'])
               .collection('comments')
+              .orderBy("datePublished", descending: true)
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
