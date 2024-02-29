@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
@@ -59,8 +60,11 @@ class CommentCard extends StatelessWidget {
           ),
           IconButton(
               onPressed: () {
-                Firestore_methods().likeComment(snap['postId'],
-                    snap['commentId'], snap['uid'], snap['likedby']);
+                Firestore_methods().likeComment(
+                    snap['postId'],
+                    snap['commentId'],
+                    FirebaseAuth.instance.currentUser!.uid,
+                    snap['likedby']);
               },
               icon: snap['likedby']
                       .contains(FirebaseAuth.instance.currentUser!.uid)

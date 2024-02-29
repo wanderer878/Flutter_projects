@@ -1,10 +1,10 @@
-import 'dart:js';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/screens/comments.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/Like_animations.dart';
 import 'package:intl/intl.dart';
 import 'package:instagram_clone/models/user.dart';
@@ -21,6 +21,7 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
+
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<User_provider>(context).get_user;
@@ -62,7 +63,11 @@ class _PostCardState extends State<PostCard> {
                                   shrinkWrap: true,
                                   children: ["Delete"]
                                       .map((e) => GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              Firestore_methods().deletePost(
+                                                  widget.snap['postId']);
+                                              Navigator.of(context).pop();
+                                            },
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 12, horizontal: 16),
@@ -78,7 +83,7 @@ class _PostCardState extends State<PostCard> {
             ),
           ),
           GestureDetector(
-            onDoubleTap: (){
+            onDoubleTap: () {
               Firestore_methods().likePost(
                 widget.snap['postId'].toString(),
                 user.userId,
@@ -92,49 +97,48 @@ class _PostCardState extends State<PostCard> {
               alignment: Alignment.center,
               children: [
                 SizedBox(
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: double.infinity,
-            child: Image.network(
-              widget.snap['post_url'],
-              fit: BoxFit.cover,
-            ),
-          ),
-          AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
-            opacity: isLikeAnimating ? 1 : 0,
-            child: LikeAnimation(
-                      isAnimating: isLikeAnimating,
-                      duration: const Duration(
-                        milliseconds: 400,
-                      ),
-                      onEnd: () {
-                        setState(() {
-                          isLikeAnimating = false;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                        size: 100,
-                      ),
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: double.infinity,
+                  child: Image.network(
+                    widget.snap['post_url'],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isLikeAnimating ? 1 : 0,
+                  child: LikeAnimation(
+                    isAnimating: isLikeAnimating,
+                    duration: const Duration(
+                      milliseconds: 400,
                     ),
-          ),
+                    onEnd: () {
+                      setState(() {
+                        isLikeAnimating = false;
+                      });
+                    },
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 100,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
-          
           Row(
             children: [
               LikeAnimation(
                 isAnimating: widget.snap['likes'].contains(user.userId),
                 smallLike: true,
                 child: IconButton(
-                    onPressed: ()=> Firestore_methods().likePost(
+                  onPressed: () => Firestore_methods().likePost(
                     widget.snap['postId'].toString(),
                     user.userId,
                     widget.snap['likes'],
                   ),
-                    icon:  widget.snap['likes'].contains(user.userId)
+                  icon: widget.snap['likes'].contains(user.userId)
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.red,
@@ -142,15 +146,20 @@ class _PostCardState extends State<PostCard> {
                       : const Icon(
                           Icons.favorite_border,
                         ),
-                    ),
+                ),
               ),
-              IconButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Comments_sc(
-                  snap: widget.snap,
-                )));
-              }, icon: Icon(Icons.chat)),
               IconButton(
-                onPressed: (){},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Comments_sc(
+                                  snap: widget.snap,
+                                )));
+                  },
+                  icon: Icon(Icons.chat)),
+              IconButton(
+                onPressed: () {},
                 icon: Icon(Icons.send),
               ),
               Expanded(
@@ -201,17 +210,38 @@ class _PostCardState extends State<PostCard> {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
-                        "View all comments",
-                        style: TextStyle(color: secondaryColor, fontSize: 16),
-                      ),
-                    ),
+                        padding: EdgeInsets.symmetric(vertical: 4),
+                        child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('posts')
+                                .doc(widget.snap['postId'])
+                                .collection('comments')
+                                .snapshots(),
+                            builder: (context,
+                                AsyncSnapshot<
+                                        QuerySnapshot<Map<String, dynamic>>>
+                                    snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.active) {
+                                return Text(
+                                  'View ${snapshot.data?.docs.length ?? 'all'} comments',
+                                  style: TextStyle(
+                                      color: secondaryColor, fontSize: 16),
+                                );
+                              } else {
+                                return Text(
+                                  'View all comments',
+                                  style: TextStyle(
+                                      color: secondaryColor, fontSize: 16),
+                                );
+                              }
+                            })),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      DateFormat.yMMMd().format(widget.snap['datePublished'].toDate()),
+                      DateFormat.yMMMd()
+                          .format(widget.snap['datePublished'].toDate()),
                       style: TextStyle(color: secondaryColor, fontSize: 16),
                     ),
                   ),

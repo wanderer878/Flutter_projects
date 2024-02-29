@@ -59,12 +59,11 @@ class Firestore_methods {
     return res;
   }
 
-  Future<String> likeComment(
+  Future<void> likeComment(
       String postId, String commentId, String uid, List likes) async {
-    String res = 'Some error occured';
     try {
       if (likes.contains(uid)) {
-        _firestore
+        await _firestore
             .collection('posts')
             .doc(postId)
             .collection('comments')
@@ -73,7 +72,7 @@ class Firestore_methods {
           'likedby': FieldValue.arrayRemove([uid])
         });
       } else {
-        _firestore
+        await _firestore
             .collection('posts')
             .doc(postId)
             .collection('comments')
@@ -82,11 +81,9 @@ class Firestore_methods {
           'likedby': FieldValue.arrayUnion([uid])
         });
       }
-      res = 'success';
     } catch (e) {
-      res = e.toString();
+      e.toString();
     }
-    return res;
   }
 
   Future<String> postComment(String postId, String text, String uid,
@@ -118,5 +115,13 @@ class Firestore_methods {
       res = err.toString();
     }
     return res;
+  }
+
+  Future<void> deletePost(String postId) async {
+    try {
+      await _firestore.collection('posts').doc(postId).delete();
+    } catch (e) {
+      e.toString();
+    }
   }
 }
