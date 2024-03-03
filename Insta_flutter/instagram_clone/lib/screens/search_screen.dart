@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
 class SearchSc extends StatefulWidget {
@@ -22,9 +25,32 @@ class _SearchScState extends State<SearchSc> {
           controller: _controller,
           onFieldSubmitted: (String value) {
             print(_controller.text);
+            setState(() {
+              searched = true;
+            });
           },
         ),
       ),
+      body: searched ? FutureBuilder(future: FirebaseFirestore.instance.collection("users").where(_controller.text,isGreaterThanOrEqualTo: true).get(),
+       builder: (context, AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>> snapshot){
+         if(snapshot.hasData){
+           return ListView.builder(
+             itemCount: snapshot.data!.docs.length,
+             itemBuilder: (context, index) {
+               return ListTile(
+                 title: Text(snapshot.data!.docs[index].data()['username']),
+                 leading: CircleAvatar(
+                   backgroundImage: NetworkImage(snapshot.data!.docs[index].data()['photo_url']),
+                 ),
+                 );
+             },
+           );
+         }else{
+           return Center(
+             child: CircularProgressIndicator(),
+           );
+         }
+       }) : Placeholder(),
     );
   }
 }
