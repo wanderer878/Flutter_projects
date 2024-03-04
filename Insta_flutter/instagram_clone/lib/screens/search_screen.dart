@@ -24,19 +24,19 @@ class _SearchScState extends State<SearchSc> {
           decoration: InputDecoration(label: Text('Enter text  to search')),
           controller: _controller,
           onFieldSubmitted: (String value) {
-            print(_controller.text);
             setState(() {
               searched = true;
             });
           },
         ),
       ),
-      body: searched ? FutureBuilder(future: FirebaseFirestore.instance.collection("users").where(_controller.text,isGreaterThanOrEqualTo: true).get(),
+      body: searched ? FutureBuilder(future: FirebaseFirestore.instance.collection("users").where("username",isEqualTo: _controller.text) .get(),
        builder: (context, AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>> snapshot){
          if(snapshot.hasData){
            return ListView.builder(
              itemCount: snapshot.data!.docs.length,
              itemBuilder: (context, index) {
+              print(snapshot.data!.docs[index].data());
                return ListTile(
                  title: Text(snapshot.data!.docs[index].data()['username']),
                  leading: CircleAvatar(
