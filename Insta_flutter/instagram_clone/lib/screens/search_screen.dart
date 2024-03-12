@@ -30,15 +30,14 @@ class _SearchScState extends State<SearchSc> {
           },
         ),
       ),
-      body: searched ? FutureBuilder(future: FirebaseFirestore.instance.collection("users").where("username",isEqualTo: _controller.text) .get(),
+      body: searched ? FutureBuilder(future: FirebaseFirestore.instance.collection("users").where("username",isGreaterThanOrEqualTo: _controller.text) .get(),
        builder: (context, AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>> snapshot){
          if(snapshot.hasData){
            return ListView.builder(
              itemCount: snapshot.data!.docs.length,
              itemBuilder: (context, index) {
-              print(snapshot.data!.docs[index].data());
                return ListTile(
-                 title: Text(snapshot.data!.docs[index].data()['username']),
+                 title: Text(snapshot.data!.docs[index].data()['username']),                                             
                  leading: CircleAvatar(
                    backgroundImage: NetworkImage(snapshot.data!.docs[index].data()['photo_url']),
                  ),
