@@ -139,37 +139,73 @@ class _AddPostsState extends State<AddPosts> {
                     ? LinearProgressIndicator()
                     : Padding(padding: EdgeInsets.only(top: 0)),
                 Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(backgroundImage: NetworkImage(user.photo_url)),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: TextField(
-                        controller: _descriptionController,
-                        maxLines: 8,
-                        decoration: InputDecoration(
-                          hintText: 'Write a caption...',
-                          border: InputBorder.none,
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Wrap(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                                backgroundImage: NetworkImage(user.photo_url)),
+                            Text("  ${user.username}")
+                          ],
+                        ),
+                       Center(
+                         child: AspectRatio(
+                           aspectRatio: 487 / 451,
+                           child: Container(
+                             decoration: BoxDecoration(
+                                 image: DecorationImage(
+                                     image: MemoryImage(_file!),
+                                     fit: BoxFit.fill,
+                                     alignment: FractionalOffset.topCenter)),
+                           ),
+                         ),
+                       )
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.,
+
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: TextField(
+                            controller: _descriptionController,
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              hintText: '\nWrite a caption...',
+                              border: InputBorder.none,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 45,
-                      width: 45,
-                      child: AspectRatio(
-                        aspectRatio: 487 / 451,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: MemoryImage(_file!),
-                                  fit: BoxFit.fill,
-                                  alignment: FractionalOffset.topCenter)),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: AspectRatio(
+                              aspectRatio: 487 / 451,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: MemoryImage(_file!),
+                                        fit: BoxFit.fill,
+                                        alignment: FractionalOffset.topCenter)),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 )
               ],
             ),
