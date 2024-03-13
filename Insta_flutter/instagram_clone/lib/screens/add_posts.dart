@@ -152,16 +152,17 @@ class _AddPostsState extends State<AddPosts> {
                           ],
                         ),
                        Center(
-                         child: AspectRatio(
-                           aspectRatio: 487 / 451,
-                           child: Container(
-                             decoration: BoxDecoration(
-                                 image: DecorationImage(
-                                     image: MemoryImage(_file!),
-                                     fit: BoxFit.fill,
-                                     alignment: FractionalOffset.topCenter)),
-                           ),
-                         ),
+                         child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  width: double.infinity,
+                  child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: MemoryImage(_file!),
+                                        fit: BoxFit.contain,
+                                        alignment: FractionalOffset.topCenter)),
+                              ),
+                ),
                        )
                       ],
                     )),
