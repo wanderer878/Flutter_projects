@@ -151,63 +151,37 @@ class _AddPostsState extends State<AddPosts> {
                             Text("  ${user.username}")
                           ],
                         ),
-                       Center(
-                         child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: double.infinity,
-                  child: Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: MemoryImage(_file!),
-                                        fit: BoxFit.contain,
-                                        alignment: FractionalOffset.topCenter)),
-                              ),
-                ),
-                       )
-                      ],
-                    )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.,
-
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.35,
+                            width: double.infinity,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(158, 158, 158, 0.201),
+                                  image: DecorationImage(
+                                      image: MemoryImage(_file!),
+                                      fit: BoxFit.contain,
+                                      alignment: FractionalOffset.topCenter)),
+                            ),
+                          ),
+                        ),
+                        
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: TextField(
                             controller: _descriptionController,
-                            maxLines: 1,
+                            maxLines: 3,
                             decoration: InputDecoration(
-                              hintText: '\nWrite a caption...',
-                              border: InputBorder.none,
+                              hintText: "Write a caption...",
+                              border: InputBorder.none
                             ),
                           ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: SizedBox(
-                            height: 45,
-                            width: 45,
-                            child: AspectRatio(
-                              aspectRatio: 487 / 451,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: MemoryImage(_file!),
-                                        fit: BoxFit.fill,
-                                        alignment: FractionalOffset.topCenter)),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                        )
+                      ],
+                    )),
               ],
             ),
           );
