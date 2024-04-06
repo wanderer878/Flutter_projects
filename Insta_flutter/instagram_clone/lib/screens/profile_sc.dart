@@ -1,21 +1,46 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/Followbutton.dart';
 
 class Profile_sc extends StatefulWidget {
-  const Profile_sc({super.key});
+  final userid;
+  const Profile_sc({super.key, required this.userid});
 
   @override
   State<Profile_sc> createState() => _Peofile_scState();
 }
 
 class _Peofile_scState extends State<Profile_sc> {
+  var userdata = {};
+
+  @override
+  void initState() {
+    getuser();
+  }
+
+  getuser() async {
+    try {
+      var UserSnap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.userid)
+          .get();
+
+      userdata = UserSnap.data()!;
+      print(userdata);
+      setState(() {});
+    } catch (e) {
+      showSnackbar(e.toString(), context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("username"),
+        title: Text(userdata['username']),
         backgroundColor: mobileBackgroundColor,
       ),
       body: Padding(
@@ -27,8 +52,7 @@ class _Peofile_scState extends State<Profile_sc> {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"),
+                  backgroundImage: NetworkImage(userdata['photo_url']),
                 ),
                 Expanded(
                   flex: 1,
@@ -44,10 +68,10 @@ class _Peofile_scState extends State<Profile_sc> {
                       ),
                       Followbutton(
                         backgroundColor: mobileBackgroundColor,
-                        bordercolor : primaryColor,
+                        bordercolor: primaryColor,
                         text: "Edit profile",
                         txtclr: Colors.grey,
-                        function: (){},
+                        function: () {},
                       )
                     ],
                   ),
@@ -57,9 +81,10 @@ class _Peofile_scState extends State<Profile_sc> {
             Container(
               padding: EdgeInsets.only(top: 10.0),
               alignment: Alignment.centerLeft,
-              child: Text("Username", style: TextStyle(
-                fontWeight: FontWeight.bold
-              ),),
+              child: Text(
+                "Username",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             Container(
               padding: EdgeInsets.only(top: 1),
@@ -72,7 +97,7 @@ class _Peofile_scState extends State<Profile_sc> {
     );
   }
 
-  Column buildStatColumn(int num , String label){
+  Column buildStatColumn(int num, String label) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +108,8 @@ class _Peofile_scState extends State<Profile_sc> {
         ),
         Text(
           label,
-          style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontSize: 10, color: Colors.grey, fontWeight: FontWeight.w600),
         )
       ],
     );
