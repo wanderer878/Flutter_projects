@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/widgets/Followbutton.dart';
 
 class Profile_sc extends StatefulWidget {
   const Profile_sc({super.key});
@@ -22,6 +23,7 @@ class _Peofile_scState extends State<Profile_sc> {
         child: Column(
           children: [
             Row(
+              //crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 CircleAvatar(
                   radius: 40,
@@ -30,16 +32,39 @@ class _Peofile_scState extends State<Profile_sc> {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Column(
                     children: [
-                      buildStatColumn(30, "posts"),
-                      buildStatColumn(160, "followers"),
-                      buildStatColumn(10, "following"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildStatColumn(30, "posts"),
+                          buildStatColumn(160, "followers"),
+                          buildStatColumn(10, "following"),
+                        ],
+                      ),
+                      Followbutton(
+                        backgroundColor: mobileBackgroundColor,
+                        bordercolor : primaryColor,
+                        text: "Edit profile",
+                        txtclr: Colors.grey,
+                        function: (){},
+                      )
                     ],
                   ),
                 )
               ],
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10.0),
+              alignment: Alignment.centerLeft,
+              child: Text("Username", style: TextStyle(
+                fontWeight: FontWeight.bold
+              ),),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 1),
+              alignment: Alignment.centerLeft,
+              child: Text("Some description"),
             )
           ],
         ),
