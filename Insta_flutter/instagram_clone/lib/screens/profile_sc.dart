@@ -15,6 +15,7 @@ class Profile_sc extends StatefulWidget {
 
 class _Peofile_scState extends State<Profile_sc> {
   var userdata = {};
+  int postlen = 0;
 
   @override
   void initState() {
@@ -28,8 +29,15 @@ class _Peofile_scState extends State<Profile_sc> {
           .doc(widget.userid)
           .get();
 
+      var PostsSnap = await FirebaseFirestore.instance
+          .collection('posts')
+          .where('uid', isEqualTo: widget.userid)
+          .get();
+
       userdata = UserSnap.data()!;
-      print(userdata);
+      postlen = PostsSnap.docs.length;
+
+      print(PostsSnap);
       setState(() {});
     } catch (e) {
       showSnackbar(e.toString(), context);
@@ -61,9 +69,11 @@ class _Peofile_scState extends State<Profile_sc> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          buildStatColumn(30, "posts"),
-                          buildStatColumn(160, "followers"),
-                          buildStatColumn(10, "following"),
+                          buildStatColumn(postlen, "posts"),
+                          buildStatColumn(
+                              userdata['followers'].length, "followers"),
+                          buildStatColumn(
+                              userdata['following'].length, "following"),
                         ],
                       ),
                       Followbutton(
@@ -82,14 +92,14 @@ class _Peofile_scState extends State<Profile_sc> {
               padding: EdgeInsets.only(top: 10.0),
               alignment: Alignment.centerLeft,
               child: Text(
-                "Username",
+                userdata['username'],
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
             Container(
               padding: EdgeInsets.only(top: 1),
               alignment: Alignment.centerLeft,
-              child: Text("Some description"),
+              child: Text(userdata['bio']),
             )
           ],
         ),
