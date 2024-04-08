@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
@@ -16,6 +17,7 @@ class Profile_sc extends StatefulWidget {
 class _Peofile_scState extends State<Profile_sc> {
   var userdata = {};
   int postlen = 0;
+  bool isFollowing = false;
 
   @override
   void initState() {
@@ -37,7 +39,10 @@ class _Peofile_scState extends State<Profile_sc> {
       userdata = UserSnap.data()!;
       postlen = PostsSnap.docs.length;
 
-      print(PostsSnap);
+      isFollowing = UserSnap.data()!['followers']
+          .contains(FirebaseAuth.instance.currentUser!.uid);
+
+      //  print(PostsSnap.docs);
       setState(() {});
     } catch (e) {
       showSnackbar(e.toString(), context);
@@ -76,13 +81,29 @@ class _Peofile_scState extends State<Profile_sc> {
                               userdata['following'].length, "following"),
                         ],
                       ),
-                      Followbutton(
-                        backgroundColor: mobileBackgroundColor,
-                        bordercolor: primaryColor,
-                        text: "Edit profile",
-                        txtclr: Colors.grey,
-                        function: () {},
-                      )
+                      FirebaseAuth.instance.currentUser!.uid == widget.userid
+                          ? Followbutton(
+                              backgroundColor: mobileBackgroundColor,
+                              bordercolor: primaryColor,
+                              text: "Edit profile",
+                              txtclr: secondaryColor,
+                              function: () {},
+                            )
+                          : isFollowing
+                              ? Followbutton(
+                                  backgroundColor: secondaryColor,
+                                  bordercolor: secondaryColor,
+                                  text: "Unfollow",
+                                  txtclr: primaryColor,
+                                  function: () {},
+                                )
+                              : Followbutton(
+                                  backgroundColor: blueColor,
+                                  bordercolor: blueColor,
+                                  text: "follow",
+                                  txtclr: primaryColor,
+                                  function: () {},
+                                )
                     ],
                   ),
                 )
