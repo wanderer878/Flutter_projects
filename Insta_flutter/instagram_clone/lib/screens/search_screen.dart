@@ -40,7 +40,8 @@ class _SearchScState extends State<SearchSc> {
                   .get(),
               builder: (context,
                   AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                if (!snapshot.hasData) {
+                if (!snapshot.hasData ||
+                    snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
