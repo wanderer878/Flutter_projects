@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/Followbutton.dart';
@@ -110,8 +111,12 @@ class _Peofile_scState extends State<Profile_sc> {
                                         bordercolor: secondaryColor,
                                         text: "Unfollow",
                                         txtclr: primaryColor,
-                                        function: () {},
-                                      )
+                                        function: () async {
+                                          await Firestore_methods().follow_user(
+                                              FirebaseAuth
+                                                  .instance.currentUser!.uid,
+                                              widget.userid);
+                                        })
                                     : Followbutton(
                                         backgroundColor: blueColor,
                                         bordercolor: blueColor,
