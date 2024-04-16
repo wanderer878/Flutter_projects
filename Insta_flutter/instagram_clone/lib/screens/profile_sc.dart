@@ -18,6 +18,8 @@ class Profile_sc extends StatefulWidget {
 class _Peofile_scState extends State<Profile_sc> {
   var userdata = {};
   int postlen = 0;
+  int followers = 0;
+  int following = 0;
   bool isFollowing = false;
   late bool isLoading;
 
@@ -44,7 +46,8 @@ class _Peofile_scState extends State<Profile_sc> {
 
       userdata = UserSnap.data()!;
       postlen = PostsSnap.docs.length;
-
+      followers = userdata['followers'].length;
+      following = userdata['following'].length;
       isFollowing = UserSnap.data()!['followers']
           .contains(FirebaseAuth.instance.currentUser!.uid);
 
@@ -90,10 +93,8 @@ class _Peofile_scState extends State<Profile_sc> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 buildStatColumn(postlen, "posts"),
-                                buildStatColumn(
-                                    userdata['followers'].length, "followers"),
-                                buildStatColumn(
-                                    userdata['following'].length, "following"),
+                                buildStatColumn(followers, "followers"),
+                                buildStatColumn(following, "following"),
                               ],
                             ),
                             FirebaseAuth.instance.currentUser!.uid ==
@@ -116,13 +117,28 @@ class _Peofile_scState extends State<Profile_sc> {
                                               FirebaseAuth
                                                   .instance.currentUser!.uid,
                                               widget.userid);
+
+                                          setState(() {
+                                            isFollowing = false;
+                                            following--;
+                                          });
                                         })
                                     : Followbutton(
                                         backgroundColor: blueColor,
                                         bordercolor: blueColor,
                                         text: "follow",
                                         txtclr: primaryColor,
-                                        function: () {},
+                                        function: () async {
+                                          Firestore_methods().follow_user(
+                                              FirebaseAuth
+                                                  .instance.currentUser!.uid,
+                                              widget.userid);
+
+                                          setState(() {
+                                            isFollowing = true;
+                                            following++;
+                                          });
+                                        },
                                       )
                           ],
                         ),
