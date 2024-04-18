@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
+import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/Followbutton.dart';
@@ -102,9 +104,37 @@ class _Peofile_scState extends State<Profile_sc> {
                                 ? Followbutton(
                                     backgroundColor: mobileBackgroundColor,
                                     bordercolor: primaryColor,
-                                    text: "Edit profile",
+                                    text: "Sign out",
                                     txtclr: secondaryColor,
-                                    function: () {},
+                                    function: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                                title: Text('Signout ?'),
+                                                content: Text(
+                                                    'Do you want to Signout  ?'),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Auth_methods()
+                                                            .signout();
+                                                        Navigator.pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        Login_Page()));
+                                                      },
+                                                      child: Text('Yes')),
+                                                  TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text('No'))
+                                                ],
+                                              ));
+                                    },
                                   )
                                 : isFollowing
                                     ? Followbutton(
