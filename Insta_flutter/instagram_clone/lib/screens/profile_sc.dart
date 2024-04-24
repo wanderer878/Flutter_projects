@@ -6,6 +6,7 @@ import 'package:instagram_clone/resources/auth_methods.dart';
 import 'package:instagram_clone/resources/firestore_methods.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/Followbutton.dart';
 
@@ -71,10 +72,12 @@ class _Peofile_scState extends State<Profile_sc> {
             child: CircularProgressIndicator(),
           )
         : Scaffold(
-            appBar: AppBar(
-              title: Text(userdata['username']),
-              backgroundColor: mobileBackgroundColor,
-            ),
+            appBar: MediaQuery.of(context).size.width < webScreenSize
+                ? AppBar(
+                    title: Text(userdata['username']),
+                    backgroundColor: mobileBackgroundColor,
+                  )
+                : null,
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
