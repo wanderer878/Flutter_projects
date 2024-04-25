@@ -50,6 +50,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: mobileBackgroundColor,
         title: SvgPicture.asset(
           'assets/ic_instagram.svg',
           height: 32,

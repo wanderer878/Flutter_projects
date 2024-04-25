@@ -52,12 +52,15 @@ class _FeedsState extends State<Feeds> {
                   child: CircularProgressIndicator(),
                 );
               }
-
+        
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      child: PostCard(snap: snapshot.data!.docs[index].data()),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: PostCard(snap: snapshot.data!.docs[index].data()),
+                      ),
                     );
                   });
             }));
