@@ -19,6 +19,9 @@ class _FeedsState extends State<Feeds> {
   Widget build(BuildContext context) {
     double _screen_width = MediaQuery.of(context).size.width;
     return Scaffold(
+        backgroundColor: _screen_width < webScreenSize
+            ? mobileBackgroundColor
+            : webBackgroundColor,
         floatingActionButton: _screen_width > webScreenSize
             ? FloatingActionButton(
                 backgroundColor: mobileBackgroundColor,
@@ -52,15 +55,17 @@ class _FeedsState extends State<Feeds> {
                   child: CircularProgressIndicator(),
                 );
               }
-        
+
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: PostCard(snap: snapshot.data!.docs[index].data()),
-                      ),
+                    return Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: _screen_width < webScreenSize
+                              ? 0
+                              : _screen_width * 0.3,
+                          vertical: _screen_width > webScreenSize ? 15 : 0),
+                      child: PostCard(snap: snapshot.data!.docs[index].data()),
                     );
                   });
             }));

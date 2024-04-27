@@ -8,6 +8,7 @@ import 'package:instagram_clone/responsive/responsive_layout.dart';
 import 'package:instagram_clone/responsive/web_screen_layout.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
@@ -47,8 +48,12 @@ class _Signup_scState extends State<Signup_sc> {
     return Scaffold(
       body: SafeArea(
           child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: MediaQuery.of(context).size.width < webScreenSize
+                  ? EdgeInsets.symmetric(horizontal: 32)
+                  : EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width / 3),
               width: double.infinity,
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
