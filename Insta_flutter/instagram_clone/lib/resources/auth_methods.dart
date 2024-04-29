@@ -50,7 +50,9 @@ class Auth_methods {
             bio: bio,
             photo_url: photo_url,
             followers: [],
-            following: []);
+            following: [],
+            saved_posts: []
+          );
 
         print(user_cred.user!.uid);
         //adding collection

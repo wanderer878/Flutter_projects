@@ -154,4 +154,22 @@ class Firestore_methods {
       }
     }
   }
+
+  Future<void> save_post(String postId,String uid, List saved_posts) async { // not working
+    try {
+      saved_posts.contains(postId) ? await _firestore.collection("users").doc(uid).update({
+        "saved_posts": FieldValue.arrayRemove([postId])
+      })
+      :
+       await _firestore.collection("users").doc(uid).update(
+        {
+          "saved_posts": FieldValue.arrayUnion([postId])
+        }
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
 }

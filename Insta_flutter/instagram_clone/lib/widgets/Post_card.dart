@@ -159,14 +159,18 @@ class _PostCardState extends State<PostCard> {
                                 )));
                   },
                   icon: Icon(Icons.chat)),
-              IconButton(
+              /*IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.send),
-              ),
+              ),*/
               Expanded(
                   child: Align(
                 alignment: Alignment.bottomRight,
-                child: IconButton(onPressed: () {}, icon: Icon(Icons.bookmark)),
+                child: IconButton(
+                    onPressed: () =>Firestore_methods().save_post(
+                          widget.snap["postId"].toString(), user.userId, user.saved_posts)
+                    ,
+                    icon: user.saved_posts.contains(widget.snap["postId"].toString()) ? Icon(Icons.bookmark):Icon(Icons.bookmark_add_outlined)),
               ))
             ],
           ),
