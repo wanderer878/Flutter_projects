@@ -157,15 +157,35 @@ class Firestore_methods {
 
   Future<void> save_post(String postId,String uid, List saved_posts) async { // not working
     try {
-      saved_posts.contains(postId) ? await _firestore.collection("users").doc(uid).update({
+      /*saved_posts.contains(postId) ? await _firestore.collection("users").doc(uid).update({
         "saved_posts": FieldValue.arrayRemove([postId])
-      })
+      }) 
       :
        await _firestore.collection("users").doc(uid).update(
         {
           "saved_posts": FieldValue.arrayUnion([postId])
         }
-      );
+      );*/
+      if (!saved_posts.contains(uid)) {
+        await _firestore
+            .collection('users')
+            .doc(uid)
+            .update({
+          'saved_posts': FieldValue.arrayUnion([postId])
+        });
+
+        print("added ");
+      } else {
+        await _firestore
+            .collection('users')
+            .doc(uid)
+            .update({
+          'saved_posts': FieldValue.arrayRemove([postId])
+        });
+        print("removed");
+      }
+
+      
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
