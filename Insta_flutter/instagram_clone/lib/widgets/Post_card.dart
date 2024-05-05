@@ -64,9 +64,10 @@ class _PostCardState extends State<PostCard> {
                                   shrinkWrap: true,
                                   children: ["Delete"]
                                       .map((e) => GestureDetector(
-                                            onTap: () {
-                                              Firestore_methods().deletePost(
-                                                  widget.snap['postId']);
+                                            onTap: () async {
+                                              await Firestore_methods()
+                                                  .deletePost(
+                                                      widget.snap['postId']);
                                               Navigator.of(context).pop();
                                             },
                                             child: Container(
@@ -167,14 +168,18 @@ class _PostCardState extends State<PostCard> {
                   child: Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
-                    onPressed: () async{
-                       Firestore_methods().save_post(widget.snap["postId"], user.userId, user.saved_posts);
-                       await Provider.of<User_provider>(context,listen: false).refreshuser();
-                       
-                    }
-                    
-                    ,
-                    icon: user.saved_posts.contains(widget.snap["postId"].toString()) ? Icon(Icons.bookmark):Icon(Icons.bookmark_add_outlined)),
+                    onPressed: () async {
+                      //print(user.saved_posts);
+                      await Firestore_methods().save_post(
+                          widget.snap["postId"], user.userId, user.saved_posts);
+
+                      await Provider.of<User_provider>(context, listen: false)
+                          .refreshuser();
+                    },
+                    icon: user.saved_posts
+                            .contains(widget.snap["postId"].toString())
+                        ? Icon(Icons.bookmark)
+                        : Icon(Icons.bookmark_add_outlined)),
               ))
             ],
           ),

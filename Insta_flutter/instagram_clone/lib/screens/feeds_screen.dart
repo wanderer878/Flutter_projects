@@ -50,7 +50,8 @@ class _FeedsState extends State<Feeds> {
             stream: FirebaseFirestore.instance.collection('posts').snapshots(),
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+              if (!snapshot.hasData ||
+                  snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
