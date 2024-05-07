@@ -33,7 +33,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   }
 
   void Navigation_tapped(int page) {
-    print(page);
+    //print(page);
     pageController.jumpToPage(page);
   }
 
@@ -57,7 +57,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
               icon: Icon(Icons.add_circle,
                   color: _page == 2 ? primaryColor : secondaryColor)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite,
+              icon: Icon(Icons.bookmark,
                   color: _page == 3 ? primaryColor : secondaryColor)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person,

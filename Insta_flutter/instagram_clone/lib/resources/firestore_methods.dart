@@ -167,18 +167,18 @@ class Firestore_methods {
           "saved_posts": FieldValue.arrayUnion([postId])
         }
       );*/
-      print(saved_posts);
+      //print(saved_posts);
       if (!saved_posts.contains(postId)) {
         await _firestore.collection('users').doc(uid).update({
           'saved_posts': FieldValue.arrayUnion([postId])
         });
 
-        print("added ");
+        //print("added ");
       } else {
         await _firestore.collection('users').doc(uid).update({
           'saved_posts': FieldValue.arrayRemove([postId])
         });
-        print("removed");
+        //print("removed");
       }
     } catch (e) {
       if (kDebugMode) {

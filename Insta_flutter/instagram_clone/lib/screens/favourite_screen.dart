@@ -22,29 +22,48 @@ class _Fav_scState extends State<Fav_sc> {
     double _screen_width = MediaQuery.of(context).size.width;
     //print(user.saved_posts);
     return Scaffold(
-      backgroundColor: _screen_width < webScreenSize ? mobileBackgroundColor:webBackgroundColor,
-      appBar:  _screen_width < webScreenSize ? AppBar(title: Text('Saved_posts'), backgroundColor: mobileBackgroundColor,):null,
-      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("posts").snapshots(), 
-      builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+        backgroundColor: _screen_width < webScreenSize
+            ? mobileBackgroundColor
+            : webBackgroundColor,
+        appBar: _screen_width < webScreenSize
+            ? AppBar(
+                title: Text('Saved Seeds'),
+                backgroundColor: mobileBackgroundColor,
+              )
+            : null,
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-        return ListView.builder(itemCount: snapshot.data!.docs.length, 
-        itemBuilder: (_,index){
-
-          return  user.saved_posts.contains(snapshot.data!.docs[index].data()["postId"]) ?  Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: _screen_width < webScreenSize
-                              ? 0
-                              : _screen_width * 0.3,
-                          vertical: _screen_width > webScreenSize ? 15 : 0),
-                      child: PostCard(snap: snapshot.data!.docs[index].data()),
-                    ):SizedBox(height: 0,);
-        });
-      })
-    );
+              return user.saved_posts.isEmpty
+                  ? Center(
+                      child: Text('Nothing to show , Let\'s save something !'),
+                    )
+                  : ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (_, index) {
+                        return user.saved_posts.contains(
+                                snapshot.data!.docs[index].data()["postId"])
+                            ? Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: _screen_width < webScreenSize
+                                        ? 0
+                                        : _screen_width * 0.3,
+                                    vertical:
+                                        _screen_width > webScreenSize ? 15 : 0),
+                                child: PostCard(
+                                    snap: snapshot.data!.docs[index].data()),
+                              )
+                            : SizedBox(
+                                height: 0,
+                              );
+                      });
+            }));
   }
 }

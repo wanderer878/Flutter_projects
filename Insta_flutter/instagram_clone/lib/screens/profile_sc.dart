@@ -97,9 +97,9 @@ class _Peofile_scState extends State<Profile_sc> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                buildStatColumn(postlen, "posts"),
-                                buildStatColumn(followers, "followers"),
-                                buildStatColumn(following, "following"),
+                                buildStatColumn(postlen, "seeds"),
+                                buildStatColumn(followers, "seeders"),
+                                buildStatColumn(following, "seeding"),
                               ],
                             ),
                             FirebaseAuth.instance.currentUser!.uid ==
