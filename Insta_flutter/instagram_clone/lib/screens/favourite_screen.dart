@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user.dart';
 import 'package:instagram_clone/providers/user_provider.dart';
+import 'package:instagram_clone/utils/colors.dart';
+import 'package:instagram_clone/utils/global_variables.dart';
+import 'package:instagram_clone/widgets/Post_card.dart';
 import 'package:provider/provider.dart';
 
 class Fav_sc extends StatefulWidget {
@@ -12,21 +16,34 @@ class Fav_sc extends StatefulWidget {
 }
 
 class _Fav_scState extends State<Fav_sc> {
-  
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User_provider>(context).get_user;
-    print(user.userId);
+    double _screen_width = MediaQuery.of(context).size.width;
+    //print(user.saved_posts);
     return Scaffold(
-      appBar: AppBar(title: Text('Saved_posts'),),
-      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("users").doc(user.userId).snapshots(), 
-      builder: (context, AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot){
-       if (snapshot.connectionState == ConnectionState.waiting) {
-         return Center(
-          child: CircularProgressIndicator(),
-         );
-       }
-       return Text("hello");
+      backgroundColor: _screen_width < webScreenSize ? mobileBackgroundColor:webBackgroundColor,
+      appBar:  _screen_width < webScreenSize ? AppBar(title: Text('Saved_posts'), backgroundColor: mobileBackgroundColor,):null,
+      body: StreamBuilder(stream: FirebaseFirestore.instance.collection("posts").snapshots(), 
+      builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        return ListView.builder(itemCount: snapshot.data!.docs.length, 
+        itemBuilder: (_,index){
+
+          return  user.saved_posts.contains(snapshot.data!.docs[index].data()["postId"]) ?  Container(
+                      margin: EdgeInsets.symmetric(
+                          horizontal: _screen_width < webScreenSize
+                              ? 0
+                              : _screen_width * 0.3,
+                          vertical: _screen_width > webScreenSize ? 15 : 0),
+                      child: PostCard(snap: snapshot.data!.docs[index].data()),
+                    ):SizedBox(height: 0,);
+        });
       })
     );
   }
