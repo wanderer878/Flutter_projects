@@ -34,10 +34,10 @@ class _FeedsState extends State<Feeds> {
         appBar: _screen_width < webScreenSize
             ? AppBar(
                 backgroundColor: mobileBackgroundColor,
-                title: //Image.asset('assets/inseed_high_resolution_logo.png'),
+                title: 
                     SvgPicture.asset(
-                  'assets/inseed_high_resolution_logo(1).svg',
-                  height: 50,
+                  'assets/ic_instagram.svg',
+                  height: 40,
                   color: primaryColor,
                 ),
                 actions: [

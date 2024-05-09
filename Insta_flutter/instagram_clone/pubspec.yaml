@@ -31,7 +31,7 @@ flutter:
   uses-material-design: true
   assets: 
     - assets/ic_instagram.svg
-    - assets/inseed.svg
     - assets/inseed_high_resolution_logo(1).svg
-    - assets/inseed_high_resolution_logo.png
     - assets/ic_instagram copy.svg
+    
+
