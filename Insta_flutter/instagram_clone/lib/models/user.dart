@@ -43,7 +43,6 @@ class User {
         followers: snapMap["followers"],
         following: snapMap["following"],
         photo_url: snapMap["photo_url"],
-        saved_posts: snapMap["saved_posts"]
-        );
+        saved_posts: snapMap["saved_posts"]);
   }
 }
