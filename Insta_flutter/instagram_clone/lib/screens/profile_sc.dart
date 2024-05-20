@@ -28,6 +28,7 @@ class _Peofile_scState extends State<Profile_sc> {
 
   @override
   void initState() {
+    print(widget.userid);
     getuser();
   }
 

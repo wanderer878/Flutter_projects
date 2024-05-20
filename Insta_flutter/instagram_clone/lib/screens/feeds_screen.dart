@@ -67,6 +67,7 @@ class _FeedsState extends State<Feeds> {
                               ? 0
                               : _screen_width * 0.3,
                           vertical: _screen_width > webScreenSize ? 15 : 0),
+
                       child: PostCard(snap: snapshot.data!.docs[index].data()),
                     );
                   });
