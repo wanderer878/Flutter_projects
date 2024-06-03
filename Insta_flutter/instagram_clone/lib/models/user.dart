@@ -34,6 +34,7 @@ class User {
 
   static User fromSnap(DocumentSnapshot snap) {
     var snapMap = (snap.data() as Map<String, dynamic>);
+     print(snapMap["username"]);
 
     return User(
         username: snapMap["username"],

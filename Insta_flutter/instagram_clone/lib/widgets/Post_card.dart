@@ -22,9 +22,11 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
+ 
 
   @override
   Widget build(BuildContext context) {
+     
     final User user = Provider.of<User_provider>(context).get_user;
     return Container(
       color: mobileBackgroundColor,

@@ -17,6 +17,7 @@ class Auth_methods {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
+    print("current user: ${FirebaseAuth.instance.currentUser!.email}");
     return model.User.fromSnap(snapshot);
   }
 
