@@ -5,10 +5,29 @@ class Document {
   Document() : _json = jsonDecode(documentJson);
 
   (String, {DateTime modified}) get metadata {
-    const title = 'Document 1';
-    DateTime now = DateTime.now();
+    if (_json
+        case {
+          'metadata': {'title': String title, 'modified': String _modified}
+        }) {
+      return (title, modified: DateTime.parse(_modified));
+    } else {
+      throw const FormatException('Unexpected json');
+    }
+  }
+}
 
-    return (title, modified: now);
+class Block {
+  final String type;
+  final String text;
+
+  Block(this.type, this.text);
+
+  factory Block.fromJson(Map<String, dynamic> json) {
+    if (json case {'type': String type, 'text': String text}) {
+      return Block(type, text);
+    } else {
+      throw const FormatException('Unexpected json');
+    }
   }
 }
 

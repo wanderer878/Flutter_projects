@@ -23,15 +23,20 @@ class Document_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final record = document.metadata;
+    //final record = document.metadata; //using record
+    final (title, modified: local_modified) = document.metadata;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(record.$1),
+        //title: Text(record.$1), //if your're using record without pattern,
+        title: Text(title),
       ),
       body: Column(
         children: [
-          Center(child: Text('Modified at ${record.modified}')),
+          //Center(child: Text('Modified at ${record.modified}')), //if your're using record without pattern,
+          Center(
+            child: Text('Modified at ${local_modified}'),
+          )
         ],
       ),
     );
