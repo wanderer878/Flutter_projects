@@ -14,6 +14,14 @@ class Document {
       throw const FormatException('Unexpected json');
     }
   }
+
+  List<Block> getBlocks() {
+    if (_json case {'blocks': List BlockJson}) {
+      return [for (final element in BlockJson) Block.fromJson(element)];
+    } else {
+      throw const FormatException('Unexpected json');
+    }
+  }
 }
 
 class Block {
