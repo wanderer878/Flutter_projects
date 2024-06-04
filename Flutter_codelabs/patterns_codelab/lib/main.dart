@@ -76,18 +76,17 @@ class Block_widget extends StatelessWidget {
 String FormatDate(DateTime dateTime) {
   final difference = dateTime.difference(DateTime.now());
 
-  switch (difference) {
-    case Duration(inDays: 1):
-      return 'Tommorow';
-    case Duration(inDays: 0):
-      return 'Today';
-    case Duration(inDays: -1):
-      return 'Yesterday';
-    case Duration(inDays: final days, isNegative: true):
-      return '${days.abs()} days ago';
-    case Duration(inDays: final days, isNegative: false):
-      return '$days days after';
-  }
+  return switch (difference) {
+    Duration(inDays: 1) => 'Tommorow',
+    Duration(inDays: 0) => 'Today',
+    Duration(inDays: -1) => 'Yesterday',
+    Duration(inDays: final days, isNegative: true) when days > 7 =>
+      '${days.abs() ~/ 7} weeks ago',
+    Duration(inDays: final days, isNegative: false) when days > 7 =>
+      '${days ~/ 7} weeks from now',
+    Duration(inDays: final days, isNegative: true) => '${days.abs()} days ago',
+    Duration(inDays: final days, isNegative: false) => '$days days after',
+  };
 
   return 'hello'; //delete krdena bhai
 }
