@@ -44,7 +44,7 @@ class Document_screen extends StatelessWidget {
                 itemCount: blockList.length,
                 itemBuilder: (context, index) {
                   return Block_widget(
-                    Block: blockList[index],
+                    block: blockList[index],
                   );
                 }),
           )
@@ -55,22 +55,27 @@ class Document_screen extends StatelessWidget {
 }
 
 class Block_widget extends StatelessWidget {
-  final Block;
-  const Block_widget({super.key, this.Block});
+  final Block block;
+  const Block_widget({super.key, required this.block});
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle;
-
-    textStyle = switch (Block.type) {
-      'h1' => Theme.of(context).textTheme.displayMedium,
-      'p' || 'checkbox' => Theme.of(context).textTheme.bodyMedium,
-      _ => Theme.of(context).textTheme.bodySmall
-    };
-
     return Container(
-      margin: EdgeInsets.all(8.0),
-      child: Text(style: textStyle, Block.text),
-    );
+        margin: EdgeInsets.all(8.0),
+        child: switch (block) {
+          HeaderBlock(:final text) => Text(
+              text,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ParagraphBlock(:final text) => Text(text),
+          CheckboxBlock(:final text, :final isChecked) => Row(
+              children: [
+                Checkbox(value: isChecked, onChanged: (_) {}),
+                Text(text)
+              ],
+            )
+        }
+        //Text(style: textStyle, Block.text),
+        );
   }
 }
 
