@@ -25,6 +25,7 @@ class Document_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     //final record = document.metadata; //using record
     final (title, modified: local_modified) = document.metadata;
+    final Modified = FormatDate(local_modified);
     final blockList = document.getBlocks();
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +37,7 @@ class Document_screen extends StatelessWidget {
         children: [
           //Center(child: Text('Modified at ${record.modified}')), //if your're using record without pattern,
           Center(
-            child: Text('Modified at ${local_modified}'),
+            child: Text('Modified ${Modified}'),
           ),
           Expanded(
             child: ListView.builder(
@@ -77,16 +78,15 @@ String FormatDate(DateTime dateTime) {
   final difference = dateTime.difference(DateTime.now());
 
   return switch (difference) {
+    //this is a switch expression
     Duration(inDays: 1) => 'Tommorow',
     Duration(inDays: 0) => 'Today',
     Duration(inDays: -1) => 'Yesterday',
-    Duration(inDays: final days, isNegative: true) when days > 7 =>
+    Duration(inDays: final days, isNegative: true) when days.abs() > 7 =>
       '${days.abs() ~/ 7} weeks ago',
     Duration(inDays: final days, isNegative: false) when days > 7 =>
-      '${days ~/ 7} weeks from now',
+      '${days.abs() ~/ 7} weeks from now',
     Duration(inDays: final days, isNegative: true) => '${days.abs()} days ago',
     Duration(inDays: final days, isNegative: false) => '$days days after',
   };
-
-  return 'hello'; //delete krdena bhai
 }
