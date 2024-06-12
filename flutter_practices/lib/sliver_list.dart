@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Sliver_practice extends StatelessWidget {
@@ -7,9 +8,14 @@ class Sliver_practice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           pinned: true,
+          stretch: true,
+          onStretchTrigger: () async {
+            print('Stretched');
+          },
           backgroundColor: Colors.purple[900],
           centerTitle: true,
           expandedHeight: 200.0,
@@ -19,15 +25,16 @@ class Sliver_practice extends StatelessWidget {
               position: DecorationPosition.foreground,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.center,
-                    colors: <Color>[
-                Colors.purple[900]!,
-                Colors.transparent
-              ])),
-              child:  Image.network(
-                  fit: BoxFit.cover,
-                  "https://images.unsplash.com/photo-1717400411765-0d6a4d0bc8db?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDB8fHxlbnwwfHx8fHw%3D"),
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
+                      colors: <Color>[
+                    Colors.purple[900]!,
+                    Colors.transparent
+                  ])),
+              child: Image.network(
+                "https://images.unsplash.com/photo-1717400411765-0d6a4d0bc8db?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDB8fHxlbnwwfHx8fHw%3D",
+                fit: BoxFit.cover,
+              ),
             ),
             title: Text(style: TextStyle(color: Colors.white), "Sliver appbar"),
             centerTitle: true,
