@@ -21,6 +21,11 @@ class Sliver_practice extends StatelessWidget {
           expandedHeight: 200.0,
           flexibleSpace: FlexibleSpaceBar(
             collapseMode: CollapseMode.parallax,
+            stretchModes: <StretchMode>[
+              StretchMode.zoomBackground,
+              StretchMode.blurBackground,
+              //StretchMode.fadeTitle
+            ],
             background: DecoratedBox(
               position: DecorationPosition.foreground,
               decoration: BoxDecoration(
