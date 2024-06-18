@@ -116,13 +116,13 @@ class Sliver_list extends StatelessWidget {
     Data('borderlands 2', '4k games',
         'https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Borderlands_2_cover_art.png/220px-Borderlands_2_cover_art.png'),
     Data('Gta 4', 'Rockstar games',
-        "https://imageio.forbes.com/specials-images/imageserve/5feb6e009c0e954da771233d/GTA-4/960x0.jpg?format=jpg&width=1440"),
+        "https://upload.wikimedia.org/wikipedia/en/thumb/b/b7/Grand_Theft_Auto_IV_cover.jpg/220px-Grand_Theft_Auto_IV_cover.jpg"),
     Data('half life', 'valve',
         "https://cdn.mos.cms.futurecdn.net/TDCYXoYuAmCkMx2v3A22AG-650-80.jpeg.webp"),
     Data('counter strike', 'valve',
-        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/header.jpg?t=1716504320"),
+        "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/CS2_Cover_Art.jpg/220px-CS2_Cover_Art.jpg"),
     Data('tomb raider', '4k games',
-        "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/750920/header.jpg?t=1709834464"),
+        "https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Shadow_of_the_Tomb_Raider_cover.png/220px-Shadow_of_the_Tomb_Raider_cover.png"),
   ];
 
   @override
