@@ -1,34 +1,37 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MystateWidget extends InheritedWidget {
-  const MystateWidget({
+  MystateWidget({
     Key? key,
     required Widget child,
     required this.data,
-  }) : super(key: key, child: child) ;
+  }) : super(key: key, child: child);
 
-  final int data;
+  int data;
 
   static MystateWidget? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<MystateWidget>();
   }
-  
+
   @override
-  bool updateShouldNotify( MystateWidget oldWidget) {
+  bool updateShouldNotify(MystateWidget oldWidget) {
     return oldWidget.data != data;
   }
-  
 }
 
-class Widget1 extends StatelessWidget {
-   Widget1({super.key});
-  
+class Widget1 extends StatefulWidget {
+  Widget1({super.key});
+
+  @override
+  State<Widget1> createState() => _Widget1State();
+}
+
+class _Widget1State extends State<Widget1> {
   @override
   Widget build(BuildContext context) {
-    final mydata = MystateWidget.of(context)?.data ?? 9;
+    var mydata = MystateWidget.of(context);
+    mydata = null;
     return Scaffold(
       appBar: AppBar(
         title: Text("Inherited widget practice"),
@@ -37,7 +40,18 @@ class Widget1 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(mydata.toString()),
+            Text(mydata?.data.toString() ?? '40'),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    mydata?.data = 50;
+                    print(mydata?.data);
+                  });
+                },
+                child: Text('increase'))
           ],
         ),
       ),
