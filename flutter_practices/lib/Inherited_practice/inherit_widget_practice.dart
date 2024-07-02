@@ -31,7 +31,7 @@ class _Widget1State extends State<Widget1> {
   @override
   Widget build(BuildContext context) {
     var mydata = MystateWidget.of(context);
-    mydata = null;
+    //mydata = null;
     return Scaffold(
       appBar: AppBar(
         title: Text("Inherited widget practice"),
@@ -40,18 +40,28 @@ class _Widget1State extends State<Widget1> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(mydata?.data.toString() ?? '40'),
+            Text(mydata?.data.toString() ?? 'my data doesn\'t exists'),
             SizedBox(
               height: 10,
             ),
             ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    mydata?.data = 50;
-                    print(mydata?.data);
+                    mydata?.data = mydata.data + 1;
+                    //print(mydata?.data);
                   });
                 },
-                child: Text('increase'))
+                child: Text('increase')),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    mydata?.data = mydata.data == 0 ? 0 : mydata.data - 1;
+                  });
+                },
+                child: Text('decrease'))
           ],
         ),
       ),

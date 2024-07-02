@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practices/inherit_widget_practice.dart';
-import 'package:flutter_practices/sliver_list.dart';
-import 'package:flutter_practices/sliver_practice.dart';
+import 'package:flutter_practices/Inherited_practice/Color_Screen.dart';
+import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dart';
+import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
+import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
 
 void main() {
   //runApp(const MainApp());
-  runApp(const Inherit_widget_class());
+  //runApp(const Inherit_widget_class());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -14,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Sliver_List_Appbar(),
+      home: Color_inherit(),
     );
   }
 }
@@ -25,7 +27,7 @@ class Inherit_widget_class extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MystateWidget(
-      data: 65,
+      data: 0,
       child: MaterialApp(
         home: Widget1(),
       ),
