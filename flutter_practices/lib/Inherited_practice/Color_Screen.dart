@@ -26,14 +26,16 @@ class Color_inherit extends StatefulWidget {
 }
 
 class _Color_inheritState extends State<Color_inherit> {
-  @override
-  Widget build(BuildContext context) {
-    Color _color = Colors.blue.shade100;
+
+  Color _color = Colors.blue.shade100;
     void ColorChange(){
       setState(() {
         _color = Colors.green;
       });
     }
+  @override
+  Widget build(BuildContext context) {
+    
     return Inherit_class(
       color:  _color,
       function:  ColorChange,
