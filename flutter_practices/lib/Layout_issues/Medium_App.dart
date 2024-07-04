@@ -32,6 +32,8 @@ class Menu extends StatelessWidget {
           child: Column(
             children: [
               // Modify code here
+              Example1(),
+              Example2(),
               Example3(),
             ],
           ),

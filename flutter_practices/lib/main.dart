@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practices/Implicit_animations/Animated_Opacity.dart';
 import 'package:flutter_practices/Inherited_practice/Color_Screen.dart';
 import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dart';
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
@@ -6,9 +7,10 @@ import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
 
 void main() {
-  //runApp(const MainApp());
+  runApp(const MainApp());
   //runApp(const Inherit_widget_class());
-  runApp(Menu());
+  //runApp(Menu());
+  
 }
 
 class MainApp extends StatelessWidget {
@@ -17,7 +19,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Color_inherit(),
+      //home: Color_inherit(),
+      home: Animated_Opacity(),
     );
   }
 }
