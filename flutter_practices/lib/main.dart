@@ -6,11 +6,17 @@ import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dar
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
+import 'package:flutter_practices/material_motion_animations/List_screen.dart';
+import 'package:flutter_practices/material_motion_animations/ProviderClass.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  //runApp(const MainApp());
   //runApp(const Inherit_widget_class());
   //runApp(Menu());
+  runApp(ChangeNotifierProvider(
+      create: (Context) => Providerclass(),
+      child: Material_motion_animations()));
 }
 
 class MainApp extends StatelessWidget {
@@ -36,6 +42,16 @@ class Inherit_widget_class extends StatelessWidget {
       child: MaterialApp(
         home: Widget1(),
       ),
+    );
+  }
+}
+
+class Material_motion_animations extends StatelessWidget {
+  const Material_motion_animations({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ListScreen(),
     );
   }
 }
