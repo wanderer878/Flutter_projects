@@ -71,7 +71,7 @@ class MailViewRouterDelegate extends RouterDelegate<void>
     // Handles the back button when on the [ComposePage].
     if (onCompose) {
       // TODO: Add Container Transform from FAB to compose email page (Motion)
-      emailStore.onCompose = false;
+      //emailStore.onCompose = false;
       return SynchronousFuture<bool>(false);
     }
 

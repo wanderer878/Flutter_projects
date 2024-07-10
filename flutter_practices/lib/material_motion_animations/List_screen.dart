@@ -54,7 +54,7 @@ class TransformContainer extends StatelessWidget {
     }, openBuilder: (_, closecontainer) {
       return DetailsScreen(index: index);
     },
-    openColor: Theme.of(context).cardColor,
+    openColor: Colors.deepPurple,
     );
   }
 }

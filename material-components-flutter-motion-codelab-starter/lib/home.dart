@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -731,10 +732,8 @@ class _ReplyFabState extends State<_ReplyFab>
         final tooltip = onMailView ? 'Reply' : 'Compose';
 
         // TODO: Add Container Transform from FAB to compose email page (Motion)
-        return Material(
-          color: theme.colorScheme.secondary,
-          shape: circleFabBorder,
-          child: Tooltip(
+        return OpenContainer(closedBuilder: (_,opencontainer){
+          return Tooltip(
             message: tooltip,
             child: InkWell(
               customBorder: circleFabBorder,
@@ -743,18 +742,8 @@ class _ReplyFabState extends State<_ReplyFab>
                   context,
                   listen: false,
                 ).onCompose = true;
-
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    pageBuilder: (
-                      BuildContext context,
-                      Animation<double> animation,
-                      Animation<double> secondaryAnimation,
-                    ) {
-                      return const ComposePage();
-                    },
-                  ),
-                );
+          
+               opencontainer();
               },
               child: SizedBox(
                 height: _mobileFabDimension,
@@ -764,7 +753,19 @@ class _ReplyFabState extends State<_ReplyFab>
                 ),
               ),
             ),
-          ),
+          );
+        }, openBuilder: (_,closebuilder){
+          return const ComposePage();
+        },
+        onClosed: (succesfuly_closed) {
+          Provider.of<EmailStore>(
+                  context,
+                  listen: false,
+                ).onCompose = false;
+        },
+        closedShape: circleFabBorder,
+        closedColor: Theme.of(context).colorScheme.secondary,
+        closedElevation: 6,
         );
       },
     );

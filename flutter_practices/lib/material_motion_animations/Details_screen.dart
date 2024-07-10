@@ -13,7 +13,21 @@ class DetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(Provider.of<Providerclass>(context).games[index]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(Provider.of<Providerclass>(context).games[index]),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back'),
+            )
+          ],
+        ),
       ),
     );
   }
