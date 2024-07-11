@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_practices/material_motion_animations/Details_screen.dart';
+import 'package:flutter_practices/material_motion_animations/transform_animations/Details_screen.dart';
 import 'package:flutter_practices/material_motion_animations/ProviderClass.dart';
 import 'package:provider/provider.dart';
 
@@ -44,17 +44,19 @@ class TransformContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OpenContainer(closedBuilder: (_, opencontainer) {
-      return InkWell(
-        onTap: () {
-          opencontainer();
-        },
-        child: child,
-      );
-    }, openBuilder: (_, closecontainer) {
-      return DetailsScreen(index: index);
-    },
-    openColor: Colors.deepPurple,
+    return OpenContainer(
+      closedBuilder: (_, opencontainer) {
+        return InkWell(
+          onTap: () {
+            opencontainer();
+          },
+          child: child,
+        );
+      },
+      openBuilder: (_, closecontainer) {
+        return DetailsScreen(index: index);
+      },
+      openColor: Colors.deepPurple,
     );
   }
 }
