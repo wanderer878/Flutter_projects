@@ -6,6 +6,7 @@ import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dar
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
+import 'package:flutter_practices/material_motion_animations/fadethrough_animation/FirstPage.dart';
 import 'package:flutter_practices/material_motion_animations/shared_axis_transition/Screen1.dart';
 
 import 'package:flutter_practices/material_motion_animations/shared_axis_transition/custom_Navigator/components.dart';
@@ -57,7 +58,8 @@ class Material_motion_animations extends StatelessWidget {
       //home: ListScreen(),
       //home: Screen1(),
       //home: MyAppWithCustomNavigator(),
-      home: customNavigator(),
+      //home: customNavigator(),
+      home: Firstpage(),
       debugShowCheckedModeBanner: false,
     );
   }
