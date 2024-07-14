@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +28,9 @@ class MailViewRouterDelegate extends RouterDelegate<void>
           onPopPage: handlePopPage,
           pages: [
             // TODO: Add Fade through transition between mailbox pages (Motion)
-            CustomTransitionPage(
+            FadeThroughTransitionPageWrapper(
               transitionKey: ValueKey(currentlySelectedInbox),
-              screen: InboxPage(
+              mailbox: InboxPage(
                 destination: currentlySelectedInbox,
               ),
             )
@@ -103,3 +104,29 @@ class MailViewRouterDelegate extends RouterDelegate<void>
 }
 
 // TODO: Add Fade through transition between mailbox pages (Motion)
+class FadeThroughTransitionPageWrapper extends Page {
+ const FadeThroughTransitionPageWrapper({
+   required this.mailbox,
+   required this.transitionKey,
+ })  : super(key: transitionKey);
+
+ final Widget mailbox;
+ final ValueKey transitionKey;
+
+ @override
+ Route createRoute(BuildContext context) {
+   return PageRouteBuilder(
+       settings: this,
+       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+         return FadeThroughTransition(
+           fillColor: Theme.of(context).scaffoldBackgroundColor,
+           animation: animation,
+           secondaryAnimation: secondaryAnimation,
+           child: child,
+         );
+       },
+       pageBuilder: (context, animation, secondaryAnimation) {
+         return mailbox;
+       });
+ }
+}
