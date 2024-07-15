@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_practices/material_motion_animations/fadethrough_animation/Inbox.dart';
+import 'package:flutter_practices/material_motion_animations/fadethrough_animation/SecondPage.dart';
 import 'package:flutter_practices/material_motion_animations/fadethrough_animation/route.dart';
 
 class Firstpage extends StatelessWidget {
@@ -13,17 +13,17 @@ class Firstpage extends StatelessWidget {
         title: Text('First Page (Fade through)'),
         actions: [
           PopupMenuButton(
-              onSelected: (selected) => print('selected'),
-              //Navigator.push(context, routes().createRoute(Inbox())),
+              onSelected: (selected) =>
+              Navigator.pushReplacement(context, routes().createRoute(Secondpage(ScreenToShow: selected))),
               itemBuilder: (_) {
                 return <PopupMenuEntry<String>>[
                   PopupMenuItem<String>(
                     value: 'Inbox',
-                    child: MenuItem(),
+                    child: MenuItem(icon: Icons.mail,label: "inbox",),
                   ),
                   PopupMenuItem<String>(
                     value: 'About',
-                    child: Icon(Icons.details),
+                    child: MenuItem(icon: Icons.info, label: "about"),
                   ),
                 ];
               }),
@@ -46,8 +46,11 @@ class Firstpage extends StatelessWidget {
 
 class MenuItem extends StatelessWidget {
   const MenuItem({
-    super.key,
+    super.key, required this.icon, required this.label,
   });
+
+  final IconData icon;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +60,12 @@ class MenuItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
-          Icons.mail,
+          icon
         ),
         SizedBox(
           width: 5,
         ),
-        Text('hello')
+        Text(label)
       ],
     );
   }
