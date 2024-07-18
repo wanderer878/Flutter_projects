@@ -1,8 +1,13 @@
+import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => Blog_provider(),
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
