@@ -18,7 +18,7 @@ class Showblog extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text(_list[index]["id"].toString(),
+        child: Text(_list[index]["content"].toString(),
             style: Theme.of(context).textTheme.displayMedium),
       ),
     );

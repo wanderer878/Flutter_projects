@@ -11,10 +11,28 @@ class Addbloag extends StatefulWidget {
 }
 
 class _AddbloagState extends State<Addbloag> {
+  TextEditingController _titlecontroller = TextEditingController();
+  TextEditingController _contentcontroller = TextEditingController();
+  bool _enabled = false;
+  @override
+  void initState() {
+    super.initState();
+    _titlecontroller.addListener(checktextfield);
+
+    _contentcontroller.addListener(checktextfield);
+  }
+
+  void checktextfield() {
+    setState(() {
+      _enabled =
+          _titlecontroller.text.isEmpty || _contentcontroller.text.isEmpty
+              ? false
+              : true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titlecontroller = TextEditingController();
-    TextEditingController _contentcontroller = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Blog'),
@@ -46,13 +64,16 @@ class _AddbloagState extends State<Addbloag> {
                 height: 50,
               ),
               ElevatedButton(
-                
-                onPressed: _titlecontroller.text.isEmpty || _titlecontroller.text.isEmpty ?  null: () {
-                 
-                  Provider.of<Blog_provider>(context,listen: false).addblog(_titlecontroller.text, _contentcontroller.text);
-                },
-                child: Text('Add Blog'),
-              ),
+                child: Text('Add blog'),
+                onPressed: _enabled
+                    ? () {
+                        Provider.of<Blog_provider>(context, listen: false)
+                            .addblog(
+                                _titlecontroller.text, _contentcontroller.text);
+                        Navigator.pop(context);
+                      }
+                    : null,
+              )
             ],
           ),
         ),
