@@ -31,7 +31,7 @@ class _HomepageState extends State<Homepage> {
               child: Center(
                   child: ListTile(
                 title: Text(_blogProvider.items[index]['title']!),
-                subtitle: Text(_blogProvider.items[index]['id'].toString()),
+                subtitle: Text(_blogProvider.items[index]['content'].toString()),
               )),
               onTap: () => Navigator.push(
                   _, MaterialPageRoute(builder: (_) => Showblog(index: index))),

@@ -1,9 +1,16 @@
+import 'package:blog_posts/Blog_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
-class Addbloag extends StatelessWidget {
+class Addbloag extends StatefulWidget {
   const Addbloag({super.key});
 
+  @override
+  State<Addbloag> createState() => _AddbloagState();
+}
+
+class _AddbloagState extends State<Addbloag> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _titlecontroller = TextEditingController();
@@ -39,8 +46,10 @@ class Addbloag extends StatelessWidget {
                 height: 50,
               ),
               ElevatedButton(
-                onPressed: () {
-                  // Add blog logic here
+                
+                onPressed: _titlecontroller.text.isEmpty || _titlecontroller.text.isEmpty ?  null: () {
+                 
+                  Provider.of<Blog_provider>(context,listen: false).addblog(_titlecontroller.text, _contentcontroller.text);
                 },
                 child: Text('Add Blog'),
               ),
