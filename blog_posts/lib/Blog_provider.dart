@@ -9,7 +9,14 @@ class Blog_provider extends ChangeNotifier {
   List<Map<String, dynamic>> get items => _items;
 
   void addblog(String title, String content){
+    print("add");
     _items.insert(0, {"title": title, "content": content});
+    notifyListeners();
+  }
+
+  void editblog(String title, String content ,int index){
+    print("hello");
+    _items[index] = {"title": title, "content": content}; 
     notifyListeners();
   }
 }

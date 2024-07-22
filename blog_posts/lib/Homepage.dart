@@ -1,4 +1,4 @@
-import 'package:blog_posts/Addblog.dart';
+import 'package:blog_posts/components/Add_Edit_blog.dart';
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Showblog.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,8 @@ class CustomNavigator extends StatefulWidget {
 
 class _CustomNavigatorState extends State<CustomNavigator> {
   bool _showDetails = false;
+  int _index = 0;
+  
   static final GlobalKey<NavigatorState> nav_key =
       new GlobalKey<NavigatorState>();
   bool checkPop(Route<dynamic> route, dynamic result) {
@@ -21,11 +23,16 @@ class _CustomNavigatorState extends State<CustomNavigator> {
       return false;
     }
 
+    setState(() {
+      _showDetails = false;
+    });
+
     return true;
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String,dynamic>> _blogList = Provider.of<Blog_provider>(context).items;
     return Scaffold(
       body: Navigator(
         key: nav_key,
@@ -36,11 +43,33 @@ class _CustomNavigatorState extends State<CustomNavigator> {
           PageWrapper(child: Homepage(
             Callback: (int index) {
               setState(() {
+                _index = index;
                 _showDetails = true;
               });
             },
           )),
+          if (_showDetails) PageWrapper(child: Showblog(index: _index))
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => _showDetails
+                      ? Add_Edit_blog(barTitle: "Edit blog", buttonText: "Edit", title: _blogList[_index]['title'], content: _blogList[_index]['content'], callback: (String text , String content){
+                        Provider.of<Blog_provider>(context, listen: false)
+                            .addblog(text, content);
+                        Navigator.pop(context);
+                      },)
+                      : Add_Edit_blog(
+                          barTitle: "Add Blog", buttonText: "Add ", callback: (String text, String content){
+                            Provider.of<Blog_provider>(context, listen: false)
+                            .editblog(text, content, _index);
+                        Navigator.pop(context);
+                          },)));
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -87,15 +116,10 @@ class _HomepageState extends State<Homepage> {
                   subtitle:
                       Text(_blogProvider.items[index]['content'].toString()),
                 )),
-                onTap: widget.Callback());
+                onTap: () {
+                  widget.Callback(index);
+                });
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => Addbloag()));
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
 }

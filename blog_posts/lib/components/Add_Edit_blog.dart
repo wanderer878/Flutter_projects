@@ -3,23 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-class Addbloag extends StatefulWidget {
-  const Addbloag({super.key});
+class Add_Edit_blog extends StatefulWidget {
+  const Add_Edit_blog({super.key, required this.barTitle, this.title,  this.content, required this.buttonText, required this.callback});
+  final String barTitle, buttonText;
+  final String? title,content;
+  final Function callback;
 
   @override
-  State<Addbloag> createState() => _AddbloagState();
+  State<Add_Edit_blog> createState() => _AddbloagState();
 }
 
-class _AddbloagState extends State<Addbloag> {
-  TextEditingController _titlecontroller = TextEditingController();
-  TextEditingController _contentcontroller = TextEditingController();
-  bool _enabled = false;
+class _AddbloagState extends State<Add_Edit_blog> {
+  late TextEditingController _titlecontroller;
+  late TextEditingController _contentcontroller;
+  bool _enabled =  false;
   @override
   void initState() {
     super.initState();
-    _titlecontroller.addListener(checktextfield);
+    _titlecontroller = TextEditingController(text: widget.title)..addListener(checktextfield);
 
-    _contentcontroller.addListener(checktextfield);
+    _contentcontroller= TextEditingController(text: widget.content)..addListener(checktextfield);
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _titlecontroller.dispose();
+    _contentcontroller.dispose();
   }
 
   void checktextfield() {
@@ -35,7 +44,7 @@ class _AddbloagState extends State<Addbloag> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Blog'),
+        title: Text(widget.barTitle),
       ),
       body: Center(
         child: Padding(
@@ -64,13 +73,10 @@ class _AddbloagState extends State<Addbloag> {
                 height: 50,
               ),
               ElevatedButton(
-                child: Text('Add blog'),
+                child: Text(widget.buttonText),
                 onPressed: _enabled
                     ? () {
-                        Provider.of<Blog_provider>(context, listen: false)
-                            .addblog(
-                                _titlecontroller.text, _contentcontroller.text);
-                        Navigator.pop(context);
+                        widget.callback(_titlecontroller.text,_contentcontroller.text);
                       }
                     : null,
               )
