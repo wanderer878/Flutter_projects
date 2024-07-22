@@ -15,7 +15,7 @@ class CustomNavigator extends StatefulWidget {
 class _CustomNavigatorState extends State<CustomNavigator> {
   bool _showDetails = false;
   int _index = 0;
-  
+
   static final GlobalKey<NavigatorState> nav_key =
       new GlobalKey<NavigatorState>();
   bool checkPop(Route<dynamic> route, dynamic result) {
@@ -32,7 +32,8 @@ class _CustomNavigatorState extends State<CustomNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String,dynamic>> _blogList = Provider.of<Blog_provider>(context).items;
+    List<Map<String, dynamic>> _blogList =
+        Provider.of<Blog_provider>(context).items;
     return Scaffold(
       body: Navigator(
         key: nav_key,
@@ -57,19 +58,28 @@ class _CustomNavigatorState extends State<CustomNavigator> {
               context,
               MaterialPageRoute(
                   builder: (_) => _showDetails
-                      ? Add_Edit_blog(barTitle: "Edit blog", buttonText: "Edit", title: _blogList[_index]['title'], content: _blogList[_index]['content'], callback: (String text , String content){
-                        Provider.of<Blog_provider>(context, listen: false)
-                            .addblog(text, content);
-                        Navigator.pop(context);
-                      },)
-                      : Add_Edit_blog(
-                          barTitle: "Add Blog", buttonText: "Add ", callback: (String text, String content){
+                      ? Add_Edit_blog(
+                          barTitle: "Edit blog",
+                          buttonText: "Edit",
+                          title: _blogList[_index]['title'],
+                          content: _blogList[_index]['content'],
+                          callback: (String text, String content) {
                             Provider.of<Blog_provider>(context, listen: false)
-                            .editblog(text, content, _index);
-                        Navigator.pop(context);
-                          },)));
+                                .editblog(text, content, _index);
+                            Navigator.pop(context);
+                          },
+                        )
+                      : Add_Edit_blog(
+                          barTitle: "Add Blog",
+                          buttonText: "Add ",
+                          callback: (String text, String content) {
+                            Provider.of<Blog_provider>(context, listen: false)
+                                .addblog(text, content);
+                            Navigator.pop(context);
+                          },
+                        )));
         },
-        child: Icon(Icons.add),
+        child: Icon(_showDetails ? Icons.edit : Icons.add),
       ),
     );
   }
@@ -100,26 +110,53 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    final _blogProvider = Provider.of<Blog_provider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
       ),
-      body: ListView.builder(
-          padding: EdgeInsets.symmetric(vertical: 5),
-          itemCount: _blogProvider.items.length,
-          itemBuilder: (_, index) {
-            return InkWell(
-                child: Center(
-                    child: ListTile(
-                  title: Text(_blogProvider.items[index]['title']!),
-                  subtitle:
-                      Text(_blogProvider.items[index]['content'].toString()),
-                )),
-                onTap: () {
-                  widget.Callback(index);
-                });
-          }),
+      body: Consumer<Blog_provider>(
+        builder: (context, value, child) {
+          return ListView.builder(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              itemCount: value.items.length,
+              itemBuilder: (_, index) {
+                return InkWell(
+                    child: Dismissible(
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        color: Colors.red,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 18.0),
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      ),
+                      key: UniqueKey(),
+                      onDismissed: (direction) {
+                        setState(() {
+                          Provider.of<Blog_provider>(context, listen: false)
+                              .deleteblog(index);
+                        });
+                      },
+                      child: Center(
+                          child: ListTile(
+                        title: Text(value.items[index]['title']!),
+                        subtitle:
+                            Text(value.items[index]['content'].toString()),
+                      )),
+                    ),
+                    onTap: () {
+                      widget.Callback(index);
+                    });
+              });
+        },
+      ),
     );
   }
 }
