@@ -19,7 +19,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
 
   static final GlobalKey<NavigatorState> nav_key =
       new GlobalKey<NavigatorState>();
-  /*bool checkPop(Route<dynamic> route, dynamic result) {
+  bool checkPop(Route<dynamic> route, dynamic result) {
     if (!route.didPop(result)) {
       return false;
     }
@@ -29,7 +29,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     });
 
     return true;
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,9 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     return Scaffold(
       body: Navigator(
         key: nav_key,
-        /*onPopPage: (route, result) {
+        onPopPage: (route, result) {
           return checkPop(route, result);
-        },*/
+        },
         pages: [
           PageWrapper(child: Homepage(
             closeContainercallback: (){
