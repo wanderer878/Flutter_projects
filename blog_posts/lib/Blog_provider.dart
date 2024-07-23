@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:word_generator/word_generator.dart';
@@ -19,8 +17,7 @@ class Blog_provider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editblog(String title, String content, int index) {
-    print("hello");
+  void editblog(String title, String content, int index) {;
     _items[index] = {"title": title, "content": content};
     notifyListeners();
   }

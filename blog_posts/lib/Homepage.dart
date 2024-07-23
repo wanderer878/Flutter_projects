@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:blog_posts/components/Add_Edit_blog.dart';
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Showblog.dart';
@@ -18,7 +19,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
 
   static final GlobalKey<NavigatorState> nav_key =
       new GlobalKey<NavigatorState>();
-  bool checkPop(Route<dynamic> route, dynamic result) {
+  /*bool checkPop(Route<dynamic> route, dynamic result) {
     if (!route.didPop(result)) {
       return false;
     }
@@ -28,7 +29,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     });
 
     return true;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,16 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     return Scaffold(
       body: Navigator(
         key: nav_key,
-        onPopPage: (route, result) {
+        /*onPopPage: (route, result) {
           return checkPop(route, result);
-        },
+        },*/
         pages: [
           PageWrapper(child: Homepage(
+            closeContainercallback: (){
+              setState(() {
+                _showDetails = false;
+              });
+            },
             Callback: (int index) {
               setState(() {
                 _index = index;
@@ -49,7 +55,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
               });
             },
           )),
-          if (_showDetails) PageWrapper(child: Showblog(index: _index))
+          
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -101,8 +107,9 @@ class PageWrapper extends Page {
 }
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key, required this.Callback});
+  const Homepage({super.key, required this.Callback, required this.closeContainercallback});
   final Function Callback;
+  final void Function() closeContainercallback;
   @override
   State<Homepage> createState() => _HomepageState();
 }
@@ -120,7 +127,8 @@ class _HomepageState extends State<Homepage> {
               padding: EdgeInsets.symmetric(vertical: 5),
               itemCount: value.items.length,
               itemBuilder: (_, index) {
-                return InkWell(
+                return OpenContainer(closedBuilder: (_,openContainer){
+                  return InkWell(
                     child: Dismissible(
                       direction: DismissDirection.endToStart,
                       background: Container(
@@ -153,7 +161,14 @@ class _HomepageState extends State<Homepage> {
                     ),
                     onTap: () {
                       widget.Callback(index);
+                      openContainer();
                     });
+                },
+                 openBuilder: (_,closeContainer){
+                  return Showblog(index: index, onClose: ()=> widget.closeContainercallback(),);
+                  
+                 });
+                
               });
         },
       ),
