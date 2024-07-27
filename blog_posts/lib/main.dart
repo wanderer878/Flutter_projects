@@ -3,6 +3,8 @@ import 'package:blog_posts/Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'components/custom_navigator.dart';
+
 void main() {
   runApp(ChangeNotifierProvider(
     create: (_) => Blog_provider(),
