@@ -22,8 +22,7 @@ class AdaptiveNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, dimens) {
-        // Tablet Layout
-        // Add maxWidth constraint check
+        if (dimens.maxWidth >=600)
         return Scaffold(
           body: Row(
             children: [
@@ -43,9 +42,15 @@ class AdaptiveNavigation extends StatelessWidget {
             ],
           ),
         );
-        // Add closing curly bracket
 
-        // Add return for mobile layout
+        return Scaffold(
+          body: child,
+          bottomNavigationBar: NavigationBar(
+            destinations: destinations,
+            selectedIndex:selectedIndex,
+            onDestinationSelected: onDestinationSelected,
+          ),
+        );
       },
     );
   }

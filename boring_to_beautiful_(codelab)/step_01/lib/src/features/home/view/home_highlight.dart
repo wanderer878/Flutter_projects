@@ -16,7 +16,7 @@ class HomeHighlight extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(2), // Modify this line
+            padding: const EdgeInsets.all(35), // Modify this line
             child: Clickable(
               child: SizedBox(
                 height: 275,
