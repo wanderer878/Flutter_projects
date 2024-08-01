@@ -6,6 +6,8 @@ import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dar
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
+import 'package:flutter_practices/boring_to_beautiful/Homescreen.dart';
+import 'package:flutter_practices/boring_to_beautiful/theme.dart';
 import 'package:flutter_practices/material_motion_animations/fadethrough_animation/FirstPage.dart';
 import 'package:flutter_practices/material_motion_animations/fadethrough_animation/PageTransitionSwitcher.dart';
 import 'package:flutter_practices/material_motion_animations/shared_axis_transition/Screen1.dart';
@@ -19,9 +21,10 @@ void main() {
   //runApp(const MainApp());
   //runApp(const Inherit_widget_class());
   //runApp(Menu());
-  runApp(ChangeNotifierProvider(
+  /*runApp(ChangeNotifierProvider(
       create: (Context) => Providerclass(),
-      child: Material_motion_animations()));
+      child: Material_motion_animations()));*/
+  runApp(const Boring_to_Beautiful());
 }
 
 class MainApp extends StatelessWidget {
@@ -62,6 +65,18 @@ class Material_motion_animations extends StatelessWidget {
       //home: customNavigator(),
       //home: Firstpage(),
       home: Pagetransitionswitcher(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class Boring_to_Beautiful extends StatelessWidget {
+  const Boring_to_Beautiful({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData(),
+      home: Homescreen(),
       debugShowCheckedModeBanner: false,
     );
   }
