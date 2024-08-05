@@ -70,13 +70,32 @@ class Material_motion_animations extends StatelessWidget {
   }
 }
 
-class Boring_to_Beautiful extends StatelessWidget {
+class Boring_to_Beautiful extends StatefulWidget {
   const Boring_to_Beautiful({super.key});
+
+  @override
+  State<Boring_to_Beautiful> createState() => _Boring_to_BeautifulState();
+}
+
+class _Boring_to_BeautifulState extends State<Boring_to_Beautiful> {
+  ThemeMode _themeMode = theme_Mode;
+
+  void toggle_theme() {
+    setState(() {
+      _themeMode =
+          _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: _themeMode,
+      darkTheme: darkTheme,
       theme: themeData(),
-      home: Homescreen(),
+      home: Homescreen(
+        toggle_theme: toggle_theme,
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
