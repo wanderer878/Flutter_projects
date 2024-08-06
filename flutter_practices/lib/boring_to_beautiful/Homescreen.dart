@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practices/boring_to_beautiful/desktop_layout.dart';
 import 'package:flutter_practices/boring_to_beautiful/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,18 +10,19 @@ class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Boring to Beautiful'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.brightness_2_outlined),
-            onPressed: () {
-              toggle_theme();
-            },
-          ),
-        ],
-      ),
-      body: Center(
+        appBar: AppBar(
+          title: Text('Boring to Beautiful'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.brightness_2_outlined),
+              onPressed: () {
+                toggle_theme();
+              },
+            ),
+          ],
+        ),
+        body: DesktopLayout()
+        /*Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -36,7 +38,7 @@ class Homescreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      ),*/
+        );
   }
 }
