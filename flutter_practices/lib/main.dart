@@ -7,6 +7,7 @@ import 'package:flutter_practices/Layout_issues/Medium_App.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
 import 'package:flutter_practices/boring_to_beautiful/Homescreen.dart';
+import 'package:flutter_practices/boring_to_beautiful/select_provider.dart';
 import 'package:flutter_practices/boring_to_beautiful/theme.dart';
 import 'package:flutter_practices/material_motion_animations/fadethrough_animation/FirstPage.dart';
 import 'package:flutter_practices/material_motion_animations/fadethrough_animation/PageTransitionSwitcher.dart';
@@ -24,7 +25,10 @@ void main() {
   /*runApp(ChangeNotifierProvider(
       create: (Context) => Providerclass(),
       child: Material_motion_animations()));*/
-  runApp(const Boring_to_Beautiful());
+  runApp(ChangeNotifierProvider(
+    create: (_) => SelectProvider(),
+    child: const Boring_to_Beautiful(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
