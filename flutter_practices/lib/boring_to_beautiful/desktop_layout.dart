@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_practices/boring_to_beautiful/GridviewScreen.dart';
+import 'package:flutter_practices/boring_to_beautiful/Searchpage.dart';
 import 'package:flutter_practices/boring_to_beautiful/select_provider.dart';
+import 'package:flutter_practices/material_motion_animations/shared_axis_transition/custom_Navigator/SearchPage.dart';
 import 'package:provider/provider.dart';
 
 class DesktopLayout extends StatefulWidget {
@@ -26,6 +31,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       children: [
         NavigationRail(
             extended: widget.constraints.maxWidth >= 700 ? true : false,
+            //extended: widget.constraints.width >= 700 ? true : false,
             onDestinationSelected: changeDestination,
             destinations: <NavigationRailDestination>[
               NavigationRailDestination(
@@ -41,8 +47,8 @@ class _DesktopLayoutState extends State<DesktopLayout> {
             child: Center(
           child: switch (Provider.of<SelectProvider>(context, listen: false)
               .selectedindex) {
-            0 => Text('Home'),
-            1 => Text('Search'),
+            0 => Gridviewscreen(),
+            1 => SearchPage(),
             2 => Text('Profile'),
             _ => throw Exception()
           },

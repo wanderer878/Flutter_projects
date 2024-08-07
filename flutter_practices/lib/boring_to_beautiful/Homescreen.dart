@@ -28,6 +28,9 @@ class Homescreen extends StatelessWidget {
                   constraints: constraints,
                 )
               : MobileLayout();
-        }));
+        }) /*MediaQuery.of(context).size.width >= 600
+            ? DesktopLayout(constraints: MediaQuery.of(context).size)
+            : MobileLayout()*/
+        );
   }
 }
