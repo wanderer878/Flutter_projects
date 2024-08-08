@@ -37,8 +37,10 @@ class _MobileLayoutState extends State<MobileLayout> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => SearchPage()));
+                            PageRouteBuilder(
+                                pageBuilder:
+                                    (_, Animation, SecondaryAnimation) =>
+                                        SearchPage()));
                       },
                       child: Text('Go to search')),
                 ),

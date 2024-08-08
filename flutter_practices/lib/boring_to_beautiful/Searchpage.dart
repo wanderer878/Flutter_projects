@@ -6,20 +6,25 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Center(
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            width: 150,
-            height: 150,
-            color: Colors.red,
-          ),
-          Text(
-            'Search',
-            style: Theme.of(context).textTheme.headlineMedium,
-          )
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('search'),
+      ),
+      body: Center(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: 150,
+              height: 150,
+              color: Colors.red,
+            ),
+            Text(
+              'Search',
+              style: Theme.of(context).textTheme.headlineMedium,
+            )
+          ],
+        ),
       ),
     );
   }
