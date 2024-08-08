@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 PageTransitionsTheme pageTransitionsTheme =
     PageTransitionsTheme(builders: <TargetPlatform, PageTransitionsBuilder>{
-  TargetPlatform.android: FadeThroughPageTransitionsBuilder(),
+  TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
   TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
 });
 
@@ -22,4 +22,6 @@ ThemeData themeData() {
 
 ThemeMode theme_Mode = ThemeMode.system;
 
-ThemeData darkTheme = ThemeData.dark(useMaterial3: true);
+ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
+  pageTransitionsTheme: pageTransitionsTheme,
+);

@@ -16,7 +16,7 @@ class SelectProvider extends ChangeNotifier {
 
   void ChangeSelectedIndex(int index) {
     _selectedIndex = index;
-    print(_selectedIndex);
+    //print(_selectedIndex);
     notifyListeners();
   }
 

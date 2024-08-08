@@ -35,12 +35,8 @@ class _MobileLayoutState extends State<MobileLayout> {
               1 => Center(
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                                pageBuilder:
-                                    (_, Animation, SecondaryAnimation) =>
-                                        SearchPage()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SearchPage()));
                       },
                       child: Text('Go to search')),
                 ),

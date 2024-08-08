@@ -48,7 +48,14 @@ class _DesktopLayoutState extends State<DesktopLayout> {
           child: switch (Provider.of<SelectProvider>(context, listen: false)
               .selectedindex) {
             0 => Gridviewscreen(),
-            1 => SearchPage(),
+            1 => Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => SearchPage()));
+                    },
+                    child: Text('Go to search')),
+              ),
             2 => Text('Profile'),
             _ => throw Exception()
           },
