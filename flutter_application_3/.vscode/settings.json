@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/Coding/flutter_git/Flutter_projects/flutter_application_3/windows"
+    "cmake.sourceDirectory": "D:/Coding/flutter_git/Flutter_projects/flutter_application_3/windows",
+    "cmake.ignoreCMakeListsMissing": true
 }
