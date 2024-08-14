@@ -1,6 +1,7 @@
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Homepage.dart';
 import 'package:blog_posts/components/Add_Edit_blog.dart';
+import 'package:blog_posts/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,8 +9,9 @@ import 'page_wrapper.dart';
 import 'pagetransition_switcher_wrapper.dart';
 
 class CustomNavigator extends StatefulWidget {
-  const CustomNavigator({super.key});
+  const CustomNavigator({super.key, required this.changeTheme});
 
+  final Function changeTheme;
   @override
   State<CustomNavigator> createState() => _CustomNavigatorState();
 }
@@ -46,6 +48,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
         pages: [
           PageWrapper(
               child: Homepage(
+            ChangeTheme: changeTheme,
             closeContainercallback: () {
               setState(() {
                 _showDetails = false;
