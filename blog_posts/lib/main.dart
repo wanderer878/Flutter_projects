@@ -36,12 +36,13 @@ class MainApp extends StatelessWidget {
   return (
     light: lightTheme.copyWith(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Color(0xFF007070), brightness: Brightness.light),
+            seedColor: Color(0xFFFFDE3F), brightness: Brightness.light),
         textTheme:
             GoogleFonts.eduVicWaNtBeginnerTextTheme(lightTheme.textTheme)),
     dark: darkTheme.copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF007070), brightness: Brightness.dark),
-        textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(darkTheme.textTheme),
-        )
+      colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFFFFDE3F), brightness: Brightness.dark),
+      textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(darkTheme.textTheme),
+    )
   );
 }

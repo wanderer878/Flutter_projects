@@ -12,11 +12,14 @@ class Showblog extends StatelessWidget {
     final List<Map<String, dynamic>> _list =
         Provider.of<Blog_provider>(context).items;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          onClose();
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+            onPressed: () {
+              onClose();
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back)),
         title: Text(
           _list[index]["title"],
           style: Theme.of(context).textTheme.headlineLarge,

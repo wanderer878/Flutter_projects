@@ -4,9 +4,15 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Add_Edit_blog extends StatefulWidget {
-  const Add_Edit_blog({super.key, required this.barTitle, this.title,  this.content, required this.buttonText, required this.callback});
+  const Add_Edit_blog(
+      {super.key,
+      required this.barTitle,
+      this.title,
+      this.content,
+      required this.buttonText,
+      required this.callback});
   final String barTitle, buttonText;
-  final String? title,content;
+  final String? title, content;
   final Function callback;
 
   @override
@@ -16,14 +22,17 @@ class Add_Edit_blog extends StatefulWidget {
 class _AddbloagState extends State<Add_Edit_blog> {
   late TextEditingController _titlecontroller;
   late TextEditingController _contentcontroller;
-  bool _enabled =  false;
+  bool _enabled = false;
   @override
   void initState() {
     super.initState();
-    _titlecontroller = TextEditingController(text: widget.title)..addListener(checktextfield);
+    _titlecontroller = TextEditingController(text: widget.title)
+      ..addListener(checktextfield);
 
-    _contentcontroller= TextEditingController(text: widget.content)..addListener(checktextfield);
+    _contentcontroller = TextEditingController(text: widget.content)
+      ..addListener(checktextfield);
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -43,6 +52,7 @@ class _AddbloagState extends State<Add_Edit_blog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
         title: Text(widget.barTitle),
       ),
@@ -76,7 +86,8 @@ class _AddbloagState extends State<Add_Edit_blog> {
                 child: Text(widget.buttonText),
                 onPressed: _enabled
                     ? () {
-                        widget.callback(_titlecontroller.text,_contentcontroller.text);
+                        widget.callback(
+                            _titlecontroller.text, _contentcontroller.text);
                       }
                     : null,
               )

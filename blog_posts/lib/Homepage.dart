@@ -36,7 +36,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColorDark,
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
         title: Text('Home Page'),
         actions: <Widget>[
@@ -54,9 +54,9 @@ class _HomepageState extends State<Homepage> {
               itemBuilder: (_, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 3.0),
+                      vertical: 8.0, horizontal: 5.0),
                   child: OpenContainer(
-                      closedColor: Theme.of(context).colorScheme.onSecondary,
+                      closedColor: Theme.of(context).colorScheme.primary,
                       closedBuilder: (_, openContainer) {
                         return InkWell(
                             child: Dismissible(
