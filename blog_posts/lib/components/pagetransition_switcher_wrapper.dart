@@ -8,6 +8,7 @@ class PagetransitionSwitcherWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageTransitionSwitcher(
       child: child,
+      duration: Duration(seconds: 1),
       transitionBuilder: (child, primaryAnimation, secondaryAnimation) {
         return FadeThroughTransition(
           fillColor: Colors.transparent,

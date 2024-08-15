@@ -73,31 +73,33 @@ class _CustomNavigatorState extends State<CustomNavigator> {
             ))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _showDetails
-                ? Navigator.push(
-                    context,
-                    route(Add_Edit_blog(
-                      barTitle: "Edit blog",
-                      buttonText: "Edit",
-                      title: _blogList[_index]['title'],
-                      content: _blogList[_index]['content'],
-                      callback: (String text, String content) {
-                        Provider.of<Blog_provider>(context, listen: false)
-                            .editblog(text, content, _index);
-                        Navigator.pop(context);
-                      },
-                    )))
-                : setState(() {
-                    _showAdd = true;
-                  });
-          },
-          child: PagetransitionSwitcherWrapper(
-            child: _showDetails
-                ? Icon(Icons.edit, key: UniqueKey())
-                : Icon(Icons.add),
-          )),
+      floatingActionButton: !_showAdd
+          ? FloatingActionButton(
+              onPressed: () {
+                _showDetails
+                    ? Navigator.push(
+                        context,
+                        route(Add_Edit_blog(
+                          barTitle: "Edit blog",
+                          buttonText: "Edit",
+                          title: _blogList[_index]['title'],
+                          content: _blogList[_index]['content'],
+                          callback: (String text, String content) {
+                            Provider.of<Blog_provider>(context, listen: false)
+                                .editblog(text, content, _index);
+                            Navigator.pop(context);
+                          },
+                        )))
+                    : setState(() {
+                        _showAdd = true;
+                      });
+              },
+              child: PagetransitionSwitcherWrapper(
+                child: _showDetails
+                    ? Icon(Icons.edit, key: UniqueKey())
+                    : Icon(Icons.add),
+              ))
+          : null,
     );
   }
 }
