@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 
 import 'components/custom_navigator.dart';
 
-ThemeMode themeMode = ThemeMode.system;
-
 void main() {
   runApp(ChangeNotifierProvider(
     create: (_) => Blog_provider(),
@@ -24,27 +22,26 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: themes().light,
         darkTheme: themes().dark,
-        themeMode: themeMode,
-        home: CustomNavigator(
-          changeTheme: changeTheme,
-        ));
+        themeMode: Provider.of<Blog_provider>(context).themeMode,
+        home: CustomNavigator());
   }
 }
 
 ({ThemeData light, ThemeData dark}) themes() {
-  ThemeData lightTheme = ThemeData.light();
+  ThemeData lightTheme = ThemeData.light(
+    useMaterial3: true,
+  );
 
-  ThemeData darkTheme = ThemeData.dark();
-
+  ThemeData darkTheme = ThemeData.dark(useMaterial3: true);
   return (
     light: lightTheme.copyWith(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Color(0xFF007070), brightness: Brightness.light),
         textTheme:
             GoogleFonts.eduVicWaNtBeginnerTextTheme(lightTheme.textTheme)),
     dark: darkTheme.copyWith(
-        textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(darkTheme.textTheme))
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF007070), brightness: Brightness.dark),
+        textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(darkTheme.textTheme),
+        )
   );
-}
-
-ThemeMode changeTheme() {
-  return ThemeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
 }

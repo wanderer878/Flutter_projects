@@ -17,7 +17,7 @@ class SearchPage extends StatelessWidget {
             Container(
               width: 150,
               height: 150,
-              color: Colors.red,
+              color: Theme.of(context).colorScheme.primary,
             ),
             Text(
               'Search',

@@ -21,13 +21,12 @@ Route route(Widget child) {
 }
 
 class Homepage extends StatefulWidget {
-  const Homepage(
-      {super.key,
-      required this.Callback,
-      required this.closeContainercallback,
-      required this.ChangeTheme});
+  const Homepage({
+    super.key,
+    required this.Callback,
+    required this.closeContainercallback,
+  });
   final Function Callback;
-  final Function ChangeTheme;
   final void Function() closeContainercallback;
   @override
   State<Homepage> createState() => _HomepageState();
@@ -42,7 +41,9 @@ class _HomepageState extends State<Homepage> {
         title: Text('Home Page'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.brightness_2_outlined), onPressed: changeTheme)
+              icon: Icon(Icons.brightness_2_outlined),
+              onPressed: Provider.of<Blog_provider>(context, listen: false)
+                  .toggleThemeMode)
         ],
       ),
       body: Consumer<Blog_provider>(
@@ -55,7 +56,7 @@ class _HomepageState extends State<Homepage> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 3.0),
                   child: OpenContainer(
-                      closedColor: Theme.of(context).primaryColor,
+                      closedColor: Theme.of(context).colorScheme.onSecondary,
                       closedBuilder: (_, openContainer) {
                         return InkWell(
                             child: Dismissible(
@@ -84,7 +85,9 @@ class _HomepageState extends State<Homepage> {
                               },
                               child: Center(
                                   child: ListTile(
-                                tileColor: Theme.of(context).primaryColor,
+                                tileColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 title: Text(
                                   value.items[index]['title']!,
                                   style: Theme.of(context)
@@ -92,7 +95,9 @@ class _HomepageState extends State<Homepage> {
                                       .headlineMedium,
                                 ),
                                 subtitle: Text(
-                                    value.items[index]['content'].toString()),
+                                  value.items[index]['content'].toString(),
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
                               )),
                             ),
                             onTap: () {

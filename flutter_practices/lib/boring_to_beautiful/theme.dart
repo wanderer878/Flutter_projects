@@ -10,7 +10,10 @@ PageTransitionsTheme pageTransitionsTheme =
 
 ThemeData themeData() {
   ThemeData baseTheme = ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF067AEF)),
+      colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: Color(
+              0xFF067AEF)), // brightness: Brightness.light batana zroori hai warna color.fromseed diferentiate nhi krta
       //primaryColor: Colors.green,
       pageTransitionsTheme: pageTransitionsTheme,
       useMaterial3: true,
@@ -23,5 +26,7 @@ ThemeData themeData() {
 ThemeMode theme_Mode = ThemeMode.system;
 
 ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
+  colorScheme: ColorScheme.fromSeed(
+      brightness: Brightness.dark, seedColor: Color(0xFF067AEF)),
   pageTransitionsTheme: pageTransitionsTheme,
 );

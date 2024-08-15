@@ -9,9 +9,9 @@ import 'page_wrapper.dart';
 import 'pagetransition_switcher_wrapper.dart';
 
 class CustomNavigator extends StatefulWidget {
-  const CustomNavigator({super.key, required this.changeTheme});
-
-  final Function changeTheme;
+  const CustomNavigator({
+    super.key,
+  });
   @override
   State<CustomNavigator> createState() => _CustomNavigatorState();
 }
@@ -48,7 +48,6 @@ class _CustomNavigatorState extends State<CustomNavigator> {
         pages: [
           PageWrapper(
               child: Homepage(
-            ChangeTheme: changeTheme,
             closeContainercallback: () {
               setState(() {
                 _showDetails = false;
