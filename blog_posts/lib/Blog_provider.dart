@@ -11,7 +11,7 @@ class Blog_provider extends ChangeNotifier {
             "content": WordGenerator().randomSentence()
           });
 
-  ThemeMode _themeMode = ThemeMode.dark;
+  ThemeMode _themeMode = ThemeMode.system;
 
   List<Map<String, dynamic>> get items => _items;
   ThemeMode get themeMode => _themeMode;

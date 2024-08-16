@@ -40,6 +40,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     List<Map<String, dynamic>> _blogList =
         Provider.of<Blog_provider>(context).items;
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       body: Navigator(
         key: nav_key,
         onPopPage: (route, result) {

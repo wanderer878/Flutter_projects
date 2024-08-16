@@ -52,6 +52,7 @@ class _AddbloagState extends State<Add_Edit_blog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(
         title: Text(widget.barTitle),
