@@ -21,6 +21,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/florian-olivo-Mf23RF8xArY-unsplash.jpg
+    - assets/gamer.jpg
 
   
