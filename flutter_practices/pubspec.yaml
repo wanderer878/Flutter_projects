@@ -21,6 +21,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/gamer.jpg
+    - assets\images\flower.jpg
+    - assets\images\gamer.jpg
+    - assets\images\samsung-memory-nuRvQVPWXCk-unsplash.jpg
+    - assets\images\samsung-memory-zoiIncvoQtE-unsplash.jpg
+    - assets\images\steve-gribble-Nl9juSM9mvM-unsplash.jpg
 
   
