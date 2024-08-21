@@ -5,6 +5,8 @@ import 'package:flutter_practices/Inherited_practice/Color_Screen.dart';
 import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dart';
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
 import 'package:flutter_practices/MDC-102/cardgrid.dart';
+import 'package:flutter_practices/MDC-103/mdc-103.dart';
+import 'package:flutter_practices/MDC-103/mdc_theme.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
 import 'package:flutter_practices/boring_to_beautiful/Homescreen.dart';
@@ -20,7 +22,7 @@ import 'package:flutter_practices/material_motion_animations/ProviderClass.dart'
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MDC_103_with_Theme());
   //runApp(const Inherit_widget_class());
   //runApp(Menu());
   /*runApp(ChangeNotifierProvider(
@@ -38,11 +40,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //home: Color_inherit(),
-      //home: Animated_Opacity(),
-      //home: Animated_Container(),
-      home: CardGrid(),
-    );
+        //home: Color_inherit(),
+        //home: Animated_Opacity(),
+        //home: Animated_Container(),
+        //home: CardGrid(),
+        );
   }
 }
 
@@ -102,6 +104,19 @@ class _Boring_to_BeautifulState extends State<Boring_to_Beautiful> {
       home: Homescreen(
         toggle_theme: toggle_theme,
       ),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class MDC_103_with_Theme extends StatelessWidget {
+  const MDC_103_with_Theme({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: baseTheme(),
+      home: Mdc_103(),
       debugShowCheckedModeBanner: false,
     );
   }

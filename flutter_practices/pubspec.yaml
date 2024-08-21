@@ -26,5 +26,10 @@ flutter:
     - assets\images\samsung-memory-nuRvQVPWXCk-unsplash.jpg
     - assets\images\samsung-memory-zoiIncvoQtE-unsplash.jpg
     - assets\images\steve-gribble-Nl9juSM9mvM-unsplash.jpg
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: assets\fonts\Ubuntu\Ubuntu-Regular.ttf
+        - asset: assets\fonts\Ubuntu\Ubuntu-Bold.ttf
 
   
