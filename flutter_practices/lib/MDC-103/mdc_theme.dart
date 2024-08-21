@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-ThemeData baseTheme() {
-  ThemeData basetheme = ThemeData.light();
+ThemeData _basetheme = ThemeData.light();
 
-  return basetheme /*.copyWith(
-      textTheme: basetheme.textTheme
+ThemeData baseTheme() {
+  return _basetheme.copyWith(
+      textTheme: _basetheme.textTheme
           .copyWith(
-              bodyMedium:
-                  basetheme.textTheme.bodyMedium!.copyWith(fontSize: 19.0))
+              bodySmall: _basetheme.textTheme.bodySmall!
+                  .copyWith(fontSize: 19.0, fontStyle: FontStyle.italic))
           .apply(
               fontFamily: 'Ubuntu',
               displayColor: Colors.blue,
-              bodyColor: Colors.lightBlue))*/
-      ;
+              bodyColor: Colors.lightBlue));
 }

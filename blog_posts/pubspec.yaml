@@ -21,3 +21,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Edu VIC WA NT Beginner
+      fonts:
+        - asset: assests\Edu_VIC_WA_NT_Beginner\static\EduVICWANTBeginner-Regular.ttf
+        - asset: assests\Edu_VIC_WA_NT_Beginner\static\EduVICWANTBeginner-Bold.ttf

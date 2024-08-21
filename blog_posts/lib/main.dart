@@ -37,12 +37,13 @@ class MainApp extends StatelessWidget {
     light: lightTheme.copyWith(
         colorScheme: ColorScheme.fromSeed(
             seedColor: Color(0xFFFFDE3F), brightness: Brightness.light),
-        textTheme:
-            GoogleFonts.eduVicWaNtBeginnerTextTheme(lightTheme.textTheme)),
+        textTheme: lightTheme.textTheme
+            .apply(fontFamily: 'Edu VIC WA NT Beginner')), //offline textheme
     dark: darkTheme.copyWith(
       colorScheme: ColorScheme.fromSeed(
           seedColor: Color(0xFFFFDE3F), brightness: Brightness.dark),
-      textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(darkTheme.textTheme),
+      textTheme: GoogleFonts.eduVicWaNtBeginnerTextTheme(
+          darkTheme.textTheme), //online text theme
     )
   );
 }
