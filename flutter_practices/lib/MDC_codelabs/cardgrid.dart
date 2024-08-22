@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CardGrid extends StatelessWidget {
   CardGrid({super.key});
@@ -69,7 +70,7 @@ class CardGrid extends StatelessWidget {
       body: GridView.count(
         childAspectRatio: 8.0 / 9.0,
         crossAxisCount: 2,
-        //mainAxisSpacing: 3,
+        mainAxisSpacing: 3,
         children: _list(),
       ),
     );

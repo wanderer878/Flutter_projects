@@ -4,9 +4,9 @@ import 'package:flutter_practices/Implicit_animations/Animated_Opacity.dart';
 import 'package:flutter_practices/Inherited_practice/Color_Screen.dart';
 import 'package:flutter_practices/Inherited_practice/inherit_widget_practice.dart';
 import 'package:flutter_practices/Layout_issues/Medium_App.dart';
-import 'package:flutter_practices/MDC-102/cardgrid.dart';
-import 'package:flutter_practices/MDC-103/mdc-103.dart';
-import 'package:flutter_practices/MDC-103/mdc_theme.dart';
+import 'package:flutter_practices/MDC_codelabs/cardgrid.dart';
+import 'package:flutter_practices/MDC_codelabs/mdc-103.dart';
+import 'package:flutter_practices/MDC_codelabs/mdc_theme.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_list.dart';
 import 'package:flutter_practices/SliverList_practice/sliver_practice.dart';
 import 'package:flutter_practices/boring_to_beautiful/Homescreen.dart';
@@ -116,7 +116,7 @@ class MDC_103_with_Theme extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: baseTheme(),
-      home: Mdc_103(),
+      home: CardGrid(),
       debugShowCheckedModeBanner: false,
     );
   }
