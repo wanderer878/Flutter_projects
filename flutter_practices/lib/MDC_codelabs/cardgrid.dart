@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -8,11 +9,11 @@ class CardGrid extends StatelessWidget {
   CardGrid({super.key});
 
   List<String> _assests = [
-    "assets\\images\\flower.jpg",
-    "assets\\images\\gamer.jpg",
-    "assets\\images\\samsung-memory-nuRvQVPWXCk-unsplash.jpg",
-    "assets\\images\\samsung-memory-zoiIncvoQtE-unsplash.jpg",
-    "assets\\images\\steve-gribble-Nl9juSM9mvM-unsplash.jpg",
+    "assets/images/flower.jpg",
+    "assets/images/gamer.jpg",
+    "assets/images/samsung-memory-nuRvQVPWXCk-unsplash.jpg",
+    "assets/images/samsung-memory-zoiIncvoQtE-unsplash.jpg",
+    "assets/images/steve-gribble-Nl9juSM9mvM-unsplash.jpg",
   ];
 
   List<Card> _list() => List.generate(5, (index) {
@@ -63,11 +64,33 @@ class CardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Card Grid'),
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('Card Grid'),
+    //   ),
+    //   body: GridView.count(
+    //     childAspectRatio: 8.0 / 9.0,
+    //     crossAxisCount: 2,
+    //     mainAxisSpacing: 3,
+    //     children: _list(),
+    //   ),
+    // );
+
+    return BackdropScaffold(
+      appBar: BackdropAppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Right backdrop'),
+        actions: [
+          BackdropToggleButton(
+            icon: AnimatedIcons.close_menu,
+          )
+        ],
       ),
-      body: GridView.count(
+      backLayer: Center(child: Text('back layer')),
+      // frontLayer: Center(
+      //   child: Text('front layer'),
+      // )
+      frontLayer: GridView.count(
         childAspectRatio: 8.0 / 9.0,
         crossAxisCount: 2,
         mainAxisSpacing: 3,
