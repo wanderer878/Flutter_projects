@@ -18,6 +18,7 @@ class CardGrid extends StatelessWidget {
 
   List<Card> _list() => List.generate(5, (index) {
         return Card(
+          shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
           clipBehavior: Clip.antiAlias,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -77,24 +78,24 @@ class CardGrid extends StatelessWidget {
     // );
 
     return BackdropScaffold(
+      //frontLayerBorderRadius: BorderRadius.only(topLeft: Radius.circular(46)),
+      frontLayerShape: BeveledRectangleBorder(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(40))),
       appBar: BackdropAppBar(
-        automaticallyImplyLeading: false,
         title: Text('Right backdrop'),
-        actions: [
-          BackdropToggleButton(
-            icon: AnimatedIcons.close_menu,
-          )
-        ],
       ),
       backLayer: Center(child: Text('back layer')),
       // frontLayer: Center(
       //   child: Text('front layer'),
       // )
-      frontLayer: GridView.count(
-        childAspectRatio: 8.0 / 9.0,
-        crossAxisCount: 2,
-        mainAxisSpacing: 3,
-        children: _list(),
+      frontLayer: Padding(
+        padding: const EdgeInsets.only(top: 40.0),
+        child: GridView.count(
+          childAspectRatio: 8.0 / 9.0,
+          crossAxisCount: 2,
+          mainAxisSpacing: 3,
+          children: _list(),
+        ),
       ),
     );
   }

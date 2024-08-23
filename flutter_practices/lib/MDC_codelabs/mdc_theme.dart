@@ -5,7 +5,7 @@ ThemeData _basetheme = ThemeData.light();
 
 ThemeData baseTheme() {
   return _basetheme.copyWith(
-      canvasColor: _basetheme.colorScheme.inversePrimary,
+      //canvasColor: _basetheme.colorScheme.inversePrimary,
       appBarTheme: AppBarTheme(
           color: _basetheme.primaryColor,
           titleTextStyle: TextStyle(
