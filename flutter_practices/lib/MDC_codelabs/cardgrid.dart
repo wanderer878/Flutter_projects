@@ -5,20 +5,68 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class CardGrid extends StatelessWidget {
+class CardGrid extends StatefulWidget {
   CardGrid({super.key});
+
+  @override
+  State<CardGrid> createState() => _CardGridState();
+}
+
+class _CardGridState extends State<CardGrid> {
+  int _currentindex = 0;
+  List _pages = [GridList(), Aboutsc()];
+  @override
+  Widget build(BuildContext context) {
+    return BackdropScaffold(
+        animationCurve: Curves.decelerate,
+        frontLayerShape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(40))),
+        appBar: BackdropAppBar(
+          title: Text('Right backdrop'),
+        ),
+        backLayer: BackdropNavigationBackLayer(items: [
+          SizedBox(
+            height: 40,
+          ),
+          Menu_item(
+            MenuName: "Home",
+          ),
+          Menu_item(MenuName: "About")
+        ]),
+        frontLayer: _pages[_currentindex]);
+  }
+}
+
+class Aboutsc extends StatelessWidget {
+  const Aboutsc({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("data");
+  }
+}
+
+class GridList extends StatelessWidget {
+  GridList({super.key});
 
   List<String> _assests = [
     "assets/images/flower.jpg",
     "assets/images/gamer.jpg",
-    "assets/images/samsung-memory-nuRvQVPWXCk-unsplash.jpg",
     "assets/images/samsung-memory-zoiIncvoQtE-unsplash.jpg",
     "assets/images/steve-gribble-Nl9juSM9mvM-unsplash.jpg",
+    "assets/images/samsung-memory-nuRvQVPWXCk-unsplash.jpg",
   ];
 
   List<Card> _list() => List.generate(5, (index) {
         return Card(
-          shape: BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+          shape: BeveledRectangleBorder(
+              borderRadius: index == 0
+                  ? BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10))
+                  : BorderRadius.all(Radius.circular(10))),
           clipBehavior: Clip.antiAlias,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -65,37 +113,29 @@ class CardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Card Grid'),
-    //   ),
-    //   body: GridView.count(
-    //     childAspectRatio: 8.0 / 9.0,
-    //     crossAxisCount: 2,
-    //     mainAxisSpacing: 3,
-    //     children: _list(),
-    //   ),
-    // );
+    return GridView.count(
+      childAspectRatio: 8.0 / 9.0,
+      crossAxisCount: 2,
+      mainAxisSpacing: 3,
+      children: _list(),
+    );
+  }
+}
 
-    return BackdropScaffold(
-      //frontLayerBorderRadius: BorderRadius.only(topLeft: Radius.circular(46)),
-      frontLayerShape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(40))),
-      appBar: BackdropAppBar(
-        title: Text('Right backdrop'),
-      ),
-      backLayer: Center(child: Text('back layer')),
-      // frontLayer: Center(
-      //   child: Text('front layer'),
-      // )
-      frontLayer: Padding(
-        padding: const EdgeInsets.only(top: 40.0),
-        child: GridView.count(
-          childAspectRatio: 8.0 / 9.0,
-          crossAxisCount: 2,
-          mainAxisSpacing: 3,
-          children: _list(),
-        ),
+class Menu_item extends StatelessWidget {
+  const Menu_item({
+    super.key,
+    required this.MenuName,
+  });
+
+  final String MenuName;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        MenuName,
+        style: TextStyle(color: Theme.of(context).colorScheme.surface),
+        textAlign: TextAlign.center,
       ),
     );
   }
