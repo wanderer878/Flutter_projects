@@ -14,7 +14,7 @@ class CardGrid extends StatefulWidget {
 
 class _CardGridState extends State<CardGrid> {
   int _currentindex = 0;
-  List _pages = [GridList(), Aboutsc()];
+  List<Widget> _pages = [GridList(), Aboutsc()];
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
@@ -22,17 +22,36 @@ class _CardGridState extends State<CardGrid> {
         frontLayerShape: BeveledRectangleBorder(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(40))),
         appBar: BackdropAppBar(
-          title: Text('Right backdrop'),
+          title: OverflowBar(
+              alignment: MainAxisAlignment.start,
+              children: [Icon(Icons.diamond), Text('Right backdrop')]),
         ),
-        backLayer: BackdropNavigationBackLayer(items: [
-          SizedBox(
-            height: 40,
-          ),
-          Menu_item(
-            MenuName: "Home",
-          ),
-          Menu_item(MenuName: "About")
-        ]),
+        backLayer: Column(
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            BackdropNavigationBackLayer(
+              items: [
+                Menu_item(
+                  MenuName: "Home",
+                  index: 0,
+                  selectedIndex: _currentindex,
+                ),
+                Menu_item(
+                  MenuName: "About",
+                  index: 1,
+                  selectedIndex: _currentindex,
+                )
+              ],
+              onTap: (index) {
+                setState(() {
+                  _currentindex = index;
+                });
+              },
+            ),
+          ],
+        ),
         frontLayer: _pages[_currentindex]);
   }
 }
@@ -42,7 +61,14 @@ class Aboutsc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("data");
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Text(
+            softWrap: true,
+            "Tech Rider is a forward-thinking technology company dedicated to delivering innovative software solutions that empower businesses to thrive in the digital age. With a strong focus on cutting-edge technologies and customer-centric design, Tech Rider specializes in developing scalable mobile and web applications tailored to meet the unique needs of our clients.At Tech Rider, we believe in harnessing the power of technology to drive growth and efficiency. Our team of experienced developers, designers, and engineers work collaboratively to create intuitive, user-friendly products that not only solve problems but also enhance user experiences. From custom app development to cloud-based solutions, our expertise spans a wide range of industries, including e-commerce, healthcare, finance, and more.Innovation is at the core of everything we do. We are committed to staying ahead of the curve by constantly exploring new technologies, methodologies, and approaches to ensure that our clients benefit from the latest advancements. Our agile development process ensures quick turnaround times without compromising on quality, allowing us to deliver projects on time and within budget."),
+      ),
+    );
   }
 }
 
@@ -126,17 +152,34 @@ class Menu_item extends StatelessWidget {
   const Menu_item({
     super.key,
     required this.MenuName,
+    required this.index,
+    required this.selectedIndex,
   });
 
   final String MenuName;
+  final int index, selectedIndex;
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        MenuName,
-        style: TextStyle(color: Theme.of(context).colorScheme.surface),
-        textAlign: TextAlign.center,
-      ),
+      title: Column(children: [
+        Container(
+          decoration: BoxDecoration(
+              border: Border(
+                  bottom: index == selectedIndex
+                      ? BorderSide(
+                          color: Theme.of(context).colorScheme.surface,
+                          width: 2.0)
+                      : BorderSide.none)),
+          child: Text(
+            selectionColor: Colors.amber,
+            MenuName,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ]),
     );
   }
 }
