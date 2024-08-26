@@ -12,19 +12,53 @@ class CardGrid extends StatefulWidget {
   State<CardGrid> createState() => _CardGridState();
 }
 
-class _CardGridState extends State<CardGrid> {
+class _CardGridState extends State<CardGrid>
+    with SingleTickerProviderStateMixin {
   int _currentindex = 0;
   List<Widget> _pages = [GridList(), Aboutsc()];
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
+        onBackLayerRevealed: () {
+          setState(() {
+            _animationController.forward();
+          });
+        },
+        onBackLayerConcealed: () {
+          setState(() {
+            _animationController.reverse();
+          });
+        },
         animationCurve: Curves.decelerate,
         frontLayerShape: BeveledRectangleBorder(
             borderRadius: BorderRadius.only(topLeft: Radius.circular(40))),
         appBar: BackdropAppBar(
-          title: OverflowBar(
-              alignment: MainAxisAlignment.start,
-              children: [Icon(Icons.diamond), Text('Right backdrop')]),
+          titleSpacing: 1,
+          title: OverflowBar(alignment: MainAxisAlignment.start, children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0, right: 5.0),
+              child: AnimatedIcon(
+                  color: Theme.of(context).colorScheme.surface,
+                  size: 24,
+                  icon: AnimatedIcons.add_event,
+                  progress: _animationController),
+              // child: Icon(
+              //   Icons.diamond,
+              //   size: 30,
+              //   color: Theme.of(context).colorScheme.surface,
+              // ),
+            ),
+            Text('Right backdrop')
+          ]),
         ),
         backLayer: Column(
           children: [
