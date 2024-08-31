@@ -7,11 +7,14 @@ environment:
   sdk: '>=3.4.1 <4.0.0'
 
 dependencies:
+  extension_google_sign_in_as_googleapis_auth: ^2.0.12
   flex_color_scheme: ^7.3.1
   flutter:
     sdk: flutter
   go_router: ^14.2.7
+  google_sign_in: ^6.2.1
   googleapis: ^13.2.0
+  googleapis_auth: ^1.6.0
   http: ^1.2.2
   provider: ^6.1.2
   split_view: ^3.2.1

@@ -51,7 +51,7 @@ void main() {
     exit(1);
   }
 
-  runApp(ChangeNotifierProvider<FlutterDevPlaylists>(
+  runApp(ChangeNotifierProvider<AuthedUserPlaylists>(
     create: (context) => FlutterDevPlaylists(
       flutterDevAccountId: flutterDevAccountId,
       youTubeApiKey: youTubeApiKey,
