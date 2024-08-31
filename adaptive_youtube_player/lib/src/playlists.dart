@@ -1,3 +1,4 @@
+import 'package:adaptive_youtube_player/src/adaptive_image.dart';
 import 'package:flutter/material.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'package:provider/provider.dart';
@@ -69,9 +70,8 @@ class _PlaylistsListViewState extends State<_PlaylistsListView> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
-            leading: Image.network(
-              playlist.snippet!.thumbnails!.default_!.url!,
-            ),
+            leading: AdaptiveImage.network(
+                playlist.snippet!.thumbnails!.default_!.url!),
             title: Text(playlist.snippet!.title!),
             subtitle: Text(
               playlist.snippet!.description!,
