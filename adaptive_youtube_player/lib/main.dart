@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:adaptive_youtube_player/src/adaptive_playlists.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
@@ -17,8 +18,8 @@ final scopes = [
 ];
 
 final clientId = ClientId(
-  'TODO-Client-ID.apps.googleusercontent.com',
-  'TODO-Client-secret',
+  dotenv.env['CLIENT_ID']!, // Access using key from .env
+  dotenv.env['CLIENT_SECRET']!,
 );
 
 final _router = GoRouter(
@@ -67,7 +68,8 @@ final _router = GoRouter(
   ],
 );
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: '.env');
   runApp(ChangeNotifierProvider<AuthedUserPlaylists>(
     create: (context) => AuthedUserPlaylists(),
     child: const PlaylistsApp(),
