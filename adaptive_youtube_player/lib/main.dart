@@ -69,7 +69,7 @@ final _router = GoRouter(
 );
 
 Future main() async {
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(fileName: 'adaptive_yotubeplayer.env');
   runApp(ChangeNotifierProvider<AuthedUserPlaylists>(
     create: (context) => AuthedUserPlaylists(),
     child: const PlaylistsApp(),
