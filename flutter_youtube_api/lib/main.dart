@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
           return Homepage();
         },
         redirect: (context, state) {
-          if (context.read<Authprovider>().getredirict) {
+          if (!context.read<Authprovider>().isloggedin()) {
             return "/login";
           } else {
             return null;

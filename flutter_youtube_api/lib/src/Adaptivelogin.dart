@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_api/src/AuthProvider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:googleapis/servicemanagement/v1.dart';
+import 'package:provider/provider.dart';
 
 class Adaptivelogin extends StatefulWidget {
   const Adaptivelogin({super.key});
@@ -45,6 +49,15 @@ class _GoogleSigninloginState extends State<_GoogleSigninlogin> {
   void initState() {
     super.initState();
     _googleSignIn = GoogleSignIn(scopes: []);
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      if (account != null) {
+        _googleSignIn.authenticatedClient().then((authclient) {
+          if (authclient != null) {
+            context.read<Authprovider>().youtube_key = authclient;
+          }
+        });
+      }
+    });
   }
 
   late final GoogleSignIn _googleSignIn;
