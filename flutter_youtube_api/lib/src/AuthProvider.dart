@@ -10,7 +10,9 @@ class Authprovider extends ChangeNotifier {
 
   set youtube_key(http.Client client) {
     _api = YouTubeApi(client);
-    getplaylist();
+    getplaylist(); //when you want to set something directly , mtlb param me data pass na krna paray
+    //blke data directly assign krein jese yahan authclient = value hga  authclient(value)
+    //nhi hga to usme set use krte hain taake directly assisgning hjaye
   }
 
   Future<void> getplaylist() async {

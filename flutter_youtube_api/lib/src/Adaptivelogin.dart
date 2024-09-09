@@ -57,7 +57,7 @@ class _GoogleSigninloginState extends State<_GoogleSigninlogin> {
         _googleSignIn.authenticatedClient().then((authclient) {
           if (authclient != null) {
             context.read<Authprovider>().youtube_key = authclient;
-            context.go('/details');
+            context.go('/');
           }
         });
       }

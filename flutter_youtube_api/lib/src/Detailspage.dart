@@ -9,21 +9,15 @@ class Detailspage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final PlaylistItems = context.watch<Authprovider>().p;
     return Scaffold(
         appBar: AppBar(
           title: Text("Details Page"),
         ),
-        body: Center(child:
-            Consumer<Authprovider>(builder: (context, Authprovider, child) {
-          return Authprovider.playlist.isEmpty
-              ? CircularProgressIndicator()
-              : ListView.builder(
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(Authprovider.playlist[index].snippet!.title!),
-                    );
-                  },
-                );
-        })));
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('Details Page')]),
+        ));
   }
 }

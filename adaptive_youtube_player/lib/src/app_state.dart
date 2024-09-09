@@ -8,7 +8,9 @@ class AuthedUserPlaylists extends ChangeNotifier {
   set authClient(http.Client client) {
     _api = YouTubeApi(client);
     _loadPlaylists();
-  }
+  } //when you want to set something directly , mtlb param me data pass na krna paray
+  //blke data directly assign krein jese yahan authclient = value hga  authclient(value)
+  //nhi hga to usme set use krte hain taake directly assisgning hjaye
 
   bool get isLoggedIn => _api != null;
 
