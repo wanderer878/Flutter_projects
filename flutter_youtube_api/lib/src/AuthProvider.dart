@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 class Authprovider extends ChangeNotifier {
   YouTubeApi? _api;
   final List<Playlist> playlist = [];
+  final Map<String, List<PlaylistItem>> playlistItems = {};
 
   bool isloggedin() => _api != null;
 
@@ -28,6 +29,29 @@ class Authprovider extends ChangeNotifier {
       nextPageToken = response.nextPageToken;
       playlist.addAll(response.items!);
       notifyListeners();
+    } while (nextPageToken != null);
+  }
+
+  List<PlaylistItem> getplaylistItems({required String playlistId}) {
+    if (!playlistItems.containsKey(playlistId)) {
+      playlistItems[playlistId] = [];
+      retrievePlaylsit(playlistId: playlistId);
+    }
+    return playlistItems[playlistId]!;
+  }
+
+  Future<void> retrievePlaylsit({required String playlistId}) async {
+    String? nextPageToken;
+    do {
+      var response = await _api!.playlistItems.list(
+        ['snippet', 'contentDetails'],
+        maxResults: 25,
+        playlistId: playlistId,
+        pageToken: nextPageToken,
+      );
+      playlistItems[playlistId]!.addAll(response.items!);
+      notifyListeners();
+      nextPageToken = response.nextPageToken;
     } while (nextPageToken != null);
   }
 }

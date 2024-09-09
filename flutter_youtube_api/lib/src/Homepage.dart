@@ -10,19 +10,37 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Details Page"),
+          title: Text("Home Page"),
         ),
-        body: Center(child:
-            Consumer<Authprovider>(builder: (context, Authprovider, child) {
-          return Authprovider.playlist.isEmpty
-              ? CircularProgressIndicator()
-              : ListView.builder(
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(Authprovider.playlist[index].snippet!.title!),
-                    );
-                  },
-                );
-        })));
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Consumer<Authprovider>(
+                  builder: (context, Authprovider, child) {
+                return Authprovider.playlist.isEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: Authprovider.playlist.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Authprovider.getplaylistItems(
+                                  playlistId: Authprovider.playlist[index].id!);
+                              context.go('/details',
+                                  extra: Authprovider.playlist[index].id);
+                            },
+                            child: ListTile(
+                              title: Text(
+                                  Authprovider.playlist[index].snippet!.title!),
+                            ),
+                          );
+                        },
+                      );
+              }),
+            ),
+          ],
+        )));
   }
 }
