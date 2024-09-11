@@ -35,8 +35,7 @@ class _GoogleapisAuthLogin extends StatefulWidget {
 class _GoogleapisAuthLoginState extends State<_GoogleapisAuthLogin> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {}, child: Text("Login on windows/Mac/Linux"));
+    return Text('data');
   }
 }
 
