@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_youtube_api/src/AuthProvider.dart';
 import 'package:flutter_youtube_api/src/Detailspage.dart';
 import 'package:flutter_youtube_api/src/Homepage.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_youtube_api/src/Login.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(ChangeNotifierProvider<Authprovider>(
       create: (context) => Authprovider(), child: MainApp()));
 }

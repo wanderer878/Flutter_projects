@@ -8,7 +8,11 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Adaptivelogin(),
+        child: Adaptivelogin(
+          scopes: [
+            'https://www.googleapis.com/auth/youtube.readonly',
+          ],
+        ),
       ),
     );
   }
