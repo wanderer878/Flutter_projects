@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_youtube_api/src/AuthProvider.dart';
 import 'package:go_router/go_router.dart';
@@ -27,11 +29,46 @@ class Detailspage extends StatelessWidget {
                       itemCount:
                           authProvider.playlistItems[_playlistId]!.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(authProvider
-                              .playlistItems[_playlistId]![index].snippet!.title
-                              .toString()),
-                        );
+                        final item =
+                            authProvider.playlistItems[_playlistId]![index];
+                        final thumbnails = item.snippet?.thumbnails;
+                        if (thumbnails != null && thumbnails.standard != null) {
+                          return Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  AspectRatio(
+                                      aspectRatio: 4 / 3,
+                                      child: Stack(
+                                        children: [
+                                          ClipRect(
+                                            child: Image.network(
+                                                fit: BoxFit.fitWidth,
+                                                thumbnails.standard!.url
+                                                    .toString()),
+                                          ),
+                                          Positioned.fill(
+                                              child: ClipRRect(
+                                            child: BackdropFilter(
+                                                child: Container(
+                                                  color: Colors.transparent,
+                                                ),
+                                                filter: ImageFilter.blur(
+                                                  sigmaX: 10,
+                                                  sigmaY: 10,
+                                                )),
+                                          ))
+                                        ],
+                                      )),
+                                  Text('Hello')
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+
+                        return SizedBox.shrink();
                       });
                 }
               }),
