@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_youtube_api/src/AdaptiveLayout.dart';
 import 'package:flutter_youtube_api/src/AuthProvider.dart';
 import 'package:flutter_youtube_api/src/Detailspage.dart';
 import 'package:flutter_youtube_api/src/Homepage.dart';
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
     GoRoute(
         path: '/',
         builder: (context, state) {
-          return Homepage();
+          return Adaptivelayout();
         },
         redirect: (context, state) {
           if (!context.read<Authprovider>().isloggedin()) {

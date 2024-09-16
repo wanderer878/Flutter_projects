@@ -17,6 +17,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   http: ^1.2.2
   provider: ^6.1.2
+  split_view: ^3.2.1
   url_launcher: ^6.3.0
 
 dev_dependencies:
