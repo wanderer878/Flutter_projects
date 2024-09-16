@@ -28,8 +28,11 @@ class Homepage extends StatelessWidget {
                             onTap: () {
                               Authprovider.getplaylistItems(
                                   playlistId: Authprovider.playlist[index].id!);
-                              context.go('/details',
-                                  extra: Authprovider.playlist[index].id);
+                              context.go('/details', extra: {
+                                'playlistId': Authprovider.playlist[index].id,
+                                'playlistTitle':
+                                    Authprovider.playlist[index].snippet!.title
+                              });
                             },
                             child: ListTile(
                               title: Text(
