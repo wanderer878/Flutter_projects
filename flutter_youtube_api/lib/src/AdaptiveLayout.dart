@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_api/src/Detailspage.dart';
+import 'package:flutter_youtube_api/src/Homepage.dart';
 import 'package:split_view/split_view.dart';
 
 class Adaptivelayout extends StatelessWidget {
@@ -8,24 +10,13 @@ class Adaptivelayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (_, constraints) {
       if (constraints.maxWidth < 600) {
-        return Center(
-          child: Text('mobile'),
-        );
+        return Homepage();
       }
 
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("Adaptive Page"),
-        ),
-        body: SplitView(children: [
-          Center(
-            child: Text('Hello'),
-          ),
-          Center(
-            child: Text('world'),
-          )
-        ], viewMode: SplitViewMode.Horizontal),
-      );
+      return SplitView(children: [
+        Homepage(),
+        Detailspage(),
+      ], viewMode: SplitViewMode.Horizontal);
     });
   }
 }

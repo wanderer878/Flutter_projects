@@ -6,6 +6,7 @@ class Authprovider extends ChangeNotifier {
   YouTubeApi? _api;
   final List<Playlist> playlist = [];
   final Map<String, List<PlaylistItem>> playlistItems = {};
+  Map<String, String?>? detailsData = null;
 
   bool isloggedin() => _api != null;
 
@@ -53,5 +54,10 @@ class Authprovider extends ChangeNotifier {
       notifyListeners();
       nextPageToken = response.nextPageToken;
     } while (nextPageToken != null);
+  }
+
+  set DetailsData(data) {
+    detailsData = data;
+    notifyListeners();
   }
 }
