@@ -33,7 +33,9 @@ class Homepage extends StatelessWidget {
                                 'playlistTitle':
                                     Authprovider.playlist[index].snippet!.title
                               };
-                              //context.go('/details');
+                              if (MediaQuery.of(context).size.width < 600) {
+                                context.go('/details');
+                              }
                             },
                             child: ListTile(
                               title: Text(
