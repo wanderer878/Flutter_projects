@@ -7,8 +7,27 @@ import 'package:googleapis/servicemanagement/v1.dart';
 import 'package:googleapis/youtube/v3.dart';
 import 'package:provider/provider.dart';
 
-class Detailspage extends StatelessWidget {
+class Detailspage extends StatefulWidget {
   const Detailspage({super.key});
+
+  @override
+  State<Detailspage> createState() => _DetailspageState();
+}
+
+class _DetailspageState extends State<Detailspage> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
