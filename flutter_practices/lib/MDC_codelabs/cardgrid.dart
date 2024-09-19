@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_practices/MDC_codelabs/adaptiveImages.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CardGrid extends StatefulWidget {
@@ -110,11 +112,11 @@ class GridList extends StatelessWidget {
   GridList({super.key});
 
   List<String> _assests = [
-    "assets/images/flower.jpg",
-    "assets/images/gamer.jpg",
-    "assets/images/samsung-memory-zoiIncvoQtE-unsplash.jpg",
-    "assets/images/steve-gribble-Nl9juSM9mvM-unsplash.jpg",
-    "assets/images/samsung-memory-nuRvQVPWXCk-unsplash.jpg",
+    "https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_640.jpg",
+    "https://img.freepik.com/premium-photo/modern-automobile-classic-technology-wheel-traffic_665346-119.jpg",
+    "https://images.unsplash.com/photo-1726609939114-78ca262451e9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1721332155637-8b339526cf4c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzMHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1726587912121-ea21fcc57ff8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzOHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
   List<Card> _list() => List.generate(5, (index) {
@@ -138,7 +140,7 @@ class GridList extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       Positioned.fill(
-                          child: Image.asset(
+                          child: Adaptiveimages(
                         _assests[index],
                         fit: BoxFit.fill,
                       )),
@@ -149,10 +151,9 @@ class GridList extends StatelessWidget {
                               ),
                               filter: ImageFilter.blur(
                                   sigmaX: 10.0, sigmaY: 10.0))),
-                      Image.asset(
+                      Adaptiveimages(
                         _assests[index],
                         fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
                       )
                     ],
                   )),

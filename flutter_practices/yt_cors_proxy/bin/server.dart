@@ -6,9 +6,14 @@ import 'package:http/http.dart' as http;
 import 'package:shelf_cors_headers/shelf_cors_headers.dart';
 
 Future<Response> _requestHandler(Request req) async {
-  final target = req.url.replace(scheme: 'https', host: 'i.ytimg.com');
-  final response = await http.get(target);
-  return Response.ok(response.bodyBytes, headers: response.headers);
+  final target = req.url.toString();
+  try {
+    final response = await http.get(Uri.parse(target));
+    return Response.ok(response.bodyBytes, headers: response.headers);
+  } catch (e) {
+    print('Error fetching image: $e');
+    return Response.internalServerError(body: 'Failed to fetch image');
+  }
 }
 
 void main(List<String> args) async {
