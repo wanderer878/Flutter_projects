@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube_api/src/Adaptiveimages.dart';
+import 'package:flutter_youtube_api/src/Adaptivetext.dart';
 import 'package:flutter_youtube_api/src/AuthProvider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:googleapis/servicemanagement/v1.dart';
@@ -70,10 +72,9 @@ class _DetailspageState extends State<Detailspage> {
                                               fit: StackFit.expand,
                                               alignment: Alignment.center,
                                               children: [
-                                                Image.network(
-                                                    fit: BoxFit.fill,
-                                                    thumbnails.standard!.url
-                                                        .toString()),
+                                                Adaptiveimages(thumbnails
+                                                    .standard!.url
+                                                    .toString()),
                                                 Positioned.fill(
                                                     child: ClipRRect(
                                                   child: BackdropFilter(
@@ -88,29 +89,28 @@ class _DetailspageState extends State<Detailspage> {
                                                 )),
                                                 Center(
                                                   child: Container(
-                                                    margin: EdgeInsets.all(10),
-                                                    padding: EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            157, 43, 42, 42),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        border: Border.all(
-                                                          color: Colors.white,
-                                                          width: 5,
-                                                        )),
-                                                    child: Text(
-                                                      item.snippet!.title
-                                                          .toString(),
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineSmall,
-                                                    ),
-                                                  ),
+                                                      margin:
+                                                          EdgeInsets.all(10),
+                                                      padding:
+                                                          EdgeInsets.all(5),
+                                                      decoration: BoxDecoration(
+                                                          color: Color.fromARGB(
+                                                              157, 43, 42, 42),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                            color: Colors.white,
+                                                            width: 5,
+                                                          )),
+                                                      child: Adaptivetext(
+                                                        data: item
+                                                            .snippet!.title
+                                                            .toString(),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineSmall,
+                                                      )),
                                                 )
                                               ],
                                             )),
