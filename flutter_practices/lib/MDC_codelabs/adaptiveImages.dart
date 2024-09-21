@@ -5,8 +5,9 @@ class Adaptiveimages extends StatelessWidget {
   Adaptiveimages(String url, {super.key, required this.fit}) {
     if (kIsWeb) {
       _url = Uri.parse(url)
-          .replace(host: 'localhost', port: 8080, scheme: 'http')
-          .toString();
+          .replace(
+              host: 'localhost', port: 8080, scheme: 'http', path: '/proxy')
+          .replace(queryParameters: {'url': url}).toString();
     } else {
       _url = url;
     }
@@ -20,6 +21,8 @@ class Adaptiveimages extends StatelessWidget {
     return Image.network(
       _url,
       fit: fit,
+      errorBuilder: (context, error, stackTrace) =>
+          Text("failed to load image"),
     );
   }
 }
