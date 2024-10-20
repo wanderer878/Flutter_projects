@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_1/bloc_observer.dart';
 import 'package:flutter_bloc_1/counter_bloc.dart';
+import 'package:flutter_bloc_1/counter_cubit.dart';
 
 void main() {
   runApp(MainApp());
@@ -10,7 +13,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    streams();
+    //streams();
+    bloc();
     return const MaterialApp(
       home: Scaffold(
         body: Center(
@@ -21,11 +25,22 @@ class MainApp extends StatelessWidget {
   }
 
   Future<void> streams() async {
-    Counter_bloc cb = Counter_bloc(0);
+    Bloc.observer = bloc_observer();
+    Counter_cubit cb = Counter_cubit(0);
     final Subscription = cb.stream.listen(print);
     cb.increment();
     await Future.delayed(Duration.zero);
     await Subscription.cancel();
     await cb.close();
+  }
+
+  Future<void> bloc() async {
+    Bloc.observer = bloc_observer();
+    CounterBloc bloc = CounterBloc(0);
+    print(bloc.state);
+    bloc.add(onPressed());
+    await Future.delayed(Duration.zero);
+    print(bloc.state);
+    bloc.close();
   }
 }

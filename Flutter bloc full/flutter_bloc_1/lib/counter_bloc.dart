@@ -1,13 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Counter_bloc extends Cubit<int> {
-  Counter_bloc(int initialState) : super(initialState);
+sealed class events {}
 
-  void increment() => emit(state + 1);
+final class onPressed extends events {}
 
-  @override
-  void onChange(Change<int> change) {
-    super.onChange(change);
-    print(change);
+final class onHeld extends events {}
+
+class CounterBloc extends Bloc<events, int> {
+  CounterBloc(int initial_state) : super(initial_state) {
+    on<onPressed>(
+      (event, emit) => emit(state + 1),
+    );
+
+    on<onHeld>((event, emit) => emit(state - 1));
   }
 }
