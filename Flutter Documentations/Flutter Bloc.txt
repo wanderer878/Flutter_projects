@@ -1,0 +1,6 @@
+Video tutorial :
+https://www.youtube.com/watch?v=SDk_GldOtK8&ab_channel=RivaanRanawat
+
+Cubit conatins functions
+Bloc contains events
+
