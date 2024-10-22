@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(BlocProvider(
-      //create: (_) => CubitCounter(0),
-      create: (context) => BlocCounter(0),
-      child: MainApp()));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => CubitCounter(0)),
+    BlocProvider(create: (_) => BlocCounter(0)),
+  ], child: MainApp()));
+
+  //runApp(BlocProvider(create: (_) => BlocCounter(0), child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -16,46 +18,13 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Homescreen_bloc(),
+      home: Homescreen(),
     );
   }
 }
 
-class Homescreen_cubit extends StatelessWidget {
-  Homescreen_cubit({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<CubitCounter>(context);
-    return Scaffold(
-      body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        BlocBuilder<CubitCounter, int>(
-            bloc: cubit,
-            builder: (context, counter) {
-              return Text(
-                counter.toString(),
-                style: TextStyle(fontSize: 40),
-              );
-            }),
-        SizedBox(
-          height: 20,
-        ),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (cotext) => IncDecCubit()));
-            },
-            child: Text('functions')),
-      ])),
-    );
-  }
-}
-
-class Homescreen_bloc extends StatelessWidget {
-  Homescreen_bloc({
+class Homescreen extends StatelessWidget {
+  Homescreen({
     super.key,
   });
 
@@ -66,13 +35,13 @@ class Homescreen_bloc extends StatelessWidget {
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         BlocBuilder<BlocCounter, int>(
-            bloc: bloc,
+            //bloc: bloc,
             builder: (context, counter) {
-              return Text(
-                counter.toString(),
-                style: TextStyle(fontSize: 40),
-              );
-            }),
+          return Text(
+            counter.toString(),
+            style: TextStyle(fontSize: 40),
+          );
+        }),
         SizedBox(
           height: 20,
         ),
