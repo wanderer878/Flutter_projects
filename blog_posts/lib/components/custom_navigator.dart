@@ -1,8 +1,10 @@
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Homepage.dart';
 import 'package:blog_posts/components/Add_Edit_blog.dart';
+import 'package:blog_posts/cubit/Blog_cubit.dart';
 import 'package:blog_posts/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'page_wrapper.dart';
@@ -37,8 +39,10 @@ class _CustomNavigatorState extends State<CustomNavigator> {
 
   @override
   Widget build(BuildContext context) {
+    /*List<Map<String, dynamic>> _blogList =
+        Provider.of<Blog_provider>(context).items;*/
     List<Map<String, dynamic>> _blogList =
-        Provider.of<Blog_provider>(context).items;
+        BlocProvider.of<BlogCubit>(context).state;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       body: Navigator(
@@ -67,7 +71,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
               barTitle: "Add Blog",
               buttonText: "Add ",
               callback: (String text, String content) {
-                Provider.of<Blog_provider>(context, listen: false)
+                BlocProvider.of<BlogCubit>(context, listen: false)
                     .addblog(text, content);
                 setState(() {
                   _showAdd = false;

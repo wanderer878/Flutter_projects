@@ -1,6 +1,9 @@
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Homepage.dart';
+import 'package:blog_posts/cubit/Blog_cubit.dart';
+import 'package:blog_posts/cubit/Home_sc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +12,7 @@ import 'components/custom_navigator.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => Blog_provider()),
+    BlocProvider(create: (_) => BlogCubit())
   ], child: MainApp()));
 }
 
@@ -22,7 +26,9 @@ class MainApp extends StatelessWidget {
         theme: themes().light,
         darkTheme: themes().dark,
         themeMode: Provider.of<Blog_provider>(context).themeMode,
-        home: CustomNavigator());
+        home: CustomNavigator()
+        //home: HomeSc(),
+        );
   }
 }
 
