@@ -69,7 +69,9 @@ class _CustomNavigatorState extends State<CustomNavigator> {
               callback: (String text, String content) {
                 Provider.of<Blog_provider>(context, listen: false)
                     .addblog(text, content);
-                Navigator.pop(context);
+                setState(() {
+                  _showAdd = false;
+                });
               },
             ))
         ],

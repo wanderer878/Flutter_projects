@@ -7,10 +7,9 @@ import 'package:provider/provider.dart';
 import 'components/custom_navigator.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (_) => Blog_provider(),
-    child: MainApp(),
-  ));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Blog_provider()),
+  ], child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {

@@ -24,6 +24,7 @@ class Blog_provider extends ChangeNotifier {
 
   void addblog(String title, String content) {
     _items.insert(0, {"title": title, "content": content});
+    //print("$title $content");
     notifyListeners();
   }
 
