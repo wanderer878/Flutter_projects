@@ -42,7 +42,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
     /*List<Map<String, dynamic>> _blogList =
         Provider.of<Blog_provider>(context).items;*/
     List<Map<String, dynamic>> _blogList =
-        BlocProvider.of<BlogCubit>(context).state;
+        BlocProvider.of<BlogCubit>(context).state.list;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       body: Navigator(

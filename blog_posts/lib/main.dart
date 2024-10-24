@@ -1,7 +1,6 @@
 import 'package:blog_posts/Blog_provider.dart';
 import 'package:blog_posts/Homepage.dart';
 import 'package:blog_posts/cubit/Blog_cubit.dart';
-import 'package:blog_posts/cubit/Home_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,14 +20,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: themes().light,
-        darkTheme: themes().dark,
-        themeMode: Provider.of<Blog_provider>(context).themeMode,
-        home: CustomNavigator()
-        //home: HomeSc(),
-        );
+    print(BlocProvider.of<BlogCubit>(context).state.themeMode);
+    return BlocBuilder<BlogCubit, state_class>(builder: (context, state) {
+      return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: themes().light,
+          darkTheme: themes().dark,
+          //themeMode: Provider.of<Blog_provider>(context).themeMode,
+          themeMode: BlocProvider.of<BlogCubit>(context).state.themeMode,
+          home: CustomNavigator());
+    });
   }
 }
 

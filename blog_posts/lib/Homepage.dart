@@ -44,16 +44,15 @@ class _HomepageState extends State<Homepage> {
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.brightness_2_outlined),
-                onPressed: Provider.of<Blog_provider>(context, listen: false)
+                onPressed: BlocProvider.of<BlogCubit>(context, listen: false)
                     .toggleThemeMode)
           ],
         ),
-        body: BlocBuilder<BlogCubit, List<Map<String, dynamic>>>(
-            builder: (context, state) {
-          print(state);
+        body: BlocBuilder<BlogCubit, state_class>(builder: (context, state) {
+          //print(state);
           return ListView.builder(
               padding: EdgeInsets.symmetric(vertical: 5),
-              itemCount: state.length,
+              itemCount: state.list.length,
               itemBuilder: (_, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -92,13 +91,13 @@ class _HomepageState extends State<Homepage> {
                                     .colorScheme
                                     .secondaryContainer,
                                 title: Text(
-                                  state[index]['title']!,
+                                  state.list[index]['title']!,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium,
                                 ),
                                 subtitle: Text(
-                                  state[index]['content'].toString(),
+                                  state.list[index]['content'].toString(),
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               )),

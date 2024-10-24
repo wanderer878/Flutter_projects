@@ -29,7 +29,6 @@ class Blog_provider extends ChangeNotifier {
   }
 
   void editblog(String title, String content, int index) {
-    ;
     _items[index] = {"title": title, "content": content};
     notifyListeners();
   }
