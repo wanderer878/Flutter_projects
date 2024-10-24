@@ -92,7 +92,7 @@ class _CustomNavigatorState extends State<CustomNavigator> {
                           title: _blogList[_index]['title'],
                           content: _blogList[_index]['content'],
                           callback: (String text, String content) {
-                            Provider.of<Blog_provider>(context, listen: false)
+                            BlocProvider.of<BlogCubit>(context, listen: false)
                                 .editblog(text, content, _index);
                             Navigator.pop(context);
                           },

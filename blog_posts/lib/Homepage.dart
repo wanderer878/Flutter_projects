@@ -80,7 +80,7 @@ class _HomepageState extends State<Homepage> {
                               key: UniqueKey(),
                               onDismissed: (direction) {
                                 setState(() {
-                                  Provider.of<Blog_provider>(context,
+                                  BlocProvider.of<BlogCubit>(context,
                                           listen: false)
                                       .deleteblog(index);
                                 });
