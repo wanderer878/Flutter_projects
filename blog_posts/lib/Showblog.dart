@@ -1,6 +1,8 @@
 import 'package:blog_posts/Blog_provider.dart';
+import 'package:blog_posts/cubit/Blog_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class Showblog extends StatelessWidget {
@@ -9,8 +11,10 @@ class Showblog extends StatelessWidget {
   final VoidCallback onClose;
   @override
   Widget build(BuildContext context) {
+    /* final List<Map<String, dynamic>> _list =
+        Provider.of<Blog_provider>(context).items; */
     final List<Map<String, dynamic>> _list =
-        Provider.of<Blog_provider>(context).items;
+        BlocProvider.of<BlogCubit>(context).state.list;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       appBar: AppBar(

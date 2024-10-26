@@ -28,4 +28,12 @@ class BlogCubit extends Cubit<state_class> {
     state_copy.list[index] = {"title": title, "content": content};
     emit(state_copy);
   }
+
+  void deleteblog(int index) {
+    final state_class state_copy = state_class();
+    state_copy._list = List<Map<String, dynamic>>.from(state.list);
+
+    state_copy._list.removeAt(index);
+    emit(state_copy);
+  }
 }
