@@ -1,4 +1,4 @@
-part of 'Blog_cubit.dart';
+part of 'Blog_cubit.dart'; //this file is the part of Blog Cubit
 
 class state_class {
   List<Map<String, dynamic>> _list = List.generate(

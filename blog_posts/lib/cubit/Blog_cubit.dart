@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:word_generator/word_generator.dart';
 
-part 'State_class.dart';
+part 'State_class.dart'; //state class is part of this file
 
 class BlogCubit extends Cubit<state_class> {
   BlogCubit() : super(state_class());
@@ -11,6 +11,13 @@ class BlogCubit extends Cubit<state_class> {
     final state_class updated_list = state_class();
     updated_list._list = List<Map<String, dynamic>>.from(state.list);
     updated_list.list.insert(0, {"title": title, "content": content});
+    /* if we have inserted into the original state list , to state same rehti, 
+    emit krne pr kuch nhi hta kynke state to srf update hwi hai address to same
+    hi hai , islye hmne pehly aik new list create kri phr usko new state ke 
+    tor pr pass karaya . hm [{"title": title, "content": content},...state]
+    bhi use krskty hain. immutable data types (int, double, etc.) me yeh nahi krna parta jese
+    state + 1 kynke usme hamesha new copy bnti hai mgr mutable data types
+    (list, etc.) me yeh krna parta hai*/
     emit(updated_list);
   }
 
