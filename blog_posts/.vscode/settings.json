@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "F:/Flutter_projects/blog_posts/windows"
+    "cmake.sourceDirectory": "F:/Flutter_projects/blog_posts/windows",
+    "cmake.ignoreCMakeListsMissing": true
 }

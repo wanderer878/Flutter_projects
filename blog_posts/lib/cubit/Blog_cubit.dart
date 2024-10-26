@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:word_generator/word_generator.dart';
 
+part 'State_class.dart';
+
 class BlogCubit extends Cubit<state_class> {
   BlogCubit() : super(state_class());
 
@@ -26,19 +28,4 @@ class BlogCubit extends Cubit<state_class> {
     state_copy.list[index] = {"title": title, "content": content};
     emit(state_copy);
   }
-}
-
-class state_class {
-  List<Map<String, dynamic>> _list = List.generate(
-      10,
-      (index) => {
-            'title': WordGenerator().randomName(),
-            "content": WordGenerator().randomSentence()
-          });
-
-  ThemeMode _themeMode = ThemeMode.system;
-
-  List<Map<String, dynamic>> get list => _list;
-
-  ThemeMode get themeMode => _themeMode;
 }

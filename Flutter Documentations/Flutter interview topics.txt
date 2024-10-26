@@ -1,2 +1,4 @@
 1. bloc
 2. Platform channels
+3. Model-View-Controller (MVC) and Model-View-View Model-Controller (MVVM)
+4. continuous integration and deployment (CI/CD) pipelines.
